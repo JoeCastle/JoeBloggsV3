@@ -1,0 +1,255 @@
+@use './shared/variables.scss' as *;
+@use './shared/theme.scss';
+@use './shared/form.scss';
+
+@use './component/navbar.scss';
+@use './component/landing.scss';
+@use './component/footer.scss';
+
+@use './page/fourzerofour.scss';
+
+@use './component/blog.scss';
+@use './component/bloglist.scss';
+@use './component/blogpost.scss';
+
+@use './override/atom-one.scss';
+
+* {
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 16px;
+    font-display: swap;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: $light-primary-background-colour;
+    border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $standard-blue-background;
+    border-radius: 0px;
+}
+
+html {
+    font-size: 100%;
+}
+
+html,
+body,
+#react-app,
+#root > .container-fluid,
+#page-parent {
+    //height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.container-fluid {
+    width: 100%;
+}
+
+// Fixes scrolling issues.
+body,
+#root {
+    display: flex;
+    flex: 1 0 auto;
+}
+
+#root {
+    height: 100vh;
+}
+
+body {
+    overflow: hidden;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+}
+
+// Intersection observer doesn't work on touch screen devices, so we want to show content by default.
+.content-container {
+    @media (hover: none) and (pointer: coarse) {
+        opacity: 1 !important;
+    }
+}
+
+a {
+    color: $global-hyperlink-colour;
+}
+
+a:hover,
+a:active {
+    color: $dark-blue-background !important;
+}
+
+main {
+    width: 100%;
+    flex: 1 0 auto;
+    padding-bottom: 0px;
+    width: calc(100vw - 18px);
+}
+
+#page-parent {
+    height: calc(100% - #{$navbar-height});
+    overflow: auto;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+}
+
+#scroll-to-top-btn {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 36px;
+    right: 50px;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+        opacity $global-animation-time ease-in-out,
+        visibility $global-animation-time ease-in-out;
+    will-change: opacity, visibility;
+
+    @media (max-width: 450px) {
+        bottom: 20px;
+        right: 30px;
+    }
+}
+
+#scroll-to-top-btn.show {
+    visibility: visible;
+    opacity: 1;
+    transition:
+        opacity $global-animation-time ease-in-out,
+        visibility $global-animation-time ease-in-out;
+    will-change: opacity, visibility;
+}
+
+#theme-changer-btn {
+    position: fixed;
+    bottom: 28px;
+    left: 28px;
+    color: $standard-blue-background;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    outline: 0;
+
+    > i {
+        font-size: 18px;
+    }
+}
+
+#Projects,
+#Skills {
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        height: auto !important;
+    }
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: calc(100vh - #{$navbar-height});
+
+    // Required to vertically center items for IE11 - https://medium.com/codeart-mk/internet-explorer-hacks-796200e5741c
+    // Target IE11 only as this will break other browsers.
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        height: 1px;
+    }
+
+    @media (max-width: 325px) {
+        padding: 20px 10px;
+    }
+
+    .content-container {
+        .section-title-wrapper {
+            text-align: center;
+
+            h2 {
+                font-weight: bold;
+                text-align: center;
+                font-size: 42px;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+                display: inline-block;
+
+                @media (max-width: 450px) {
+                    font-size: 30px;
+                    padding-bottom: 5px;
+                    margin: 10px 0px;
+                }
+            }
+        }
+    }
+}
+
+.section.about,
+.section.landing {
+    min-height: calc(100vh - #{$navbar-height});
+}
+
+.socials {
+    > a {
+        text-decoration: none;
+    }
+
+    > a:hover,
+    a:active {
+        text-decoration: underline;
+    }
+}
+
+.content-container {
+    max-width: $content-max-width;
+    width: 100%;
+    transition: opacity 0.4s ease-in;
+}
+
+.smooth-scroll {
+    scroll-behavior: smooth;
+}
+
+.disabled-link {
+    color: inherit;
+}
+
+.disabled-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.opacity-show {
+    opacity: 1 !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-default {
+    cursor: default;
+}
+
+#about-content-container,
+#landing-content-container {
+    max-width: 950px;
+}
+
+/* Provide sufficient contrast against white background */
+
+code {
+    color: #e01a76;
+}

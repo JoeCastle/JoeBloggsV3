@@ -1,0 +1,70 @@
+$mobile-max-width-breakpoint: 767px;
+$mobile-min-width-breakpoint: 768px;
+$content-max-width: 1350px;
+$navbar-height: 70px;
+$footer-height: 100px;
+
+$global-animation-time: 0.4s;
+
+$global-hyperlink-colour: #1c72d3;
+
+/* ### Default (dark) theme. ### */
+// Background
+$dark-primary-background-colour: #202020;
+$dark-secondary-background-colour: #292929;
+
+// Font
+$dark-primary-font-colour: #bdc2cc;
+
+// Borders
+
+/* ### Secondary (light) theme ### */
+// Background
+$light-primary-background-colour: #e3e3e3;
+$light-secondary-background-colour: #ececec;
+
+// Font
+$light-primary-font-colour: #454545;
+
+$standard-blue-background: #1c6ef7;
+$dark-blue-background: #0b4dbb;
+
+$standard-red-background: #cf4343;
+$dark-red-background: #ab1d1d;
+
+/* ### General variables ### */
+// Navbar
+$dark-navbar-background-colour: #131313;
+$dark-navbar-font-colour: #c1c6d0;
+$dark-navbar-font-colour-hover: #ffffff;
+
+$light-navbar-background-colour: $light-secondary-background-colour;
+$light-navbar-font-colour: #454545;
+$light-navbar-font-colour-hover: #1c6ef7;
+
+$box-shadow-color: 0.5;
+
+$light-border: 1px solid rgba(0, 0, 0, 0.2);
+$dark-border: 1px solid rgba(204, 204, 204, 0.1);
+
+// Accent + Muted Color Updates
+$light-accent-color: #3d7ab6;
+$light-muted-color: #888e9a;
+
+$dark-accent-color: #8fbef2;
+$dark-muted-color: #707887;
+
+// THEME MAPS
+$light-theme: (
+    text: $light-primary-font-colour,
+    background: $light-primary-background-colour,
+    accent: $light-accent-color,
+    muted: $light-muted-color,
+);
+
+$dark-theme: (
+    text: $dark-primary-font-colour,
+    background: $dark-primary-background-colour,
+    accent: $dark-accent-color,
+    muted: $dark-muted-color,
+);
