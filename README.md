@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JoeBloggsV3
+
+Welcome to my personal blog! This is where I share my thoughts, projects, and frustrations.  
+The site is built with modern technologies like **Next.js**, **React**, **TypeScript**, and **SCSS**.
+
+## Features
+
+- **Markdown-based blog posts:** Posts are written in `.md` files organized by folder, with related images stored locally.
+- **Frontmatter metadata:** Each post includes structured frontmatter (`title`, `summary`, `date`, `coverImage`) automatically parsed.
+- **Static Site Generation (SSG):** Each blog post and the homepage is pre-rendered at build time for performance and SEO.
+- **Automatic SEO metadata:** Dynamic `<title>`, `<meta>` descriptions, Open Graph, and Twitter Card metadata per post.
+- **Canonical URLs:** Each blog post includes a canonical URL for better SEO and duplicate content prevention.
+- **Reading time and word count:** Estimated reading time and word count are automatically calculated and displayed for every post.
+- **Responsive design:** Clean, mobile-first layouts built with semantic HTML and SCSS.
+- **Dark mode and light mode:** Theme automatically adapts to user preference, including code block and UI colors.
+- **Markdown enhancements:** Support for GitHub-flavoured markdown (tables, strikethroughs, task lists, etc.) via `remark-gfm`.
+- **External link security:** External links open in new tabs with `rel="noopener noreferrer"`.
+- **Local images per post:** Posts can have local images stored alongside the `.md` file for better organization.
+- **Version info and Git commit metadata:** Footer displays the current app version, Git commit hash, and build timestamp.
+- **Error handling:** Friendly loading states and graceful error logging.
+
+## Tech Stack
+
+This project uses:
+
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [SCSS](https://sass-lang.com/)
+- [Marked](https://marked.js.org/) for Markdown-to-HTML rendering
+- [remark-gfm](https://github.com/remarkjs/remark-gfm) for GitHub flavoured markdown
+- [FontAwesome](https://fontawesome.com/) (with selective icon imports)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Node.js](https://nodejs.org/) installed
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   git clone https://github.com/JoeCastle/JoeBloggsV3.git
+   cd JoeBloggsV3
+   ```
 
-## Learn More
+3. Install dependencies:
+   ```
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+### Running the Project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Start the development server:
+   ```
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the blog.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **src:** Contains the source code for the React application.
+  - **components:** React components.
+    - **pages:** Individual pages.
+    - **shared:** Components shared across multiple components or pages.
+  - **scss:** SASS files for styling the components and pages.
+- **cypress** Tests folder containing Cypress integration and component tests.
+- **public**  Static folder containing index.html, favicon and other assets.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+src/
+├── app/                 # Next.js app routes (App Router)
+│   ├── page.tsx         # Homepage
+│   └── blog/[slug]/     # Dynamic blog post pages
+├── components/          # React components (pages, shared)
+├── hooks/               # Custom React hooks
+├── posts/               # Blog posts (each folder = post + images)
+├── scss/                # SCSS styles
+├── typings/             # TypeScript types
+├── utils/               # Utility functions and metadata injection
+
+## Example Post Structure
+
+src/posts/my-first-post/
+├── my-first-post.md
+├── image1.png
+├── image2.jpg
+
+## Available Scripts
+
+- `npm run dev` — Run the dev server
+- `npm run build` — Create a production build
+- `npm test`
+- `npm eject`
+- `npm run pretty`
+- `npm run cypress:open`
+- `npm run cypress-component`
+- `npm run cypress-e2e`
+- `npm run update-project-date`
+   - Updates the date in `.env.local` and `sitemap.xml` to the current date.
+
+## TODO:
+
+- [x] Convert project to Next.js
+- [x] Write README.md.
+- [ ] Add SEO metadata per page.
+- [ ] Update styling and structure of the list and post pages.
+- [ ] Write blog posts.
+- [ ] Add cypress tests.
+- [ ] Add jest tests.
+
+## License
+
+The code in this project is licensed under the terms of the [LICENSE-website](LICENSE-website), while the content, including text and media, is licensed under the [LICENSE-content](LICENSE-content). See the respective files for detailed licensing information.
