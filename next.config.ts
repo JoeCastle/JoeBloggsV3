@@ -17,9 +17,9 @@ try {
 
 const nextConfig: NextConfig = {
   env: {
-    APP_VERSION: appVersion,
-    GIT_COMMIT_HASH: gitCommitHash,
-    BUILD_TIMESTAMP: new Date().toISOString(),
+    NEXT_PUBLIC_APP_VERSION: appVersion,
+    NEXT_PUBLIC_GIT_COMMIT_HASH: gitCommitHash,
+    NEXT_PUBLIC_BUILD_TIMESTAMP: new Date().toISOString(),
   },
 };
 

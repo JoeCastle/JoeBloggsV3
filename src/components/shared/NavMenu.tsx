@@ -21,7 +21,7 @@ export const NavMenu: React.FC<Props> = ({ isDarkMode }) => {
         <div className="navbar-header">
           <h1>
             <Link href="/#Home" className="navbar-brand">
-              <Image src={Logo} alt="Joseph Castle" width={40} height={40} />
+              <Image src={Logo} alt="Joseph Castle" width={169} height={32} />
             </Link>
           </h1>
         </div>

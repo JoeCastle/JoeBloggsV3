@@ -14,8 +14,6 @@ The site is built with modern technologies like **Next.js**, **React**, **TypeSc
 - **Responsive design:** Clean, mobile-first layouts built with semantic HTML and SCSS.
 - **Dark mode and light mode:** Theme automatically adapts to user preference, including code block and UI colors.
 - **Markdown enhancements:** Support for GitHub-flavoured markdown (tables, strikethroughs, task lists, etc.) via `remark-gfm`.
-- **External link security:** External links open in new tabs with `rel="noopener noreferrer"`.
-- **Local images per post:** Posts can have local images stored alongside the `.md` file for better organization.
 - **Version info and Git commit metadata:** Footer displays the current app version, Git commit hash, and build timestamp.
 - **Error handling:** Friendly loading states and graceful error logging.
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import globals from '../../utils/globals';
 import utils from '../../utils/utils';
-import { APP_VERSION, GIT_COMMIT, BUILD_TIMESTAMP } from '../../utils/version';
+import { NEXT_PUBLIC_APP_VERSION, NEXT_PUBLIC_GIT_COMMIT, NEXT_PUBLIC_BUILD_TIMESTAMP } from '../../utils/version';
 
 
 /**
@@ -56,10 +56,10 @@ export const Footer: React.FC = ({ }) => {
             <div className="footer-bottom-content">
                 <p className="copyright-text">Copyright &copy; 2019 - {new Date().getFullYear()} Joseph Castle. All Rights Reserved.</p>
 
-                <p className="version-text">v{APP_VERSION}</p>
+                <p className="version-text">v{NEXT_PUBLIC_APP_VERSION}</p>
 
-                <p>Commit: {GIT_COMMIT}</p>
-                <p>Built: {new Date(BUILD_TIMESTAMP).toLocaleString()}</p>
+                <p>Commit: {NEXT_PUBLIC_GIT_COMMIT}</p>
+                <p>Built: {new Date(NEXT_PUBLIC_BUILD_TIMESTAMP).toLocaleString()}</p>
             </div>
         </div>
     );

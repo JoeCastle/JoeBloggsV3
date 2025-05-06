@@ -41,15 +41,15 @@ const updateEnvLocalVersionDate = async () => {
         const envLocalContent = await fs.readFile(envLocalPath, 'utf-8');
 
         const pattern = /^APP_VERSION_DATE=(.*)$/m;
-        const updatedEnvLocalContent = envLocalContent.replace(pattern, `APP_VERSION_DATE=${Date.now()}`);
+        const updatedEnvLocalContent = envLocalContent.replace(pattern, `NEXT_PUBLIC_APP_VERSION_DATE=${Date.now()}`);
 
         await fs.writeFile(envLocalPath, updatedEnvLocalContent, 'utf-8');
-        console.log('Updated .env.local APP_VERSION_DATE');
+        console.log('Updated .env.local NEXT_PUBLIC_APP_VERSION_DATE');
 
         // If you intended to update .env too, copy the update:
         const envPath = path.join(__dirname, '.env');
         await fs.writeFile(envPath, updatedEnvLocalContent, 'utf-8');
-        console.log('Updated .env APP_VERSION_DATE');
+        console.log('Updated .env NEXT_PUBLIC_APP_VERSION_DATE');
     } catch (error) {
         console.error('Error updating .env.local or .env:', error);
     }

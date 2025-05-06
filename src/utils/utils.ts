@@ -1,6 +1,6 @@
 import globals from './globals';
 
-const SITE_URL = process.env.SITE_URL ?? 'http://localhost:3000';
+const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 /**
  * @deprecated This function should not be used.
@@ -94,7 +94,7 @@ const isFormInputValid = (value: string): boolean => {
  * @param coverImage
  * @returns
  */
-const getCoverImageUrl = (slug: string, coverImage: string) => `${SITE_URL}/posts/${slug}/${coverImage.replace('./', '')}`;
+const getCoverImageUrl = (slug: string, coverImage: string) => `${NEXT_PUBLIC_SITE_URL}/posts/${slug}/${coverImage.replace('./', '')}`;
 
 /**
  * Calculate the reading time for a blog post.
@@ -120,7 +120,7 @@ const utils = {
     isFormInputValid,
     getCoverImageUrl,
     calculateReadingTime,
-    SITE_URL
+    NEXT_PUBLIC_SITE_URL
 };
 
 export default utils;

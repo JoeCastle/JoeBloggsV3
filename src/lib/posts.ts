@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
+import utils from '@/utils/utils';
 
 export interface PostMeta {
   slug: string;
@@ -13,7 +14,7 @@ export interface PostMeta {
 }
 
 const POSTS_DIR = path.join(process.cwd(), 'src', 'posts');
-const SITE_URL = 'https://yourdomain.com'; // Replace with your real URL or load from config
+const NEXT_PUBLIC_SITE_URL = utils.NEXT_PUBLIC_SITE_URL; // Replace with your real URL or load from config
 
 export async function getAllPosts(): Promise<PostMeta[]> {
   const folders = await fs.readdir(POSTS_DIR);
@@ -34,7 +35,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
       date: data.date,
       readingTime,
       wordCount,
-      canonicalUrl: `${SITE_URL}/blog/${folder}`,
+      canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${folder}`,
     });
   }
 
@@ -57,7 +58,7 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
         date: data.date,
         readingTime,
         wordCount,
-        canonicalUrl: `${SITE_URL}/blog/${slug}`,
+        canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
       },
       content,
     };
