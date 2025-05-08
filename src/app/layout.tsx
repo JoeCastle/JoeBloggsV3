@@ -1,5 +1,6 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from 'next';
+import '../../icons.ts'
 import { Maven_Pro } from 'next/font/google';
 import ClientLayout from './clientlayout';
 import '../scss/site.scss';
@@ -58,19 +59,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta httpEquiv="Content-Language" content="en-GB" />
         <meta name="version" content={process.env.NEXT_PUBLIC_APP_VERSION_DATE} />
         <meta name="versionNumber" content={process.env.NEXT_PUBLIC_APP_VERSION} />
-
-        {/* Preconnects */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://use.fontawesome.com" />
-
-        {/* Font Awesome */}
-        <link
-          rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-          crossOrigin="anonymous"
-        />
 
         {/* Structured data */}
         <script

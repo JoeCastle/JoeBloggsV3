@@ -1,6 +1,6 @@
 // app/blog/[slug]/page.tsx
 
-import { getAllPosts, getPostBySlug } from '../../../lib/posts';
+import { getAllPosts, getPostBySlug, PostMeta } from '../../../lib/posts';
 import BlogPost from '../../../components/BlogPost';
 import type { Metadata } from 'next';
 import StructuredData from '@/components/shared/StructuredData';
@@ -11,7 +11,7 @@ interface Props {
 
 // Pre-generates all blog pages statically
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const posts: PostMeta[] = await getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));
 }
 
@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const { meta } = await getPostBySlug(slug);
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
-  const fullUrl = `${baseUrl}/blog/${slug}`;
+  const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+  const fullUrl: string = `${baseUrl}/blog/${slug}`;
 
   // const imageUrl = meta.coverImage
   //   ? `${baseUrl}/posts/${slug}/${meta.coverImage.replace('./', '')}`
@@ -29,13 +29,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     metadataBase: new URL(baseUrl),
-    title: meta.title,
+    title: `${meta.title} - JoeBloggs`,
     description: meta.summary,
     alternates: {
       canonical: fullUrl,
     },
     openGraph: {
-      title: meta.title,
+      title: `${meta.title} - JoeBloggs`,
       description: meta.summary,
       url: fullUrl,
       type: 'article',
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: meta.title,
+      title: `${meta.title} - JoeBloggs`,
       description: meta.summary,
       // ...(imageUrl && { images: [imageUrl] }),
     },
@@ -63,14 +63,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const { meta, content } = await getPostBySlug(slug);
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
-  const fullUrl = `${baseUrl}/blog/${slug}`;
-  // const imageUrl = meta.coverImage
+  const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+  const fullUrl: string = `${baseUrl}/blog/${slug}`;
+  // const imageUrl: string = meta.coverImage
   //   ? `${baseUrl}/posts/${slug}/${meta.coverImage.replace('./', '')}`
   //   : undefined;
-  const imageUrl = "";
+  const imageUrl: string = "";
 
-  const readingTimeMinutes = parseInt(meta.readingTime.replace(/\D/g, ''), 10) || undefined;
+  const readingTimeMinutes: number | undefined = parseInt(meta.readingTime.replace(/\D/g, ''), 10) || undefined;
 
   return (
     <>

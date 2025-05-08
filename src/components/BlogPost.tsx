@@ -3,23 +3,27 @@ import CopyButton from './shared/CopyButton';
 
 interface BlogPostProps {
   meta: PostMeta;
-  content: string; // already HTML
+  content: string;
 }
 
 const BlogPost = ({ meta, content }: BlogPostProps) => {
   return (
-    <article className="prose dark:prose-invert mx-auto">
-      <div className="blog-post">
-        <div className="content-width-wrapper">
-          <h1>{meta.title}</h1>
-          <p className="text-sm text-gray-500">
-            {new Date(meta.date).toLocaleDateString()} • {meta.readingTime}
-          </p>
-          <div dangerouslySetInnerHTML={{ __html: content }} />
-        </div>
+    <div className="content-width-wrapper">
+    <article className="blog-post">
+      <header className="blog-post-header">
+          <h1 className="blog-post-title">{meta.title}</h1>
+          <div className="blog-post-meta">
+              {meta.date && <span className="blog-post-date">{new Date(meta.date).toLocaleDateString()}</span>}
+              <span className="blog-post-reading-time">{meta.readingTime}</span>
+              <span className="blog-post-word-count">{meta.wordCount} words</span>
+          </div>
+      </header>
+      <div className="blog-post-content">
+        <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
       <CopyButton />
     </article>
+    </div>
   );
 };
 

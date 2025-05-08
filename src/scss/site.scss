@@ -138,7 +138,7 @@ main {
     box-shadow: none;
     outline: 0;
 
-    > i {
+    .fa-icon {
         font-size: 18px;
     }
 }
@@ -210,6 +210,7 @@ main {
     max-width: 1350px;
     width: 100%;
     transition: opacity 0.4s ease-in;
+    margin: 0 auto;
 }
 
 .smooth-scroll {
@@ -246,4 +247,8 @@ main {
 
 code {
     color: #e01a76;
+}
+
+button {
+    cursor: pointer;
 }

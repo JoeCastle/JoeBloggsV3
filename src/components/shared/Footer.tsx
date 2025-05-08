@@ -2,7 +2,9 @@ import React from 'react';
 import globals from '../../utils/globals';
 import utils from '../../utils/utils';
 import { NEXT_PUBLIC_APP_VERSION, NEXT_PUBLIC_GIT_COMMIT, NEXT_PUBLIC_BUILD_TIMESTAMP } from '../../utils/version';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { faAt } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * The footer component at the bottom of every page.
@@ -29,7 +31,7 @@ export const Footer: React.FC = ({ }) => {
                         aria-label="LinkedIn link."
                     >
                         <div>
-                            <i className="fab fa-linkedin-in"></i>
+                            <FontAwesomeIcon className="fa-icon" icon={faLinkedinIn} />
                         </div>
                     </a>
                     {/* https://www.albionresearch.com/tools/obfuscator */}
@@ -40,12 +42,12 @@ export const Footer: React.FC = ({ }) => {
                         aria-label="Email address."
                     >
                         <div>
-                            <i className="fas fa-at"></i>
+                            <FontAwesomeIcon className="fa-icon" icon={faAt} />
                         </div>
                     </a>
                     <a target="_blank" rel="noopener noreferrer" href={globals.gitHubData.url} title={'GitHub - ' + globals.gitHubData.displayName} aria-label="GitHub link.">
                         <div>
-                            <i className="fab fa-github"></i>
+                            <FontAwesomeIcon className="fa-icon" icon={faGithub} />
                         </div>
                     </a>
                 </div>

@@ -1,4 +1,4 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMoon, faSun, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
-library.add(faMoon, faSun, faArrowUp);
+config.autoAddCss = false;

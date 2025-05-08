@@ -7,8 +7,9 @@ import { Footer } from '../components/shared/Footer';
 import globals from '../utils/globals';
 import { faArrowUp, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import FontAwesomeIcon from '@/components/shared/FontAwesomeIcon';
 
-const isDarkModeDefault = globals.isDarkModeDefault;
+const isDarkModeDefault: boolean = globals.isDarkModeDefault;
 
 export default function ClientLayout({ children }: { children: React.ReactNode; }) {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -19,8 +20,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
 
   useEffect(() => {
     if (hasMounted) {
-      const themeType = localStorage.getItem('isDarkMode');
-      let mode = isDarkModeDefault;
+      const themeType: string | null = localStorage.getItem('isDarkMode');
+      let mode: boolean = isDarkModeDefault;
       if (themeType === 'true') mode = true;
       else if (themeType === 'false') mode = false;
       setIsDarkMode(mode);
@@ -43,7 +44,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
   }, []);
 
   const handleScrollToTopButtonVisibility = useCallback((e: React.UIEvent<HTMLDivElement>) => {
-    const btn = document.getElementById('scroll-to-top-btn');
+    const btn: HTMLElement | null = document.getElementById('scroll-to-top-btn');
     if (btn) {
       const scrollTop = (e.target as HTMLElement).scrollTop;
       if (scrollTop >= 100) btn.classList.add('show');
@@ -55,7 +56,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
   }, []);
 
   const handleChangeTheme = useCallback(() => {
-    const newMode = !isDarkMode;
+    const newMode: boolean = !isDarkMode;
     setIsDarkMode(newMode);
     localStorage.setItem('isDarkMode', newMode.toString());
   }, [isDarkMode]);
@@ -82,7 +83,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
         onClick={handleScrollToTop}
         title="Scroll to top"
       >
-        <FontAwesomeIcon icon={faArrowUp} />
+        <FontAwesomeIcon className="fa-icon" icon={faArrowUp} />
       </button>
 
       {hasMounted && (
@@ -91,7 +92,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
           onClick={handleChangeTheme}
           title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
         >
-          <FontAwesomeIcon icon={isDarkMode ? faMoon : faSun} />
+          <FontAwesomeIcon className="fa-icon" icon={isDarkMode ? faMoon : faSun} />
         </button>
       )}
     </div>
