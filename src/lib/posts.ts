@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import utils from '@/utils/utils';
+import { renderMarkdown } from '@/utils/renderMarkdown';
 
 export interface PostMeta {
   slug: string;
@@ -43,24 +44,25 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; content: string }> {
-    const mdPath = path.join(POSTS_DIR, slug, `${slug}.md`);
-    const file = await fs.readFile(mdPath, 'utf8');
-    const { data, content } = matter(file);
-  
-    const wordCount = content.trim().split(/\s+/).length;
-    const readingTime = `${Math.ceil(wordCount / 200)} min read`;
-  
-    return {
-      meta: {
-        slug,
-        title: data.title,
-        summary: data.summary,
-        date: data.date,
-        readingTime,
-        wordCount,
-        canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
-      },
-      content,
-    };
-  }
+  const mdPath = path.join(POSTS_DIR, slug, `${slug}.md`);
+  const file = await fs.readFile(mdPath, 'utf8');
+  const { data, content: rawMarkdown } = matter(file);
+
+  const wordCount = rawMarkdown.trim().split(/\s+/).length;
+  const readingTime = `${Math.ceil(wordCount / 200)} min read`;
+  const html = await renderMarkdown(rawMarkdown);
+
+  return {
+    meta: {
+      slug,
+      title: data.title,
+      summary: data.summary,
+      date: data.date,
+      readingTime,
+      wordCount,
+      canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
+    },
+    content: html,
+  };
+}
   

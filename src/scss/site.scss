@@ -8,7 +8,6 @@
 
 @use './page/fourzerofour.scss';
 
-@use './component/blog.scss';
 @use './component/bloglist.scss';
 @use './component/blogpost.scss';
 
@@ -35,14 +34,14 @@
     border-radius: 0px;
 }
 
-html {
-    font-size: 100%;
+html, body {
+    height: 100%;
 }
 
 html,
 body,
 #react-app,
-#root > .container-fluid,
+.container-fluid,
 #page-parent {
     //height: 100%;
     padding: 0px;
@@ -54,14 +53,9 @@ body,
 }
 
 // Fixes scrolling issues.
-body,
-#root {
+body {
     display: flex;
     flex: 1 0 auto;
-}
-
-#root {
-    height: 100vh;
 }
 
 body {
@@ -212,8 +206,8 @@ main {
     }
 }
 
-.content-container {
-    max-width: $content-max-width;
+.content-width-wrapper {
+    max-width: 1350px;
     width: 100%;
     transition: opacity 0.4s ease-in;
 }
