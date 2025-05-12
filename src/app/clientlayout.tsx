@@ -7,7 +7,6 @@ import { Footer } from '../components/shared/Footer';
 import globals from '../utils/globals';
 import { faArrowUp, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import FontAwesomeIcon from '@/components/shared/FontAwesomeIcon';
 
 const isDarkModeDefault: boolean = globals.isDarkModeDefault;
 
@@ -28,10 +27,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
     }
   }, [hasMounted]);
 
-  const handleScrollToTop = useCallback(() => {
+  const handleScrollToTop: () => void = useCallback(() => {
     if (!isScrollToTopButtonDisabled.current) {
       isScrollToTopButtonDisabled.current = true;
-      const element = document.getElementById('page-parent');
+      const element: HTMLElement | null = document.getElementById('page-parent');
       if (element) {
         element.classList.add('smooth-scroll');
         element.scrollTop = 0;
@@ -43,10 +42,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
     }
   }, []);
 
-  const handleScrollToTopButtonVisibility = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+  const handleScrollToTopButtonVisibility: (e: React.UIEvent<HTMLDivElement>) => void = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     const btn: HTMLElement | null = document.getElementById('scroll-to-top-btn');
     if (btn) {
-      const scrollTop = (e.target as HTMLElement).scrollTop;
+      const scrollTop: number = (e.target as HTMLElement).scrollTop;
       if (scrollTop >= 100) btn.classList.add('show');
       else {
         btn.classList.remove('show');
@@ -55,7 +54,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
     }
   }, []);
 
-  const handleChangeTheme = useCallback(() => {
+  const handleChangeTheme: () => void = useCallback(() => {
     const newMode: boolean = !isDarkMode;
     setIsDarkMode(newMode);
     localStorage.setItem('isDarkMode', newMode.toString());

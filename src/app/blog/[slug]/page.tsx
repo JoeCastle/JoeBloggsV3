@@ -1,24 +1,39 @@
-// app/blog/[slug]/page.tsx
-
+export const dynamicParams = true;
 import { getAllPosts, getPostBySlug, PostMeta } from '../../../lib/posts';
 import BlogPost from '../../../components/BlogPost';
 import type { Metadata } from 'next';
 import StructuredData from '@/components/shared/StructuredData';
+import { notFound } from 'next/navigation';
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
-// Pre-generates all blog pages statically
+// Pre-generates all blog pages statically. Called automatically.
 export async function generateStaticParams() {
   const posts: PostMeta[] = await getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));
 }
 
 // Dynamic SEO metadata per blog post
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: { params: { slug: string } }
+): Promise<Metadata> {
   const { slug } = await params;
-  const { meta } = await getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    return {
+      title: '404 – Page Not Found | JoeBloggs',
+      description: 'The requested blog post could not be found.',
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const { meta } = post;
 
   const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
   const fullUrl: string = `${baseUrl}/blog/${slug}`;
@@ -59,16 +74,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+
 // Page renderer
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const { meta, content } = await getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  const { meta, content } = post;
   const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
   const fullUrl: string = `${baseUrl}/blog/${slug}`;
-  // const imageUrl: string = meta.coverImage
+   // const imageUrl: string = meta.coverImage
   //   ? `${baseUrl}/posts/${slug}/${meta.coverImage.replace('./', '')}`
   //   : undefined;
-  const imageUrl: string = "";
+  const imageUrl: string = ''; // Add logic if you later support per-post images
 
   const readingTimeMinutes: number | undefined = parseInt(meta.readingTime.replace(/\D/g, ''), 10) || undefined;
 
@@ -85,5 +107,5 @@ export default async function BlogPostPage({ params }: Props) {
       />
       <BlogPost meta={meta} content={content} />
     </>
-  )
+  );
 }

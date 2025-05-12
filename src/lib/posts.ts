@@ -43,26 +43,31 @@ export async function getAllPosts(): Promise<PostMeta[]> {
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; content: string }> {
-  const mdPath = path.join(POSTS_DIR, slug, `${slug}.md`);
-  const file = await fs.readFile(mdPath, 'utf8');
-  const { data, content: rawMarkdown } = matter(file);
+export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; content: string } | null> {
+  const mdPath: string = path.join(POSTS_DIR, slug, `${slug}.md`);
 
-  const wordCount = rawMarkdown.trim().split(/\s+/).length;
-  const readingTime = `${Math.ceil(wordCount / 200)} min read`;
-  const html = await renderMarkdown(rawMarkdown);
+  try {
+    const file: string = await fs.readFile(mdPath, 'utf8');
+    const { data, content: rawMarkdown } = matter(file);
 
-  return {
-    meta: {
-      slug,
-      title: data.title,
-      summary: data.summary,
-      date: data.date,
-      readingTime,
-      wordCount,
-      canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
-    },
-    content: html,
-  };
+    const wordCount: number = rawMarkdown.trim().split(/\s+/).length;
+    const readingTime: string = `${Math.ceil(wordCount / 200)} min read`;
+    const html: string = await renderMarkdown(rawMarkdown);
+
+    return {
+      meta: {
+        slug,
+        title: data.title,
+        summary: data.summary,
+        date: data.date,
+        readingTime,
+        wordCount,
+        canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
+      },
+      content: html,
+    };
+  } catch (err) {
+    return null; // File not found or can't be parsed
+  }
 }
   
