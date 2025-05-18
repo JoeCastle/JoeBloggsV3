@@ -1,63 +1,6 @@
 import globals from './globals';
 
-const NEXT_PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
-
-/**
- * @deprecated This function should not be used.
- * @param imageIds
- */
-const getGoogleImageExportURL = (imageId: string): string => {
-    if (imageId !== '' && imageId !== null && imageId !== undefined) {
-        //return "https://drive.google.com/uc?export=view&id=" + imageId;
-        return 'https://drive.google.com/uc?id=' + imageId;
-    }
-
-    return '';
-};
-
-/**
- * @deprecated This function should not be used.
- * @param imageIds
- */
-const getGoogleImageExportURLs = (imageIds: string[]): string[] => {
-    let urls: string[] = [];
-
-    if (imageIds.length > 0) {
-        for (let i = 0; i < imageIds.length; i++) {
-            let url = getGoogleImageExportURL(imageIds[i]);
-
-            if (url !== '') {
-                urls.push(url);
-            }
-        }
-    }
-
-    return urls;
-};
-
-/**
- * https://gomakethings.com/decoding-html-entities-with-vanilla-javascript/
- * @deprecated No longer required.
- * @param html
- * @returns
- */
-const decodeHTML = (html: string): string => {
-    var txt = document.createElement('textarea');
-    txt.innerHTML = html;
-    txt.id = 'temporary-textarea';
-    var val = txt.value;
-    txt.remove();
-    return val;
-};
-
-/**
- * Opens the users default email program and populates it's subject and body.
- * @param subject Subject of the email.
- * @param body Body of the email.
- */
-const navigateToEmail = (subject: string, body: string): void => {
-    window.location.href = `mailto:${utils.decodeHTML(globals.obfuscatedEmailAddress)}?subject=${subject}&body=${body}`;
-};
+const NEXT_PUBLIC_SITE_URL: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 /**
  * Calculates my years of experience in the industry.
@@ -78,14 +21,6 @@ const getYearsOfExperience = (): number => {
     }
 
     return yearsOfExperience;
-};
-
-/**
- * Validates whether the form input is valid.
- * @param value The text input by the user.
- */
-const isFormInputValid = (value: string): boolean => {
-    return value.replace(' ', '') !== '';
 };
 
 /**
@@ -111,16 +46,24 @@ const calculateReadingTime = (text: string): string => {
     return `${minutes} min read`;
 };
 
+/**
+ * Formats the date as "12 Apr 2025"
+ * @param date Date value to be formatted.
+ * @returns Date as formatted string.
+ */
+const formatDate = (date: string): string =>
+    new Date(date).toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+
 const utils = {
-    getGoogleImageExportURL,
-    getGoogleImageExportURLs,
-    decodeHTML,
-    navigateToEmail,
     getYearsOfExperience,
-    isFormInputValid,
     getCoverImageUrl,
     calculateReadingTime,
-    NEXT_PUBLIC_SITE_URL
+    NEXT_PUBLIC_SITE_URL,
+    formatDate
 };
 
 export default utils;

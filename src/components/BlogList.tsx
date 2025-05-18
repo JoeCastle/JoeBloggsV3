@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { PostMeta } from '../lib/posts';
+import utils from '@/utils/utils';
 
 interface BlogListProps {
   posts: PostMeta[];
@@ -21,7 +22,7 @@ const BlogList = ({ posts }: BlogListProps) => {
                 <h2 className="post-title">{post.title}</h2>
                 <div className="post-meta">
                   <span className="post-date">
-                    {new Date(post.date).toLocaleDateString()}
+                    {utils.formatDate(post.date)}
                   </span>
                   <span className="post-reading-time">{post.readingTime}</span>
                 </div>

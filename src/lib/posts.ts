@@ -14,20 +14,24 @@ export interface PostMeta {
   canonicalUrl: string;
 }
 
-const POSTS_DIR = path.join(process.cwd(), 'src', 'posts');
-const NEXT_PUBLIC_SITE_URL = utils.NEXT_PUBLIC_SITE_URL; // Replace with your real URL or load from config
+const POSTS_DIR: string = path.join(process.cwd(), 'src', 'posts');
+const NEXT_PUBLIC_SITE_URL: string = utils.NEXT_PUBLIC_SITE_URL;
 
+/**
+ * Get all of the blog posts from the posts folder.
+ * @returns Array of posts with meta data.
+ */
 export async function getAllPosts(): Promise<PostMeta[]> {
-  const folders = await fs.readdir(POSTS_DIR);
+  const folders: string[] = await fs.readdir(POSTS_DIR);
   const posts: PostMeta[] = [];
 
   for (const folder of folders) {
-    const mdPath = path.join(POSTS_DIR, folder, `${folder}.md`);
-    const file = await fs.readFile(mdPath, 'utf8');
+    const mdPath: string = path.join(POSTS_DIR, folder, `${folder}.md`);
+    const file: string = await fs.readFile(mdPath, 'utf8');
     const { data, content } = matter(file);
 
-    const wordCount = content.trim().split(/\s+/).length;
-    const readingTime = `${Math.ceil(wordCount / 200)} min read`;
+    const wordCount: number = content.trim().split(/\s+/).length;
+    const readingTime: string = utils.calculateReadingTime(content);
 
     posts.push({
       slug: folder,
@@ -43,6 +47,11 @@ export async function getAllPosts(): Promise<PostMeta[]> {
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
+/**
+ * Get a single post by the post slug.
+ * @param slug Post slug.
+ * @returns Post and meta data.
+ */
 export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; content: string } | null> {
   const mdPath: string = path.join(POSTS_DIR, slug, `${slug}.md`);
 
@@ -51,7 +60,7 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
     const { data, content: rawMarkdown } = matter(file);
 
     const wordCount: number = rawMarkdown.trim().split(/\s+/).length;
-    const readingTime: string = `${Math.ceil(wordCount / 200)} min read`;
+    const readingTime: string = utils.calculateReadingTime(rawMarkdown);
     const html: string = await renderMarkdown(rawMarkdown);
 
     return {

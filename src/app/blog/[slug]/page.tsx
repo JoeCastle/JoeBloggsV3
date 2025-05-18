@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import StructuredData from '@/components/shared/StructuredData';
 import { notFound } from 'next/navigation';
 import { ScrollProgressBar } from '@/components/shared/ScrollProgressBar';
+import PostNavigation from '@/components/shared/PostNavigation';
 
 interface Props {
   params: { slug: string };
@@ -25,7 +26,7 @@ export async function generateMetadata(
 
   if (!post) {
     return {
-      title: '404 – Page Not Found | JoeBloggs',
+      title: '404 - Page Not Found | JoeBloggs',
       description: 'The requested blog post could not be found.',
       robots: {
         index: false,
@@ -95,6 +96,8 @@ export default async function BlogPostPage({ params }: Props) {
 
   const readingTimeMinutes: number | undefined = parseInt(meta.readingTime.replace(/\D/g, ''), 10) || undefined;
 
+  const allPosts: PostMeta[] = await getAllPosts();
+
   return (
     <>
       {meta.wordCount > 400 && <ScrollProgressBar />}
@@ -108,6 +111,8 @@ export default async function BlogPostPage({ params }: Props) {
         readingTimeMinutes={readingTimeMinutes}
       />
       <BlogPost meta={meta} content={content} />
+
+      <PostNavigation posts={allPosts} currentSlug={slug} />
     </>
   );
 }

@@ -20,7 +20,7 @@ export const NavMenu: React.FC<Props> = ({ isDarkMode }) => {
       <div className="container-fluid">
         <div className="navbar-header">
           <h1>
-            <Link href="/#Home" className="navbar-brand">
+            <Link href="/" className="navbar-brand">
               <Image src={Logo} alt="Joseph Castle" width={169} height={32} priority={true} />
             </Link>
           </h1>

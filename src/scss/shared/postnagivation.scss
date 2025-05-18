@@ -1,0 +1,86 @@
+@use '../shared/variables.scss' as *;
+@use '../shared/theme.scss' as *;
+@use 'sass:color';
+
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid $light-divider;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+  padding-bottom: 2rem;
+
+  .nav-link {
+    text-decoration: none;
+    color: $standard-blue-background;
+    display: flex;
+    flex-direction: column;
+    @include transition-properties(color);
+
+    &:hover .nav-title {
+      text-decoration: underline;
+    }
+
+    .nav-label {
+      font-size: 0.8rem;
+      color: rgba($light-primary-font-colour, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      @include transition-properties(color);
+    }
+
+    .nav-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 0.25rem 0;
+      color: $light-primary-font-colour;
+      @include transition-properties(color);
+    }
+
+    .nav-date {
+      font-size: 0.8rem;
+      color: rgba($light-primary-font-colour, 0.6);
+      @include transition-properties(color);
+    }
+  }
+
+  .prev-link {
+    align-items: flex-start;
+  }
+
+  .next-link {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .nav-label.loop-label {
+    font-weight: bold;
+  }
+}
+
+// Dark mode support
+.theme-container.dark-theme {
+  .post-navigation {
+    border-top: 1px solid $dark-divider;
+
+    .nav-link {
+      color: color.scale($standard-blue-background, $lightness: 15%);
+
+      .nav-label {
+        color: rgba($dark-primary-font-colour, 0.7);
+      }
+
+      .nav-title {
+        color: $dark-primary-font-colour;
+      }
+
+      .nav-date {
+        color: rgba($dark-primary-font-colour, 0.6);
+      }
+    }
+  }
+}
