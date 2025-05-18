@@ -1,6 +1,7 @@
 @use './shared/variables.scss' as *;
 @use './shared/theme.scss';
 @use './shared/form.scss';
+@use './shared/scrollprogressbar.scss';
 
 @use './component/navbar.scss';
 @use './component/landing.scss';
@@ -34,9 +35,9 @@
     border-radius: 0px;
 }
 
-html, body {
-    height: 100%;
-}
+// html, body {
+//     height: 100%;
+// }
 
 html,
 body,
@@ -52,15 +53,32 @@ body,
     width: 100%;
 }
 
-// Fixes scrolling issues.
-body {
-    display: flex;
-    flex: 1 0 auto;
-}
 
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    display: flex; // Fixes scrolling issues.
+    flex: 1 0 auto; // Fixes scrolling issues.
+    flex-direction: column;
     overflow: hidden;
 }
+
+// // Fixes scrolling issues.
+// body {
+//     display: flex;
+//     flex: 1 0 auto;
+// }
+
+// body {
+//     overflow: hidden;
+// }
 
 .page-content {
     display: flex;

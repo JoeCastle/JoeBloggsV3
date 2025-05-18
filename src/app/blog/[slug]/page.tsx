@@ -4,6 +4,7 @@ import BlogPost from '../../../components/BlogPost';
 import type { Metadata } from 'next';
 import StructuredData from '@/components/shared/StructuredData';
 import { notFound } from 'next/navigation';
+import { ScrollProgressBar } from '@/components/shared/ScrollProgressBar';
 
 interface Props {
   params: { slug: string };
@@ -96,6 +97,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      {meta.wordCount > 400 && <ScrollProgressBar />}
       <StructuredData
         url={fullUrl}
         title={meta.title}

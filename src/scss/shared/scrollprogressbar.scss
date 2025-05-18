@@ -1,0 +1,20 @@
+@use './variables.scss' as *;
+
+.scroll-progress-container {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: transparent;
+  z-index: 9999;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background-color: $standard-blue-background;
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+}
