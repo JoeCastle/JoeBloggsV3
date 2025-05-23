@@ -11,7 +11,7 @@ footer {
     text-align: center;
     padding: 40px 0px 30px 0px;
 
-    > div {
+    >div {
         max-width: 1000px;
         padding: 0px 20px;
     }
@@ -25,14 +25,14 @@ footer {
         flex-wrap: wrap;
         display: none; // Not necessary as navbar is always viewable.
 
-        > li {
+        >li {
             padding: 0px 10px;
 
             @media (max-width: 768px) {
                 padding: 0px 5px;
             }
 
-            > a {
+            >a {
                 font-size: 21px;
                 text-decoration: underline;
             }
@@ -47,11 +47,11 @@ footer {
         margin-top: 30px;
         flex-wrap: wrap;
 
-        > a {
+        >a {
             margin: 0 10px;
             text-decoration: none;
 
-            > div {
+            >div {
                 background-color: #292929;
                 border-radius: 15px;
                 width: 45px;
@@ -66,7 +66,7 @@ footer {
             }
         }
 
-        > a:hover,
+        >a:hover,
         a:active {
             text-decoration: underline;
         }
@@ -82,7 +82,7 @@ footer {
             align-items: center;
         }
 
-        > div {
+        >div {
             max-width: 50%;
 
             @media (max-width: 600px) {
@@ -90,7 +90,7 @@ footer {
             }
         }
 
-        > div:nth-child(1) {
+        >div:nth-child(1) {
             text-align: left;
             padding-right: 10px;
 
@@ -99,7 +99,7 @@ footer {
             }
         }
 
-        > div:nth-child(2) {
+        >div:nth-child(2) {
             padding-left: 10px;
         }
     }

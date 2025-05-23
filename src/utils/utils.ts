@@ -53,9 +53,9 @@ const calculateReadingTime = (text: string): string => {
  */
 const formatDate = (date: string): string =>
     new Date(date).toLocaleDateString(undefined, {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
     });
 
 const utils = {

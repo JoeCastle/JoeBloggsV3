@@ -6,7 +6,7 @@ import React from 'react';
 import Logo from '../../images/logo_cropped.png';
 
 interface Props {
-  isDarkMode: boolean;
+    isDarkMode: boolean;
 }
 
 /**
@@ -15,17 +15,17 @@ interface Props {
  * @returns
  */
 export const NavMenu: React.FC<Props> = ({ isDarkMode }) => {
-  return (
-    <nav className={`navbar navbar-expand-lg navbar-expand-md ${isDarkMode ? 'navbar-dark' : ''}`}>
-      <div className="container-fluid">
-        <div className="navbar-header">
-          <h1>
-            <Link href="/" className="navbar-brand">
-              <Image src={Logo} alt="Joseph Castle" width={169} height={32} priority={true} />
-            </Link>
-          </h1>
-        </div>
-      </div>
-    </nav>
-  );
+    return (
+        <nav className={`navbar navbar-expand-lg navbar-expand-md ${isDarkMode ? 'navbar-dark' : ''}`}>
+            <div className="container-fluid">
+                <div className="navbar-header">
+                    <h1>
+                        <Link href="/" className="navbar-brand">
+                            <Image src={Logo} alt="Joseph Castle" width={169} height={32} priority={true} />
+                        </Link>
+                    </h1>
+                </div>
+            </div>
+        </nav>
+    );
 };

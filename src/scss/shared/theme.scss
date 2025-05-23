@@ -4,12 +4,15 @@
 
 // === THEME TRANSITION MIXIN ===
 @mixin transition-properties($properties) {
-    $transition-list: ();
-    @each $prop in $properties {
-        $transition-list: list.append($transition-list, $prop $global-animation-time ease-in-out, comma);
-    }
-    transition: $transition-list;
-    will-change: $properties;
+    $transition-list: (
+    );
+
+@each $prop in $properties {
+    $transition-list: list.append($transition-list, $prop $global-animation-time ease-in-out, comma);
+}
+
+transition: $transition-list;
+will-change: $properties;
 }
 
 // === THEME BASE MIXIN ===
@@ -43,21 +46,25 @@
         @include transition-properties((background-color, border));
     }
 
-    .about .socials > a > div {
+    .about .socials>a>div {
         background-color: map.get($theme, background);
+
         @if not $is-dark {
             box-shadow: 4px 4px 12px -4px rgba(0, 0, 0, 0.3);
-        } @else {
+        }
+
+        @else {
             border: $dark-border;
         }
+
         @include transition-properties((background-color, box-shadow));
     }
 
-    ul.skillarea-summary-tile-techs > li {
+    ul.skillarea-summary-tile-techs>li {
         color: $standard-blue-background;
         @include transition-properties((color));
 
-        > span {
+        >span {
             color: map.get($theme, text);
             @include transition-properties((color));
         }
@@ -72,7 +79,7 @@
             @include transition-properties((color));
         }
 
-        .socials-footer > a > div {
+        .socials-footer>a>div {
             background-color: map.get($theme, background);
             @include transition-properties((background-color));
         }
@@ -121,6 +128,7 @@
 
 // === CODE BLOCK THEME MIXIN ===
 @mixin apply-code-theme($is-dark: false) {
+
     // Base code block styling
     .hljs {
         color: if($is-dark, #abb2bf, #383a42);

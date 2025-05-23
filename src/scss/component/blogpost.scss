@@ -94,21 +94,26 @@
     h1 {
         font-size: 2.2rem;
     }
+
     h2 {
         font-size: 1.8rem;
         padding-bottom: 0.5rem;
         border-bottom: 2px solid;
         @include transition-properties(border-color);
     }
+
     h3 {
         font-size: 1.5rem;
     }
+
     h4 {
         font-size: 1.3rem;
     }
+
     h5 {
         font-size: 1.1rem;
     }
+
     h6 {
         font-size: 1rem;
     }
@@ -270,6 +275,7 @@
         }
 
         table {
+
             th,
             td {
                 border-color: rgba($light-primary-font-colour, 0.2);
@@ -335,6 +341,7 @@
         }
 
         table {
+
             th,
             td {
                 border-color: rgba($dark-primary-font-colour, 0.3);

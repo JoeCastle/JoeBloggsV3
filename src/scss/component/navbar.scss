@@ -1,6 +1,7 @@
 @use '../shared/variables.scss' as *;
 
 @media (max-width: $mobile-max-width-breakpoint) {
+
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
     body {
         padding-top: 50px;
@@ -97,7 +98,7 @@ nav.navbar {
                 display: flex;
                 align-items: center;
 
-                > img {
+                >img {
                     max-width: 300px;
                     max-height: 32px;
                     width: 169px;
@@ -109,11 +110,13 @@ nav.navbar {
         .navbar-collapse {
             width: 100%;
             border: none;
+
             //Above mobile width
             @media (min-width: $mobile-min-width-breakpoint) {
                 display: flex !important;
                 justify-content: flex-end;
             }
+
             //Below mobile width
             @media (max-width: $mobile-max-width-breakpoint) {
                 margin-left: 0px;
@@ -140,6 +143,7 @@ nav.navbar {
             }
 
             @media (min-width: $mobile-min-width-breakpoint) {
+
                 //Animated underline
                 //https://tobiasahlin.com/blog/css-trick-animating-link-underlines/
                 a:after {
@@ -154,6 +158,7 @@ nav.navbar {
                     transform: scaleX(0);
                     transition: all 0.3s ease-in-out 0s;
                 }
+
                 // Only underline the link that has the active class.
                 a.active:after {
                     visibility: visible;

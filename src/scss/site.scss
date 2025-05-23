@@ -60,6 +60,7 @@ html {
     margin: 0;
     padding: 0;
 }
+
 body {
     height: 100%;
     margin: 0;
@@ -164,7 +165,9 @@ main {
 
 #Projects,
 #Skills {
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+
+    @media screen and (-ms-high-contrast: active),
+    (-ms-high-contrast: none) {
         height: auto !important;
     }
 }
@@ -179,7 +182,8 @@ main {
 
     // Required to vertically center items for IE11 - https://medium.com/codeart-mk/internet-explorer-hacks-796200e5741c
     // Target IE11 only as this will break other browsers.
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @media screen and (-ms-high-contrast: active),
+    (-ms-high-contrast: none) {
         height: 1px;
     }
 
@@ -215,11 +219,11 @@ main {
 }
 
 .socials {
-    > a {
+    >a {
         text-decoration: none;
     }
 
-    > a:hover,
+    >a:hover,
     a:active {
         text-decoration: underline;
     }

@@ -2,6 +2,10 @@
 title: "lorem ipsum"
 summary: "This is post 3"
 date: "2025-04-30"
+tags:
+  - react
+  - typescript
+  - personal
 ---
 
 # Infelix obsceno cibique milite

@@ -5,13 +5,14 @@ import utils from '@/utils/utils';
 import { renderMarkdown } from '@/utils/renderMarkdown';
 
 export interface PostMeta {
-  slug: string;
-  title: string;
-  summary: string;
-  date: string;
-  readingTime: string;
-  wordCount: number;
-  canonicalUrl: string;
+    slug: string;
+    title: string;
+    summary: string;
+    date: string;
+    readingTime: string;
+    wordCount: number;
+    canonicalUrl: string;
+    tags?: string[];
 }
 
 const POSTS_DIR: string = path.join(process.cwd(), 'src', 'posts');
@@ -22,29 +23,30 @@ const NEXT_PUBLIC_SITE_URL: string = utils.NEXT_PUBLIC_SITE_URL;
  * @returns Array of posts with meta data.
  */
 export async function getAllPosts(): Promise<PostMeta[]> {
-  const folders: string[] = await fs.readdir(POSTS_DIR);
-  const posts: PostMeta[] = [];
+    const folders: string[] = await fs.readdir(POSTS_DIR);
+    const posts: PostMeta[] = [];
 
-  for (const folder of folders) {
-    const mdPath: string = path.join(POSTS_DIR, folder, `${folder}.md`);
-    const file: string = await fs.readFile(mdPath, 'utf8');
-    const { data, content } = matter(file);
+    for (const folder of folders) {
+        const mdPath: string = path.join(POSTS_DIR, folder, `${folder}.md`);
+        const file: string = await fs.readFile(mdPath, 'utf8');
+        const { data, content } = matter(file);
 
-    const wordCount: number = content.trim().split(/\s+/).length;
-    const readingTime: string = utils.calculateReadingTime(content);
+        const wordCount: number = content.trim().split(/\s+/).length;
+        const readingTime: string = utils.calculateReadingTime(content);
 
-    posts.push({
-      slug: folder,
-      title: data.title,
-      summary: data.summary,
-      date: data.date,
-      readingTime,
-      wordCount,
-      canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${folder}`,
-    });
-  }
+        posts.push({
+            slug: folder,
+            title: data.title,
+            summary: data.summary,
+            date: data.date,
+            readingTime,
+            wordCount,
+            canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${folder}`,
+            tags: data.tags || []
+        });
+    }
 
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
 /**
@@ -53,30 +55,30 @@ export async function getAllPosts(): Promise<PostMeta[]> {
  * @returns Post and meta data.
  */
 export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; content: string } | null> {
-  const mdPath: string = path.join(POSTS_DIR, slug, `${slug}.md`);
+    const mdPath: string = path.join(POSTS_DIR, slug, `${slug}.md`);
 
-  try {
-    const file: string = await fs.readFile(mdPath, 'utf8');
-    const { data, content: rawMarkdown } = matter(file);
+    try {
+        const file: string = await fs.readFile(mdPath, 'utf8');
+        const { data, content: rawMarkdown } = matter(file);
 
-    const wordCount: number = rawMarkdown.trim().split(/\s+/).length;
-    const readingTime: string = utils.calculateReadingTime(rawMarkdown);
-    const html: string = await renderMarkdown(rawMarkdown);
+        const wordCount: number = rawMarkdown.trim().split(/\s+/).length;
+        const readingTime: string = utils.calculateReadingTime(rawMarkdown);
+        const html: string = await renderMarkdown(rawMarkdown);
 
-    return {
-      meta: {
-        slug,
-        title: data.title,
-        summary: data.summary,
-        date: data.date,
-        readingTime,
-        wordCount,
-        canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
-      },
-      content: html,
-    };
-  } catch (err) {
-    return null; // File not found or can't be parsed
-  }
+        return {
+            meta: {
+                slug,
+                title: data.title,
+                summary: data.summary,
+                date: data.date,
+                readingTime,
+                wordCount,
+                canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
+                tags: data.tags || []
+            },
+            content: html,
+        };
+    } catch (err) {
+        return null; // File not found or can't be parsed
+    }
 }
-  
