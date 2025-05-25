@@ -1,5 +1,3 @@
-import globals from './globals';
-
 const NEXT_PUBLIC_SITE_URL: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 /**

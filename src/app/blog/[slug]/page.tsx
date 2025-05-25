@@ -8,8 +8,8 @@ import PostNavigation from '@/components/shared/PostNavigation';
 import { markdownToPlainText } from '@/lib/markdownToPlainText';
 import StructuredData from '@/components/shared/StructuredData';
 
-interface Props {
-    params: { slug: string };
+interface Params {
+    slug: string;
 }
 
 // Pre-generates all blog pages statically. Called automatically.
@@ -19,9 +19,7 @@ export async function generateStaticParams() {
 }
 
 // Dynamic SEO metadata per blog post
-export async function generateMetadata(
-    { params }: { params: { slug: string } }
-): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
     const { slug } = await params;
     const post = await getPostBySlug(slug);
 
@@ -36,7 +34,7 @@ export async function generateMetadata(
         };
     }
 
-    const { meta, markdown } = post;
+    const { meta } = post;
 
     const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
@@ -47,37 +45,6 @@ export async function generateMetadata(
             ? `${baseUrl}/posts/${slug}/${meta.coverImage.replace('./', '')}`
             : undefined;
     }
-
-    // const jsonLd = {
-    //     "@context": "https://schema.org",
-    //     "@type": "BlogPosting",
-    //     mainEntityOfPage: {
-    //         "@type": "WebPage",
-    //         "@id": fullUrl,
-    //     },
-    //     headline: meta.title,
-    //     description: meta.summary,
-    //     datePublished: meta.date,
-    //     dateModified: meta.dateModified || meta.date,
-    //     url: fullUrl,
-    //     author: {
-    //         "@type": "Person",
-    //         name: "Joseph Castle",
-    //         url: "https://joecastle.co.uk",
-    //     },
-    //     publisher: {
-    //         "@type": "Organization",
-    //         name: "JoeBloggs",
-    //         logo: {
-    //             "@type": "ImageObject",
-    //             url: `${baseUrl}/favicon-32x32.png`,
-    //         },
-    //     },
-    //     keywords: meta.tags?.join(', '),
-    //     ...(imageUrl ? { image: [imageUrl] } : {}),
-    //     ...(plainTextExcerpt ? { articleBody: plainTextExcerpt } : {}),
-    //     ...(readingTimeMinutes ? { timeRequired: `PT${readingTimeMinutes}M` } : {}),
-    // };
 
     return {
         metadataBase: new URL(baseUrl),
@@ -110,13 +77,23 @@ export async function generateMetadata(
             title: `${meta.title} - JoeBloggs`,
             description: meta.summary,
             ...(imageUrl && { images: [imageUrl] }),
-        }
+        },
+        robots: {
+            index: true,
+            follow: true,
+        },
+        icons: {
+            icon: '/favicon.ico',
+            apple: '/apple-touch-icon.png',
+            other: [
+                { rel: 'icon', url: '/android-chrome-192x192.png', sizes: '192x192' },
+            ],
+        },
     };
 }
 
-
 // Page renderer
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params }: { params: Promise<Params> }) {
     const { slug } = await params;
     const post = await getPostBySlug(slug);
 
@@ -127,9 +104,6 @@ export default async function BlogPostPage({ params }: Props) {
     const { meta, content, markdown } = post;
     const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
-    // const imageUrl: string = meta.coverImage
-    //   ? `${baseUrl}/posts/${slug}/${meta.coverImage.replace('./', '')}`
-    //   : undefined;
     const imageUrl: string = ''; // Add logic if you later support per-post images
 
     const readingTimeMinutes: number | undefined = parseInt(meta.readingTime.replace(/\D/g, ''), 10) || undefined;
@@ -149,7 +123,7 @@ export default async function BlogPostPage({ params }: Props) {
                 image={imageUrl}
                 articleBody={markdownToPlainText(markdown).slice(0, 500)}
                 wordCount={meta.wordCount}
-                readingTimeMinutes={parseInt(meta.readingTime.replace(/\D/g, ''), 10)}
+                readingTimeMinutes={readingTimeMinutes}
                 keywords={meta.tags}
             />
 

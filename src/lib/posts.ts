@@ -86,6 +86,7 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
             markdown: rawMarkdown
         };
     } catch (err) {
+        console.log(err)
         return null; // File not found or can't be parsed
     }
 }

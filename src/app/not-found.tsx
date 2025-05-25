@@ -9,7 +9,7 @@ export default function NotFound(): JSX.Element {
             <div className="error-code">404</div>
             <h1 className="error-title">Oops! Page Not Found</h1>
             <p className="error-description">
-                Looks like this route doesn't exist. You might be lost in the matrix.
+                Looks like this route doesn&#39;t exist. You might be lost in the matrix.
             </p>
 
             <pre className="error-snippet">

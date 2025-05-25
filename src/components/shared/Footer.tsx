@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import globals from '../../utils/globals';
 import utils from '../../utils/utils';
 import { NEXT_PUBLIC_APP_VERSION, NEXT_PUBLIC_GIT_COMMIT, NEXT_PUBLIC_BUILD_TIMESTAMP } from '../../utils/version';
@@ -12,6 +12,15 @@ import { faAt } from '@fortawesome/free-solid-svg-icons';
  * @returns
  */
 export const Footer: React.FC = ({ }) => {
+    const [year, setYear] = useState<number | null>(null);
+    const [buildDate, setBuildDate] = useState<string | null>(null);
+
+    useEffect(() => {
+        // done this way to avoid  client/server mismatch hydration errors.
+        setYear(new Date().getFullYear());
+        setBuildDate(new Date(NEXT_PUBLIC_BUILD_TIMESTAMP).toLocaleString());
+    }, []);
+
     return (
         <div>
             <div className="footer-top-content">
@@ -56,12 +65,14 @@ export const Footer: React.FC = ({ }) => {
             <div className="divider" />
 
             <div className="footer-bottom-content">
-                <p className="copyright-text">Copyright &copy; 2019 - {new Date().getFullYear()} Joseph Castle. All Rights Reserved.</p>
+                <p className="copyright-text">
+                    Copyright &copy; 2019 - {year ?? '----'} Joseph Castle. All Rights Reserved.
+                </p>
 
                 <p className="version-text">v{NEXT_PUBLIC_APP_VERSION}</p>
 
                 <p>Commit: {NEXT_PUBLIC_GIT_COMMIT}</p>
-                <p>Built: {new Date(NEXT_PUBLIC_BUILD_TIMESTAMP).toLocaleString()}</p>
+                <p>Built: {buildDate ?? '...'}</p>
             </div>
         </div>
     );

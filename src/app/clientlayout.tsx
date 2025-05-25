@@ -95,15 +95,14 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
                 <FontAwesomeIcon className="fa-icon" icon={faArrowUp} />
             </button>
 
-            {hasMounted && (
-                <button
-                    id="theme-changer-btn"
-                    onClick={handleChangeTheme}
-                    title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                >
-                    <FontAwesomeIcon className="fa-icon" icon={isDarkMode ? faMoon : faSun} />
-                </button>
-            )}
+            <button
+                id="theme-changer-btn"
+                onClick={handleChangeTheme}
+                title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                style={{ visibility: hasMounted ? 'visible' : 'hidden' }}
+            >
+                <FontAwesomeIcon className="fa-icon" icon={isDarkMode ? faMoon : faSun} />
+            </button>
         </div>
     );
 }
