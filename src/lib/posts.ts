@@ -9,9 +9,11 @@ export interface PostMeta {
     title: string;
     summary: string;
     date: string;
+    dateModified: string;
     readingTime: string;
     wordCount: number;
     canonicalUrl: string;
+    coverImage: string;
     tags?: string[];
 }
 
@@ -39,9 +41,11 @@ export async function getAllPosts(): Promise<PostMeta[]> {
             title: data.title,
             summary: data.summary,
             date: data.date,
+            dateModified: data.dateModified,
             readingTime,
             wordCount,
             canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${folder}`,
+            coverImage: data.coverImage,
             tags: data.tags || []
         });
     }
@@ -54,7 +58,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
  * @param slug Post slug.
  * @returns Post and meta data.
  */
-export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; content: string } | null> {
+export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; content: string, markdown: string } | null> {
     const mdPath: string = path.join(POSTS_DIR, slug, `${slug}.md`);
 
     try {
@@ -71,12 +75,15 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
                 title: data.title,
                 summary: data.summary,
                 date: data.date,
+                dateModified: data.dateModified,
                 readingTime,
                 wordCount,
                 canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
+                coverImage: data.coverImage,
                 tags: data.tags || []
             },
             content: html,
+            markdown: rawMarkdown
         };
     } catch (err) {
         return null; // File not found or can't be parsed

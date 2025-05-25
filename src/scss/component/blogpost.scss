@@ -18,6 +18,10 @@
 }
 
 .blog-post {
+    max-width: 70ch; // Supposedly the ideal content width.
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
     @include transition-properties(color);
 }
 
@@ -147,6 +151,10 @@
         border-left: 4px solid;
         font-style: italic;
         @include transition-properties((background-color, border-left-color));
+
+        p:first-child {
+            margin-top: 0;
+        }
 
         p:last-child {
             margin-bottom: 0;

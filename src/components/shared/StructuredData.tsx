@@ -5,9 +5,12 @@ interface StructuredDataProps {
     title: string;
     description: string;
     datePublished: string;
+    dateModified?: string;
+    articleBody?: string;
     image?: string;
     wordCount?: number;
     readingTimeMinutes?: number;
+    keywords?: string[];
 }
 
 export default function StructuredData({
@@ -15,9 +18,12 @@ export default function StructuredData({
     title,
     description,
     datePublished,
+    dateModified,
+    articleBody,
     image,
     wordCount,
-    readingTimeMinutes
+    readingTimeMinutes,
+    keywords
 }: StructuredDataProps) {
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -29,9 +35,12 @@ export default function StructuredData({
         headline: title,
         description,
         datePublished,
+        dateModified: dateModified || datePublished,
+        url,
         author: {
             '@type': 'Person',
             name: 'Joseph Castle',
+            url: 'https://joecastle.co.uk',
         },
         publisher: {
             '@type': 'Organization',
@@ -42,10 +51,10 @@ export default function StructuredData({
             },
         },
         ...(image ? { image: [image] } : {}),
+        ...(articleBody ? { articleBody } : {}),
         ...(wordCount ? { wordCount } : {}),
-        ...(readingTimeMinutes
-            ? { timeRequired: `PT${readingTimeMinutes}M` }
-            : {}),
+        ...(readingTimeMinutes ? { timeRequired: `PT${readingTimeMinutes}M` } : {}),
+        ...(keywords?.length ? { keywords: keywords.join(', ') } : {}),
     };
 
     return (

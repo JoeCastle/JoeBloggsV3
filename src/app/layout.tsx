@@ -13,30 +13,24 @@ export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: 'JoeBloggs | A blog by Joseph Castle',
     description:
-        'Joseph Castle is a Senior Full-Stack Software Developer with experience building websites and web applications using React, .NET and SQL.',
+        'The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.',
     keywords: [
-        'full stack developer',
-        'react',
-        '.NET',
-        'SQL',
-        'TypeScript',
-        // ...
     ],
     authors: [{ name: 'Joseph Castle' }],
     openGraph: {
         title: 'JoeBloggs | A blog by Joseph Castle',
         description:
-            'Joseph Castle is a Senior Full-Stack Software Developer with experience building websites and web applications using React, .NET and SQL.',
+            'The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.',
         url: SITE_URL,
-        images: [`${SITE_URL}/Projects_section.jpg`],
+        images: [`${SITE_URL}/Blog_image.jpg`],
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
         title: 'JoeBloggs | A blog by Joseph Castle',
         description:
-            'Joseph Castle is a Senior Full-Stack Software Developer with experience building websites and web applications using React, .NET and SQL.',
-        images: [`${SITE_URL}/Projects_section.jpg`],
+            'The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.',
+        images: [`${SITE_URL}/Blog_image.jpg`],
     },
     icons: {
         icon: '/favicon.ico',
@@ -70,11 +64,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             name: 'JoeBloggs',
                             url: SITE_URL,
                             "description": "The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.",
-                            potentialAction: {
-                                '@type': 'SearchAction',
-                                target: `${SITE_URL}/search?q={search_term_string}`,
-                                'query-input': 'required name=search_term_string',
-                            },
+                            // potentialAction: {
+                            //     '@type': 'SearchAction',
+                            //     target: `${SITE_URL}/search?q={search_term_string}`,
+                            //     'query-input': 'required name=search_term_string',
+                            // },
                         }),
                     }}
                 />

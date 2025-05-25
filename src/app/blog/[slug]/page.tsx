@@ -2,10 +2,11 @@ export const dynamicParams = true;
 import { getAllPosts, getPostBySlug, PostMeta } from '../../../lib/posts';
 import BlogPost from '../../../components/BlogPost';
 import type { Metadata } from 'next';
-import StructuredData from '@/components/shared/StructuredData';
 import { notFound } from 'next/navigation';
 import { ScrollProgressBar } from '@/components/shared/ScrollProgressBar';
 import PostNavigation from '@/components/shared/PostNavigation';
+import { markdownToPlainText } from '@/lib/markdownToPlainText';
+import StructuredData from '@/components/shared/StructuredData';
 
 interface Props {
     params: { slug: string };
@@ -35,19 +36,54 @@ export async function generateMetadata(
         };
     }
 
-    const { meta } = post;
+    const { meta, markdown } = post;
 
     const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
 
-    // const imageUrl = meta.coverImage
-    //   ? `${baseUrl}/posts/${slug}/${meta.coverImage.replace('./', '')}`
-    //   : undefined;
+    let imageUrl = undefined;
+    if (meta.coverImage) {
+        imageUrl = meta.coverImage
+            ? `${baseUrl}/posts/${slug}/${meta.coverImage.replace('./', '')}`
+            : undefined;
+    }
+
+    // const jsonLd = {
+    //     "@context": "https://schema.org",
+    //     "@type": "BlogPosting",
+    //     mainEntityOfPage: {
+    //         "@type": "WebPage",
+    //         "@id": fullUrl,
+    //     },
+    //     headline: meta.title,
+    //     description: meta.summary,
+    //     datePublished: meta.date,
+    //     dateModified: meta.dateModified || meta.date,
+    //     url: fullUrl,
+    //     author: {
+    //         "@type": "Person",
+    //         name: "Joseph Castle",
+    //         url: "https://joecastle.co.uk",
+    //     },
+    //     publisher: {
+    //         "@type": "Organization",
+    //         name: "JoeBloggs",
+    //         logo: {
+    //             "@type": "ImageObject",
+    //             url: `${baseUrl}/favicon-32x32.png`,
+    //         },
+    //     },
+    //     keywords: meta.tags?.join(', '),
+    //     ...(imageUrl ? { image: [imageUrl] } : {}),
+    //     ...(plainTextExcerpt ? { articleBody: plainTextExcerpt } : {}),
+    //     ...(readingTimeMinutes ? { timeRequired: `PT${readingTimeMinutes}M` } : {}),
+    // };
 
     return {
         metadataBase: new URL(baseUrl),
         title: `${meta.title} - JoeBloggs`,
         description: meta.summary,
+        keywords: meta.tags?.join(', '),
         alternates: {
             canonical: fullUrl,
         },
@@ -56,23 +92,25 @@ export async function generateMetadata(
             description: meta.summary,
             url: fullUrl,
             type: 'article',
-            // ...(imageUrl && {
-            //   images: [
-            //     {
-            //       url: imageUrl,
-            //       width: 1200,
-            //       height: 630,
-            //       alt: meta.title,
-            //     },
-            //   ],
-            // }),
+            publishedTime: meta.date,
+            tags: meta.tags,
+            ...(imageUrl && {
+                images: [
+                    {
+                        url: imageUrl,
+                        width: 1200,
+                        height: 630,
+                        alt: meta.title,
+                    },
+                ],
+            }),
         },
         twitter: {
             card: 'summary_large_image',
             title: `${meta.title} - JoeBloggs`,
             description: meta.summary,
-            // ...(imageUrl && { images: [imageUrl] }),
-        },
+            ...(imageUrl && { images: [imageUrl] }),
+        }
     };
 }
 
@@ -86,7 +124,7 @@ export default async function BlogPostPage({ params }: Props) {
         notFound();
     }
 
-    const { meta, content } = post;
+    const { meta, content, markdown } = post;
     const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
     // const imageUrl: string = meta.coverImage
@@ -107,9 +145,12 @@ export default async function BlogPostPage({ params }: Props) {
                 title={meta.title}
                 description={meta.summary}
                 datePublished={meta.date}
+                dateModified={meta.dateModified}
                 image={imageUrl}
+                articleBody={markdownToPlainText(markdown).slice(0, 500)}
                 wordCount={meta.wordCount}
-                readingTimeMinutes={readingTimeMinutes}
+                readingTimeMinutes={parseInt(meta.readingTime.replace(/\D/g, ''), 10)}
+                keywords={meta.tags}
             />
 
             <BlogPost meta={meta} content={content} />

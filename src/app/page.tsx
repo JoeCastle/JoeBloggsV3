@@ -10,12 +10,12 @@ export const metadata: Metadata = {
     openGraph: {
         title: globals.metaData.title,
         description: globals.metaData.description,
-        images: ['/Projects_section.jpg'],
+        images: ['/Blog_image.jpg'],
     },
     twitter: {
         title: globals.metaData.title,
         description: globals.metaData.description,
-        images: ['/Projects_section.jpg'],
+        images: ['/Blog_image.jpg'],
     },
     robots: {
         index: true,
