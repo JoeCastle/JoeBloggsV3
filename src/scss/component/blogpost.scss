@@ -92,6 +92,7 @@
         margin-bottom: 1rem;
         font-weight: 600;
         line-height: 1.3;
+        scroll-margin-top: 10px; // For the TOC links.
         @include transition-properties(color);
     }
 
