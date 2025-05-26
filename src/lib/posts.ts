@@ -14,6 +14,7 @@ export interface PostMeta {
     wordCount: number;
     canonicalUrl: string;
     coverImage: string;
+    content: string;
     tags?: string[];
 }
 
@@ -46,6 +47,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
             wordCount,
             canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${folder}`,
             coverImage: data.coverImage,
+            content: content,
             tags: data.tags || []
         });
     }
@@ -80,6 +82,7 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
                 wordCount,
                 canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
                 coverImage: data.coverImage,
+                content: rawMarkdown,
                 tags: data.tags || []
             },
             content: html,

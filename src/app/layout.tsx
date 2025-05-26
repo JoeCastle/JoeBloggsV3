@@ -54,6 +54,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta name="version" content={process.env.NEXT_PUBLIC_APP_VERSION_DATE} />
                 <meta name="versionNumber" content={process.env.NEXT_PUBLIC_APP_VERSION} />
 
+                <link
+                    rel="alternate"
+                    type="application/rss+xml"
+                    title="JoeBloggs | Blog RSS Feed"
+                    href="/rss.xml"
+                />
+
                 {/* Structured data */}
                 <script
                     type="application/ld+json"
