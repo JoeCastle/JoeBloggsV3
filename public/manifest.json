@@ -1,7 +1,7 @@
 {
     "short_name": "JoeBloggs",
     "name": "JoeBloggs | A blog by Joseph Castle",
-    "description": "The personal blog of Joseph Castle — sharing thoughts, tips, and technical frustrations.",
+    "description": "The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.",
     "icons": [
         {
             "src": "favicon.ico",

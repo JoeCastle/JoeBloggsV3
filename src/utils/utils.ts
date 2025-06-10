@@ -22,14 +22,6 @@ const getYearsOfExperience = (): number => {
 };
 
 /**
- * @deprecated This function should not be used.
- * @param slug
- * @param coverImage
- * @returns
- */
-const getCoverImageUrl = (slug: string, coverImage: string) => `${NEXT_PUBLIC_SITE_URL}/posts/${slug}/${coverImage.replace('./', '')}`;
-
-/**
  * Calculate the reading time for a blog post.
  * @param text Text of the blog post.
  * @returns String describing reading time.
@@ -58,7 +50,6 @@ const formatDate = (date: string): string =>
 
 const utils = {
     getYearsOfExperience,
-    getCoverImageUrl,
     calculateReadingTime,
     NEXT_PUBLIC_SITE_URL,
     formatDate

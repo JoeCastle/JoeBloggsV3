@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
 
+/**
+ * Generates the robots.txt file in the public folder.
+ * @returns txt file.
+ */
 export function GET() {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
-    const content = `
+    const content: string = `
 User-agent: *
 Allow: /
 

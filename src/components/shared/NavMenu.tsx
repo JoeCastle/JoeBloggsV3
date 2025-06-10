@@ -25,6 +25,9 @@ export const NavMenu: React.FC<Props> = ({ isDarkMode }) => {
                         </Link>
                     </h1>
                 </div>
+                <div className="navbar">
+                    <p>Check out my portfolio {"->"}</p>
+                </div>
             </div>
         </nav>
     );

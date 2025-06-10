@@ -1,14 +1,18 @@
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts, PostMeta } from '@/utils/posts';
 import { NextResponse } from 'next/server';
 
+/**
+ * Generates an rss.xml file in the publisc folder.
+ * @returns xml file.
+ */
 export async function GET() {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-    const posts = await getAllPosts();
+    const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const posts: PostMeta[] = await getAllPosts();
 
-    const items = posts.map((post) => {
-        const postUrl = `${baseUrl}/blog/${post.slug}`;
-        const pubDate = new Date(post.date).toUTCString();
-        const fullHtml = post.content; // This assumes `content` is already HTML
+    const items: string[] = posts.map((post) => {
+        const postUrl: string = `${baseUrl}/blog/${post.slug}`;
+        const pubDate: string = new Date(post.date).toUTCString();
+        const fullHtml: string = post.content;
 
         return `
   <item>

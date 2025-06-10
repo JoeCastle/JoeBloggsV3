@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import utils from '@/utils/utils';
-import { renderMarkdown } from '@/utils/renderMarkdown';
+import { markdownToHTML } from '@/utils/markdownToHTML';
 
 export interface PostMeta {
     slug: string;
@@ -69,7 +69,7 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
 
         const wordCount: number = rawMarkdown.trim().split(/\s+/).length;
         const readingTime: string = utils.calculateReadingTime(rawMarkdown);
-        const html: string = await renderMarkdown(rawMarkdown);
+        const html: string = await markdownToHTML(rawMarkdown);
 
         return {
             meta: {

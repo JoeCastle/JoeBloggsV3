@@ -11,7 +11,7 @@ import rehypeStringify from 'rehype-stringify';
  * @param markdown 
  * @returns 
  */
-export async function renderMarkdown(markdown: string): Promise<string> {
+export async function markdownToHTML(markdown: string): Promise<string> {
     const result = await unified()
         .use(remarkParse)
         .use(remarkGfm)

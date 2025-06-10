@@ -1,9 +1,12 @@
-// app/recent-posts/route.ts
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts, PostMeta } from '@/utils/posts';
 import { NextResponse } from 'next/server';
 
+/**
+ * Generates a recent-posts.json file in the public folder. Referenced by my portfolio website.
+ * @returns json file containing a list of the three most recent posts.
+ */
 export async function GET() {
-    const posts = await getAllPosts();
+    const posts: PostMeta[] = await getAllPosts();
 
     const recentPosts = posts
         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

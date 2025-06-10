@@ -1,11 +1,11 @@
 export const dynamicParams = true;
-import { getAllPosts, getPostBySlug, PostMeta } from '../../../lib/posts';
+import { getAllPosts, getPostBySlug, PostMeta } from '../../../utils/posts';
 import BlogPost from '../../../components/BlogPost';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ScrollProgressBar } from '@/components/shared/ScrollProgressBar';
 import PostNavigation from '@/components/shared/PostNavigation';
-import { markdownToPlainText } from '@/lib/markdownToPlainText';
+import { markdownToPlainText } from '@/utils/markdownToPlainText';
 import StructuredData from '@/components/shared/StructuredData';
 
 interface Params {

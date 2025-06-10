@@ -6,7 +6,7 @@ The site is built with modern technologies like **Next.js**, **React**, **TypeSc
 ## Features
 
 - **Markdown-based blog posts:** Posts are written in `.md` files organized by folder, with related images stored locally.
-- **Frontmatter metadata:** Each post includes structured frontmatter (`title`, `summary`, `date`, `coverImage`) automatically parsed.
+- **Frontmatter metadata:** Each post includes structured frontmatter (`title`, `summary`, `date`, `dateModified`) automatically parsed.
 - **Static Site Generation (SSG):** Each blog post and the homepage is pre-rendered at build time for performance and SEO.
 - **Automatic SEO metadata:** Dynamic `<title>`, `<meta>` descriptions, Open Graph, and Twitter Card metadata per post.
 - **Canonical URLs:** Each blog post includes a canonical URL for better SEO and duplicate content prevention.
@@ -14,6 +14,7 @@ The site is built with modern technologies like **Next.js**, **React**, **TypeSc
 - **Responsive design:** Clean, mobile-first layouts built with semantic HTML and SCSS.
 - **Dark mode and light mode:** Theme automatically adapts to user preference, including code block and UI colors.
 - **Markdown enhancements:** Support for GitHub-flavoured markdown (tables, strikethroughs, task lists, etc.) via `remark-gfm`.
+- **Automatic Generation of public files:** Dynamic `robots.txt`, `sitemap.xml`, `rss.xml` and `recent-posts.json` files generated on build.
 - **Version info and Git commit metadata:** Footer displays the current app version, Git commit hash, and build timestamp.
 - **Error handling:** Friendly loading states and graceful error logging.
 
@@ -58,15 +59,17 @@ This project uses:
 
 2. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the blog.
 
-## Project Structure
+## Project Structure Overview
 
 - **src:** Contains the source code for the React application.
+  - **app**  Next.js app routes (App Router)
   - **components:** React components.
-    - **pages:** Individual pages.
     - **shared:** Components shared across multiple components or pages.
+  - **posts:** Folders for the blog posts which group the markdown files and images.
   - **scss:** SASS files for styling the components and pages.
+  - **utils:** Utility functions for blog posts and other general functionallity.
 - **cypress** Tests folder containing Cypress integration and component tests.
-- **public**  Static folder containing index.html, favicon and other assets.
+- **public** Static folder containing index.html, favicon and other assets.
 
 ## Project Structure
 
@@ -74,8 +77,7 @@ src/
 ├── app/                 # Next.js app routes (App Router)
 │   ├── page.tsx         # Homepage
 │   └── blog/[slug]/     # Dynamic blog post pages
-├── components/          # React components (pages, shared)
-├── hooks/               # Custom React hooks
+├── components/          # React components (shared)
 ├── posts/               # Blog posts (each folder = post + images)
 ├── scss/                # SCSS styles
 ├── typings/             # TypeScript types
@@ -95,21 +97,17 @@ src/posts/my-first-post/
 - `npm test`
 - `npm eject`
 - `npm run pretty`
-- `npm run cypress:open`
-- `npm run cypress-component`
-- `npm run cypress-e2e`
 - `npm run update-project-date`
-   - Updates the date in `.env.local` and `sitemap.xml` to the current date.
+   - Updates the date in `.env.local` to the current date.
 
 ## TODO:
 
 - [x] Convert project to Next.js
 - [x] Write README.md.
-- [ ] Add SEO metadata per page.
-- [ ] Update styling and structure of the list and post pages.
+- [x] Add SEO metadata per page.
+- [x] Update styling and structure of the list and post pages.
 - [ ] Write blog posts.
-- [ ] Add cypress tests.
-- [ ] Add jest tests.
+- [ ] Add cypress or jest tests.
 
 ## License
 

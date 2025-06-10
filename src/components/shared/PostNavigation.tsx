@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { PostMeta } from '@/lib/posts';
+import { PostMeta } from '@/utils/posts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faArrowLeft,

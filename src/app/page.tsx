@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import globals from '../utils/globals';
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts } from '@/utils/posts';
 import BlogList from '@/components/BlogList';
 
 export const metadata: Metadata = {
@@ -10,12 +10,12 @@ export const metadata: Metadata = {
     openGraph: {
         title: globals.metaData.title,
         description: globals.metaData.description,
-        images: ['/Blog_image.jpg'],
+        //images: ['/Blog_image.jpg'],
     },
     twitter: {
         title: globals.metaData.title,
         description: globals.metaData.description,
-        images: ['/Blog_image.jpg'],
+        //images: ['/Blog_image.jpg'],
     },
     robots: {
         index: true,
