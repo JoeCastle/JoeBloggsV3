@@ -12,9 +12,7 @@ tags:
   - software engineer career
 ---
 
-# Answering Common Questions Asked by Junior Developers
-
-Starting a career in software development can feel overwhelming. There's no clear path, no one-size-fits-all advice, and a thousand opinions about what you should be learning and doing. I’ve gathered the most common questions that junior developers search for online—and I’ve answered them honestly, from one developer to another.
+Starting a career in software development can feel overwhelming. There's no clear path, no one-size-fits-all advice, and a thousand opinions about what you should be learning and doing. I’ve gathered the most common questions that junior developers search for online.
 
 Whether you're just getting started or trying to level up, this post is for you.
 
@@ -22,7 +20,7 @@ Whether you're just getting started or trying to level up, this post is for you.
 
 ## 1. What programming language should I start with?
 
-There's no perfect answer, but here’s the honest take:
+There's no perfect answer, but here’s a good starting point:
 
 - **JavaScript** is one of the most beginner-friendly and widely used languages, especially for web development.
 - **Python** is great for its readability and broad applications in web, data science, automation, and scripting.

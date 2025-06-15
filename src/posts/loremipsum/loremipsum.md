@@ -2,6 +2,7 @@
 title: "lorem ipsum"
 summary: "This is post 3"
 date: "2025-04-30"
+isLive: false
 tags:
   - react
   - typescript

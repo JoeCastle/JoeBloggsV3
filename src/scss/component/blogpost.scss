@@ -54,6 +54,7 @@
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
+    color: color.scale($standard-blue-background, $lightness: 15%);
     @include transition-properties(color);
 }
 

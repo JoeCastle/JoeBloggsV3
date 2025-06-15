@@ -12,9 +12,7 @@ tags:
   - programming
 ---
 
-# A Guide for Junior Software Developers
-
-Welcome! If you're a junior software developer just starting out in the tech industry, this guide is for you. It's packed with practical lessons, mindset shifts, and career tips that many of us learned the hard way—so you don’t have to. This is honest, real-world advice from someone who's been in your shoes.
+Welcome! If you're a junior software developer just starting out in the tech industry, this guide is for you. It's packed with practical lessons, mindset shifts, and career tips that many of us learned the hard way—so you don’t have to.
 
 ---
 

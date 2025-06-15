@@ -16,6 +16,7 @@ export interface PostMeta {
     coverImage: string;
     content: string;
     tags?: string[];
+    isLive: boolean;
 }
 
 const POSTS_DIR: string = path.join(process.cwd(), 'src', 'posts');
@@ -37,19 +38,23 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         const wordCount: number = content.trim().split(/\s+/).length;
         const readingTime: string = utils.calculateReadingTime(content);
 
-        posts.push({
-            slug: folder,
-            title: data.title,
-            summary: data.summary,
-            date: data.date,
-            dateModified: data.dateModified,
-            readingTime,
-            wordCount,
-            canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${folder}`,
-            coverImage: data.coverImage,
-            content: content,
-            tags: data.tags || []
-        });
+        // Don't add draft posts.
+        if (data.isLive !== false) {
+            posts.push({
+                slug: folder,
+                title: data.title,
+                summary: data.summary,
+                date: data.date,
+                dateModified: data.dateModified,
+                readingTime,
+                wordCount,
+                canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${folder}`,
+                coverImage: data.coverImage,
+                content: content,
+                tags: data.tags || [],
+                isLive: data.isLive
+            });
+        }
     }
 
     return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -67,6 +72,11 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
         const file: string = await fs.readFile(mdPath, 'utf8');
         const { data, content: rawMarkdown } = matter(file);
 
+        // Return null for unpublished posts.
+        if (data.isLive === false) {
+            return null;
+        }
+
         const wordCount: number = rawMarkdown.trim().split(/\s+/).length;
         const readingTime: string = utils.calculateReadingTime(rawMarkdown);
         const html: string = await markdownToHTML(rawMarkdown);
@@ -83,7 +93,8 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
                 canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
                 coverImage: data.coverImage,
                 content: rawMarkdown,
-                tags: data.tags || []
+                tags: data.tags || [],
+                isLive: data.isLive
             },
             content: html,
             markdown: rawMarkdown
