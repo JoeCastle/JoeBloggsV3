@@ -86,6 +86,7 @@ will-change: $properties;
     }
 }
 
+// === NAVBAR THEME MIXIN ===
 @mixin navbar-theme($is-dark) {
     $background: if($is-dark, $dark-navbar-background-colour, $light-secondary-background-colour);
     $font-colour: if($is-dark, $dark-navbar-font-colour, $light-navbar-font-colour);
@@ -213,6 +214,7 @@ will-change: $properties;
     }
 }
 
+// === CODE BLOCK TRANSITION ===
 .hljs,
 .hljs-comment,
 .hljs-quote,

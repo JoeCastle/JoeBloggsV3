@@ -36,24 +36,13 @@
     border-radius: 0px;
 }
 
-// html, body {
-//     height: 100%;
-// }
-
 html,
 body,
 #react-app,
-.container-fluid,
 #page-parent {
-    //height: 100%;
     padding: 0px;
     margin: 0px;
 }
-
-.container-fluid {
-    width: 100%;
-}
-
 
 html {
     height: 100%;
