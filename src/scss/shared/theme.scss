@@ -25,10 +25,6 @@ will-change: $properties;
 
 // === THEME CONTENT STYLING MIXIN ===
 @mixin apply-theme-to-elements($theme, $is-dark: false) {
-    .content-container h2 {
-        border-bottom: 3px solid if($is-dark, $dark-navbar-font-colour-hover, $light-navbar-font-colour-hover);
-        @include transition-properties((border-bottom));
-    }
 
     input,
     textarea {

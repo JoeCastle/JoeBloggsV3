@@ -22,7 +22,7 @@ const BlogPost = ({ meta, content }: BlogPostProps) => {
                 <div className="blog-post-content">
                     <div dangerouslySetInnerHTML={{ __html: content }} />
                 </div>
-                <CopyButton />
+                {/* <CopyButton /> */}
             </article>
         </div>
     );

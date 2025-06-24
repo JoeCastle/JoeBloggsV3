@@ -13,6 +13,11 @@ interface StructuredDataProps {
     keywords?: string[];
 }
 
+/**
+ * Generates the JSON-LD Structured Data for the blog post meta data.
+ * @param param0 
+ * @returns Script tag "application/ld+json" containing the appropriate meta data.
+ */
 export default function StructuredData({
     url,
     title,

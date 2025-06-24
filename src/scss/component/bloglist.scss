@@ -59,7 +59,6 @@
 .blog-tile-title {
     font-size: 1.7rem;
     font-weight: 700;
-    //color: $light-primary-font-colour;
     color: color.scale($standard-blue-background, $lightness: 15%);
     margin: 0;
     @include transition-properties(color);
@@ -149,7 +148,6 @@
     }
 
     .blog-tile-title {
-        //color: $dark-primary-font-colour;
         color: color.scale($standard-blue-background, $lightness: 15%);
     }
 

@@ -1,8 +1,11 @@
-// app/not-found.tsx
 import { JSX } from 'react';
 import Link from 'next/link';
 import '../scss/page/fourzerofour.scss';
 
+/**
+ * The 404 not found component.
+ * @returns 
+ */
 export default function NotFound(): JSX.Element {
     return (
         <div className="not-found-page">

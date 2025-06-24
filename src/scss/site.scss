@@ -67,13 +67,6 @@ body {
     width: 100%;
 }
 
-// Intersection observer doesn't work on touch screen devices, so we want to show content by default.
-.content-container {
-    @media (hover: none) and (pointer: coarse) {
-        opacity: 1 !important;
-    }
-}
-
 a {
     color: $global-hyperlink-colour;
 }
@@ -157,32 +150,10 @@ main {
     width: 100%;
     transition: opacity 0.4s ease-in;
     margin: 0 auto;
-    //padding: 0px 20px;
 }
 
 .smooth-scroll {
     scroll-behavior: smooth;
-}
-
-.disabled-link {
-    color: inherit;
-}
-
-.disabled-link:hover {
-    text-decoration: none;
-    color: inherit;
-}
-
-.opacity-show {
-    opacity: 1 !important;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.cursor-default {
-    cursor: default;
 }
 
 code {
