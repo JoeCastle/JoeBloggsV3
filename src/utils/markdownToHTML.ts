@@ -15,10 +15,10 @@ export async function markdownToHTML(markdown: string): Promise<string> {
     const result = await unified()
         .use(remarkParse)
         .use(remarkGfm)
-        .use(rehype)
+        .use(rehype, { allowDangerousHtml: true })          // Preserve inline HTML like <a>
         .use(rehypeSlug)
-        .use(rehypeHighlight)
-        .use(rehypeStringify)
+        .use(rehypeHighlight)                               // Syntax highlighting for ``` code blocks
+        .use(rehypeStringify, { allowDangerousHtml: true }) // Output raw HTML like <a>, <img>, etc.
         .process(markdown);
 
     return result.toString();
