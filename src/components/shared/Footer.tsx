@@ -71,8 +71,8 @@ export const Footer: React.FC = ({ }) => {
 
                 <p className="version-text">v{NEXT_PUBLIC_APP_VERSION}</p>
 
-                <p>Commit: {NEXT_PUBLIC_GIT_COMMIT}</p>
-                <p>Built: {buildDate ?? '...'}</p>
+                {/* <p>Commit: {NEXT_PUBLIC_GIT_COMMIT}</p>
+                <p>Built: {buildDate ?? '...'}</p> */}
             </div>
         </div>
     );

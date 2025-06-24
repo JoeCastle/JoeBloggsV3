@@ -1,61 +1,58 @@
 @use '../shared/variables.scss' as *;
 
 .not-found-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
-  text-align: center;
-  padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: center;
+    padding: 2rem;
 
-  //background-color: var(--background-color, #f9f9f9);
-  //color: var(--text-color, #222);
-
-  .error-code {
-    font-size: 8rem;
-    font-weight: bold;
-    color: #ccc;
-    user-select: none;
-  }
-
-  .error-title {
-    font-size: 2rem;
-    margin-top: -1rem;
-    font-weight: 600;
-  }
-
-  .error-description {
-    font-size: 1rem;
-    margin-top: 0.5rem;
-    color: #555;
-  }
-
-  .error-snippet {
-    background: #1e1e1e;
-    color: #d4d4d4;
-    padding: 1rem;
-    border-radius: 6px;
-    margin-top: 2rem;
-    font-family: monospace;
-    font-size: 0.9rem;
-    overflow-x: auto;
-    max-width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .back-home-btn {
-    margin-top: 2rem;
-    padding: 0.75rem 1.5rem;
-    background: $standard-blue-background;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    border-radius: 4px;
-    transition: background 0.2s ease;
-
-    &:hover {
-      background: $dark-blue-background;
+    .error-code {
+        font-size: 8rem;
+        font-weight: bold;
+        color: #ccc;
+        user-select: none;
     }
-  }
+
+    .error-title {
+        font-size: 2rem;
+        margin-top: -1rem;
+        font-weight: 600;
+    }
+
+    .error-description {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        color: #555;
+    }
+
+    .error-snippet {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-top: 2rem;
+        font-family: monospace;
+        font-size: 0.9rem;
+        overflow-x: auto;
+        max-width: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .back-home-btn {
+        margin-top: 2rem;
+        padding: 0.75rem 1.5rem;
+        background: $standard-blue-background;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        border-radius: 4px;
+        transition: background 0.2s ease;
+
+        &:hover {
+            background: $dark-blue-background;
+        }
+    }
 }

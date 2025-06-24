@@ -116,9 +116,3 @@ nav.navbar {
         }
     }
 }
-
-.navbar-expand-md .navbar-toggler {
-    @media (min-width: $mobile-min-width-breakpoint) {
-        display: none !important;
-    }
-}

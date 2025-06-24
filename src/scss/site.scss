@@ -5,7 +5,6 @@
 @use './shared/postnagivation.scss';
 
 @use './component/navbar.scss';
-@use './component/landing.scss';
 @use './component/footer.scss';
 
 @use './page/fourzerofour.scss';
@@ -60,16 +59,6 @@ body {
     flex-direction: column;
     overflow: hidden;
 }
-
-// // Fixes scrolling issues.
-// body {
-//     display: flex;
-//     flex: 1 0 auto;
-// }
-
-// body {
-//     overflow: hidden;
-// }
 
 .page-content {
     display: flex;
@@ -152,61 +141,6 @@ main {
     }
 }
 
-#Projects,
-#Skills {
-
-    @media screen and (-ms-high-contrast: active),
-    (-ms-high-contrast: none) {
-        height: auto !important;
-    }
-}
-
-.section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    min-height: calc(100vh - #{$navbar-height});
-
-    // Required to vertically center items for IE11 - https://medium.com/codeart-mk/internet-explorer-hacks-796200e5741c
-    // Target IE11 only as this will break other browsers.
-    @media screen and (-ms-high-contrast: active),
-    (-ms-high-contrast: none) {
-        height: 1px;
-    }
-
-    @media (max-width: 325px) {
-        padding: 20px 10px;
-    }
-
-    .content-container {
-        .section-title-wrapper {
-            text-align: center;
-
-            h2 {
-                font-weight: bold;
-                text-align: center;
-                font-size: 42px;
-                padding-bottom: 10px;
-                margin-bottom: 20px;
-                display: inline-block;
-
-                @media (max-width: 450px) {
-                    font-size: 30px;
-                    padding-bottom: 5px;
-                    margin: 10px 0px;
-                }
-            }
-        }
-    }
-}
-
-.section.about,
-.section.landing {
-    min-height: calc(100vh - #{$navbar-height});
-}
-
 .socials {
     >a {
         text-decoration: none;
@@ -250,13 +184,6 @@ main {
 .cursor-default {
     cursor: default;
 }
-
-#about-content-container,
-#landing-content-container {
-    max-width: 950px;
-}
-
-/* Provide sufficient contrast against white background */
 
 code {
     color: #e01a76;

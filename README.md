@@ -62,52 +62,38 @@ This project uses:
 ## Project Structure Overview
 
 - **src:** Contains the source code for the React application.
-  - **app**  Next.js app routes (App Router)
+  - **app**  Next.js app routes (App Router).
+    - **page.tsx** Homepage.
+    - **blog/[slug]/** Dynamic blog post pages
   - **components:** React components.
     - **shared:** Components shared across multiple components or pages.
   - **posts:** Folders for the blog posts which group the markdown files and images.
   - **scss:** SASS files for styling the components and pages.
   - **utils:** Utility functions for blog posts and other general functionallity.
-- **cypress** Tests folder containing Cypress integration and component tests.
-- **public** Static folder containing index.html, favicon and other assets.
+- ~~**cypress** Tests folder containing Cypress integration and component tests.~~
+- **public** Static folder containing favicon and other assets.
 
-## Project Structure
-
-src/
-├── app/                 # Next.js app routes (App Router)
-│   ├── page.tsx         # Homepage
-│   └── blog/[slug]/     # Dynamic blog post pages
-├── components/          # React components (shared)
-├── posts/               # Blog posts (each folder = post + images)
-├── scss/                # SCSS styles
-├── typings/             # TypeScript types
-├── utils/               # Utility functions and metadata injection
-
-## Example Post Structure
-
-src/posts/my-first-post/
-├── my-first-post.md
-├── image1.png
-├── image2.jpg
 
 ## Available Scripts
 
 - `npm run dev` — Run the dev server
 - `npm run build` — Create a production build
-- `npm test`
-- `npm eject`
+- ~~`npm test`~~
 - `npm run pretty`
 - `npm run update-project-date`
    - Updates the date in `.env.local` to the current date.
 
 ## TODO:
 
-- [x] Convert project to Next.js
+- [x] Create project based on existing portfolio project.
+- [x] Convert project from CRA to Next.js.
 - [x] Write README.md.
+- [x] Add blog post functionallity.
+- [x] Add list of posts.
 - [x] Add SEO metadata per page.
 - [x] Update styling and structure of the list and post pages.
 - [ ] Write blog posts.
-- [ ] Add cypress or jest tests.
+- [ ] Add tests.
 
 ## License
 

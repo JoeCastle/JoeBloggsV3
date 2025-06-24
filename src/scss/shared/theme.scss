@@ -38,14 +38,6 @@ will-change: $properties;
         @include transition-properties((color, background-color, border));
     }
 
-    .project-summary-tile,
-    .skill-summary-tile,
-    .skillarea-summary-tile {
-        background-color: map.get($theme, background);
-        border: if($is-dark, $dark-border, $light-border);
-        @include transition-properties((background-color, border));
-    }
-
     .about .socials>a>div {
         background-color: map.get($theme, background);
 
@@ -58,16 +50,6 @@ will-change: $properties;
         }
 
         @include transition-properties((background-color, box-shadow));
-    }
-
-    ul.skillarea-summary-tile-techs>li {
-        color: $standard-blue-background;
-        @include transition-properties((color));
-
-        >span {
-            color: map.get($theme, text);
-            @include transition-properties((color));
-        }
     }
 
     footer {
@@ -119,11 +101,6 @@ will-change: $properties;
                 background-color: $hover-colour;
             }
         }
-    }
-
-    .navbar-toggler {
-        border-color: $toggler-border;
-        @include transition-properties((border-color));
     }
 }
 
@@ -200,17 +177,6 @@ will-change: $properties;
     .hljs-class .hljs-title,
     .hljs-title.class_ {
         color: if($is-dark, #e6c07b, #c18401);
-    }
-
-    // Copy button styling
-    .code-block-wrapper .copy-button {
-        background-color: if($is-dark, #3e4451, #e1e4e8);
-        color: if($is-dark, #abb2bf, #24292e);
-        border: 1px solid if($is-dark, #4b5363, #d1d5da);
-
-        &:hover {
-            background-color: if($is-dark, #4b5363, #d1d5da);
-        }
     }
 }
 

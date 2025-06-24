@@ -205,58 +205,6 @@
     }
 }
 
-// Code block styling
-.code-block-wrapper {
-    position: relative;
-    margin: 1.5rem 0;
-    border-radius: 8px;
-    overflow: hidden;
-    @include transition-properties((background-color, border-color));
-
-    pre.code-block {
-        margin: 0;
-        //padding: 1rem;
-        overflow-x: auto;
-        font-family: monospace;
-        font-size: 0.9rem;
-        line-height: 1.5;
-
-        code {
-            padding: 1rem;
-            background: transparent;
-            //padding: 0;
-            font-family: inherit;
-        }
-    }
-
-    .copy-button {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        padding: 0.3rem 0.6rem;
-        font-size: 0.8rem;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        opacity: 0;
-        transition:
-            opacity 0.2s ease,
-            background-color 0.2s ease;
-
-        &.copied {
-            opacity: 1;
-        }
-    }
-
-    &:hover .copy-button {
-        opacity: 0.8;
-
-        &:hover {
-            opacity: 1;
-        }
-    }
-}
-
 // Theme-specific styles
 .theme-container {
     .blog-post-loading {
@@ -300,25 +248,6 @@
         code:not([class*='language-']) {
             background-color: rgba($light-primary-font-colour, 0.1);
             color: $standard-red-background;
-        }
-    }
-
-    .code-block-wrapper {
-        background-color: $light-secondary-background-colour;
-        border: $light-border;
-
-        .copy-button {
-            background-color: rgba($light-primary-font-colour, 0.1);
-            color: $light-primary-font-colour;
-
-            &:hover {
-                background-color: rgba($light-primary-font-colour, 0.2);
-            }
-
-            &.copied {
-                background-color: $standard-blue-background;
-                color: white;
-            }
         }
     }
 }
@@ -366,25 +295,6 @@
         code:not([class*='language-']) {
             background-color: rgba($dark-primary-font-colour, 0.15);
             color: color.scale($standard-blue-background, $lightness: 15%);
-        }
-    }
-
-    .code-block-wrapper {
-        background-color: $dark-secondary-background-colour;
-        border: $dark-border;
-
-        .copy-button {
-            background-color: rgba($dark-primary-font-colour, 0.2);
-            color: $dark-primary-font-colour;
-
-            &:hover {
-                background-color: rgba($dark-primary-font-colour, 0.3);
-            }
-
-            &.copied {
-                background-color: color.scale($standard-blue-background, $lightness: 10%);
-                color: white;
-            }
         }
     }
 }
