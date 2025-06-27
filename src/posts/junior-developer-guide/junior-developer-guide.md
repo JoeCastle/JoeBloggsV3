@@ -2,7 +2,7 @@
 title: "Essential Guide for Junior Software Developers: Tips, Mindset, and Best Practices"
 summary: "A comprehensive guide for junior software developers: practical tips, mindset shifts, real-world stories, and resources to help you thrive in your tech career."
 date: "2025-05-24"
-dateModified: "2025-06-24"
+dateModified: "2025-06-27"
 tags:
   - software development
   - junior developer
@@ -57,7 +57,7 @@ Remember that the senior you are talking to was a junior once too. They know tha
 Asking for help is a sign of good judgment—not failure.
 
 - Try solving the problem first.
-- Google it ([How to Google for Developers](https://www.freecodecamp.org/news/how-to-google-for-developers/)).
+- Google it (<a href="https://www.freecodecamp.org/news/how-to-google-like-a-pro/" target="_blank" rel="noopener noreferrer">How to Google Like a Pro</a>).
 - Experiment.
 - Then ask for help and show what you've tried so far.
 
@@ -66,13 +66,13 @@ Asking for help is a sign of good judgment—not failure.
 - What did you expect to happen?
 - What actually happened?
 
-Be mindful not to waste hours on a problem that a senior would only need 5 minutes to help you with.
+Be mindful not to waste hours on a problem that a senior would only need 5 minutes to help you with. Find a balance between working on a problem and asking questions. Consider the difference between spending time and wasting time.
 
 ---
 
 ## 3. You Will Feel Overwhelmed in Software Development
 
-Feeling overwhelmed doesn't mean you're failing—it means you're growing.
+Feeling overwhelmed doesn't mean you're failing, it means you're growing. You are being bombarded with lots of new information, languages, methodologies, software, procedures etc. Your first few months will feel overwhelming.
 
 I still get overwhelmed when learning new tech. The trick is to break things down and focus on one step at a time.
 
@@ -94,12 +94,9 @@ Compare yourself only to who you were yesterday, and who you want to be tomorrow
 
 Mistakes are part of the job, and an essential part of learning.
 
-
 When you mess up, learn from it. And when others mess up, learn from them. Every mistake is a chance to learn and understand something new.
 
 Minimise the effects of potential mistakes. Make frequent backups etc.
-
-<!-- **Anecdote:** I once broke the staging site on my first job. My team helped me fix it, and I learned more from that mistake than from any tutorial. -->
 
 **Pro Tip:** When you make a mistake or find a bug, write down what happened and how you fixed it.
 
@@ -113,13 +110,12 @@ The best way to learn programming is by building things.
 - Rebuild tools you use
 - Try new tech in a safe, personal space
 
-**Resource:** [Frontend Mentor](https://www.frontendmentor.io/), [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x)
+**Resource:** <a href="https://www.frontendmentor.io/" target="_blank" rel="noopener noreferrer">Frontend Mentor</a>, <a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" rel="noopener noreferrer">Build Your Own X</a>
 
 **Checklist:**
-- Pick a project that excites you
-- Break it into small tasks
+- Pick a project that you find interesting
+- Break it into smaller tasks
 - Share your code on GitHub
-- Write about what you learned
 
 I became a better programmer by working on project after project. I was able to see the common successes and failures and was able to learn from them.
 
@@ -132,8 +128,6 @@ Building projects will also allow you to showcase your skills to potential emplo
 You'll feel like a fraud at times. You'll doubt your abilities. You'll fear failure. Everyone does, even senior developers.
 
 Being a developer is difficult. Writing code is difficult. Creating projects is difficult. Learning new technologies is difficult.
-
-<!-- **Story:** I once thought I'd be "found out" for not knowing enough. Turns out, everyone feels this way sometimes. -->
 
 You never fully escape this, but it does get better.
 
@@ -149,11 +143,15 @@ Help your future self out by making simple, useful notes.
 - Summarizing concepts or errors you've encountered.
 - Storing useful code snippets or scripts.
 
-<!-- **Tools:** [Notion](https://www.notion.so/), [Obsidian](https://obsidian.md/), [Markdown](https://www.markdownguide.org/) -->
-
-I started with Notepad++, but that became difficult to manage as I added more notes. Also, it was annoying to transfer the notes between computers.
+I started with pen and paper, then began using Notepad++, but that became difficult to manage as I added more notes. Also, it was annoying to transfer the notes between computers.
 
 Now I use Obsidian, but others like Notion are good options too.
+
+Even a paper notepad and pen sitting next to you on your desk can be very useful.
+
+**Tools:** <a href="https://www.notion.com/" target="_blank" rel="noopener noreferrer">Notion</a>, <a href="https://obsidian.md/" target="_blank" rel="noopener noreferrer">Obsidian</a>, <a href="https://www.markdownguide.org/" target="_blank" rel="noopener noreferrer">Markdown</a>
+
+**Pro tip:** Write about tasks, achievements, challenges and projects when they are still fresh in your mind. This will be useful later when writing your CV and discussing them in interviews.
 
 ---
 
@@ -164,7 +162,7 @@ One bite at a time.
 
 Break complex problems into smaller, manageable steps. Start with what you know. Then work your way through the unknowns bit by bit.
 
-Start writing notes before writing code.
+Start writing notes before writing code. Plan what needs to be done first and what can be left for last.
 
 ---
 
@@ -176,7 +174,7 @@ Sometimes, stepping away is the best debugging tool.
 - Make a drink
 - Do something else for 10 minutes
 
-You'd be surprised how many problems you'll solve as you are going about your everyday chores. Or even as you are drifting off to sleep. I find it handy to keep a small note pad next to my desk so I can remember the solution for when I wake up.
+You'll be surprised by how many problems you'll solve as you are going about your everyday chores, or even as you're drifting off to sleep. I find it handy to keep a small note pad next to my desk so I can remember the solution for when I wake up.
 
 ---
 
@@ -184,7 +182,7 @@ You'd be surprised how many problems you'll solve as you are going about your ev
 
 Explain the problem aloud as if you're teaching it to a rubber duck or as if your are asking a question to a senior developer. You'll often figure out the issue mid-explanation.
 
-[Rubber Duck Debugging](https://rubberduckdebugging.com/)
+<a href="https://rubberduckdebugging.com/" target="_blank" rel="noopener noreferrer">Rubber Duck Debugging</a>
 
 I keep a rubber duck on my desk. It works!
 
@@ -194,7 +192,6 @@ I keep a rubber duck on my desk. It works!
 
 Googling effectively is one of the most underrated developer skills.
 
-
 No one expects you to remember everything. but you're expected to know **how to find** the answer when you need it. Get good at searching, scanning results, and knowing which sources to trust.
 
 **Tips:**
@@ -202,8 +199,11 @@ No one expects you to remember everything. but you're expected to know **how to 
 - Add the language or framework to your search
 - Check Stack Overflow, official docs, and GitHub issues
 - Ask chatbots like GPT, though be aware they can be confidently wrong.
+- Use advanced search features (<a href="https://support.google.com/websearch/answer/2466433" target="_blank" rel="noopener noreferrer">Refine Google searches</a>)
 
 I Google all of the time. I ask chatbots frequently. I often check stack overflow. I did it when I was a junior and I still do it as a senior.
+
+As you gain more experience you will be able to sift through irrelevant results more quickly.
 
 ---
 
@@ -211,11 +211,13 @@ I Google all of the time. I ask chatbots frequently. I often check stack overflo
 
 AI tools like ChatGPT can save time, but they're not infallible.
 
+They are tools. But if you only use a hammer, everything looks like a nail.
+
 - Always sanity-check code you get from AI
 - Understand *why* it works so you can learn
 - Never let it replace actual learning or critical thinking
 
-Check out [How to Use AI as a Developer](https://www.freecodecamp.org/news/how-to-use-ai-as-a-developer/)
+Check out <a href="https://www.freecodecamp.org/news/how-to-use-ai-generated-code/" target="_blank" rel="noopener noreferrer">How to Use AI-Generated Code in a Safe and Effective Way</a>
 
 ---
 
@@ -226,7 +228,7 @@ Every change you make affects others. Think ahead.
 - Will this break something?
 - Is it performant?
 - Is it secure?
-- Can another developer understand it?
+- Can other developers understand it?
 
 **Checklist:**
 - Write clear commit messages
@@ -249,6 +251,12 @@ Being a good developer isn't just about code.
 
 Remember, you're working with people, not just computers.
 
+You'll frequently be collaborating with:
+- Developers
+- Designers
+- Customers
+- Managers
+
 ---
 
 ## 16. The "Bus Factor": Writing Team-Friendly Code
@@ -267,9 +275,9 @@ If you disappeared tomorrow, would anyone else be able to understand your work?
 - Create a GitHub profile and share your projects
 - Write blog posts or tutorials
 - Join open-source communities
+- Create a LinkedIn profile
 
-**Resource:** [Building a Developer Portfolio](https://www.freecodecamp.org/news/developer-portfolio-tips/)
-
+**Resource:** <a href="https://www.freecodecamp.org/news/how-to-build-a-developer-portfolio-website/" target="_blank" rel="noopener noreferrer">How to Build Your Own Developer Portfolio Website with HTML, CSS, and JavaScript</a>
 
 ---
 
