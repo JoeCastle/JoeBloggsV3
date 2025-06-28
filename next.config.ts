@@ -15,6 +15,9 @@ try {
 }
 
 const nextConfig: NextConfig = {
+    // Required for Cloudflare Pages SSR support
+    output: 'standalone',
+
     // Transpile Font Awesome packages for SSG compatibility
     transpilePackages: [
         '@fortawesome/fontawesome-svg-core',

@@ -15,8 +15,6 @@ The site is built with modern technologies like **Next.js**, **React**, **TypeSc
 - **Dark mode and light mode:** Theme automatically adapts to user preference, including code block and UI colors.
 - **Markdown enhancements:** Support for GitHub-flavoured markdown (tables, strikethroughs, task lists, etc.) via `remark-gfm`.
 - **Automatic Generation of public files:** Dynamic `robots.txt`, `sitemap.xml`, `rss.xml` and `recent-posts.json` files generated on build.
-- **Version info and Git commit metadata:** Footer displays the current app version, Git commit hash, and build timestamp.
-- **Error handling:** Friendly loading states and graceful error logging.
 
 ## Tech Stack
 
@@ -92,7 +90,7 @@ This project uses:
 - [x] Add list of posts.
 - [x] Add SEO metadata per page.
 - [x] Update styling and structure of the list and post pages.
-- [ ] Write blog posts.
+- [X] Write blog posts.
 - [ ] Add tests.
 
 ## License

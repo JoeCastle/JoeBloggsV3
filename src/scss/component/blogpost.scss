@@ -2,21 +2,6 @@
 @use '../shared/theme.scss' as *;
 @use 'sass:color';
 
-.blog-post-loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 300px;
-    font-size: 1.2rem;
-    @include transition-properties(color);
-}
-
-.blog-post-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-}
-
 .blog-post {
     max-width: 70ch; // Supposedly the ideal content width.
     display: flex;
@@ -24,24 +9,6 @@
     flex-direction: column;
     margin: 0 20px;
     @include transition-properties(color);
-}
-
-.blog-post-cover {
-    margin: -2rem -1rem 2rem;
-    height: 300px;
-    overflow: hidden;
-    position: relative;
-
-    @media (min-width: $mobile-min-width-breakpoint) {
-        margin: -2rem -2rem 2rem;
-        border-radius: 8px;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
 }
 
 .blog-post-header {
@@ -207,10 +174,6 @@
 
 // Theme-specific styles
 .theme-container {
-    .blog-post-loading {
-        color: $light-primary-font-colour;
-    }
-
     .blog-post-meta {
         color: rgba($light-primary-font-colour, 0.7);
     }
@@ -254,10 +217,6 @@
 
 // Dark theme adjustments
 .theme-container.dark-theme {
-    .blog-post-loading {
-        color: $dark-primary-font-colour;
-    }
-
     .blog-post-meta {
         color: rgba($dark-primary-font-colour, 0.7);
     }

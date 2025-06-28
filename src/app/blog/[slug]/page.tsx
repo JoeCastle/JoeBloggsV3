@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
 
-    let imageUrl = undefined;
+    let imageUrl: string | undefined = `${baseUrl}/Blog_List.png`;
     if (meta.coverImage) {
         imageUrl = meta.coverImage
             ? `${baseUrl}/posts/${slug}/${meta.coverImage.replace('./', '')}`
@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
     const { meta, content, markdown } = post;
     const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
-    const imageUrl: string = ''; // Add logic if you later support per-post images
+    const imageUrl: string = `${baseUrl}/Blog_List.png`;
 
     const readingTimeMinutes: number | undefined = parseInt(meta.readingTime.replace(/\D/g, ''), 10) || undefined;
 
@@ -112,6 +112,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
     return (
         <>
+            {/* Only show the scroll progress bar if the word count of the post is more than 400 characters. */}
             {meta.wordCount > 400 && <ScrollProgressBar />}
 
             <StructuredData

@@ -13,24 +13,24 @@ export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: 'JoeBloggs | A blog by Joseph Castle',
     description:
-        'The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.',
+        'The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.',
     keywords: [
     ],
     authors: [{ name: 'Joseph Castle' }],
     openGraph: {
         title: 'JoeBloggs | A blog by Joseph Castle',
         description:
-            'The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.',
+            'The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.',
         url: SITE_URL,
-        images: [`${SITE_URL}/Blog_image.jpg`],
+        images: [`${SITE_URL}/Blog_List.png`],
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
         title: 'JoeBloggs | A blog by Joseph Castle',
         description:
-            'The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.',
-        images: [`${SITE_URL}/Blog_image.jpg`],
+            'The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.',
+        images: [`${SITE_URL}/Blog_List.png`],
     },
     icons: {
         icon: '/favicon.ico',
@@ -70,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             '@type': 'Blog',
                             name: 'JoeBloggs',
                             url: SITE_URL,
-                            "description": "The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.",
+                            "description": "The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.",
                             // potentialAction: {
                             //     '@type': 'SearchAction',
                             //     target: `${SITE_URL}/search?q={search_term_string}`,

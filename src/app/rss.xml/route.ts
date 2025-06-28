@@ -32,7 +32,7 @@ export async function GET() {
   <channel>
     <title>JoeBloggs | A blog by Joseph Castle</title>
     <link>${baseUrl}</link>
-    <description>The personal blog of Joseph Castle, a Senior Full-Stack Developer writing about React, .NET, and SQL Server.</description>
+    <description>The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.</description>
     <language>en-gb</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <managingEditor>Joseph Castle</managingEditor>

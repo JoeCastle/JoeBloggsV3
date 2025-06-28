@@ -19,11 +19,9 @@ export const NavMenu: React.FC<Props> = ({ isDarkMode }) => {
         <nav className={`navbar navbar-expand-lg navbar-expand-md ${isDarkMode ? 'navbar-dark' : ''}`}>
             <div className="container-fluid">
                 <div className="navbar-header">
-                    <h1>
-                        <Link href="/" className="navbar-brand">
-                            <Image src={Logo} alt="Joseph Castle" width={169} height={32} priority={true} />
-                        </Link>
-                    </h1>
+                    <Link href="/" className="navbar-brand">
+                        <Image src={Logo} alt="Joseph Castle" width={169} height={32} priority={true} />
+                    </Link>
                 </div>
                 <div className="navbar">
                     <Link href="https://joecastle.co.uk" className="navbar-portfolio-link" rel="noopener" target="_blank">

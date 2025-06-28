@@ -1,6 +1,5 @@
 import utils from '@/utils/utils';
 import { PostMeta } from '../utils/posts';
-import CopyButton from './shared/CopyButton';
 
 interface BlogPostProps {
     meta: PostMeta;

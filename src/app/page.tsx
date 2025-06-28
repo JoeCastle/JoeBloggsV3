@@ -10,12 +10,12 @@ export const metadata: Metadata = {
     openGraph: {
         title: globals.metaData.title,
         description: globals.metaData.description,
-        //images: ['/Blog_image.jpg'],
+        images: [`${process.env.SITE_URL}/Blog_List.png`],
     },
     twitter: {
         title: globals.metaData.title,
         description: globals.metaData.description,
-        //images: ['/Blog_image.jpg'],
+        images: [`${process.env.SITE_URL}/Blog_List.png`],
     },
     robots: {
         index: true,
@@ -27,7 +27,7 @@ export default async function Home() {
     const posts = await getAllPosts();
 
     return (
-        <div className="p-8 sm:p-20">
+        <div>
             <BlogList posts={posts} />
         </div>
     );

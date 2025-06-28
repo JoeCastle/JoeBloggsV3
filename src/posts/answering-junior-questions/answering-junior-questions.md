@@ -1,6 +1,6 @@
 ---
 title: "Answering Common Questions Asked by Junior Developers"
-summary: "A comprehensive guide for junior developers: choosing your first language, building a portfolio, gaining experience, and thriving in your first tech job. Includes real-world advice, resources, and encouragement."
+summary: "Answering questions asked by junior developers: choosing your first language, building a portfolio, gaining experience, and thriving in your first tech job. Includes real-world advice, resources, and encouragement."
 date: "2025-05-26"
 dateModified: "2025-06-27"
 tags:

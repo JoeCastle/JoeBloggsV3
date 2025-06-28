@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import globals from '../../utils/globals';
 import utils from '../../utils/utils';
-import { NEXT_PUBLIC_APP_VERSION, NEXT_PUBLIC_GIT_COMMIT, NEXT_PUBLIC_BUILD_TIMESTAMP } from '../../utils/version';
+import { NEXT_PUBLIC_APP_VERSION } from '../../utils/version';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { faAt } from '@fortawesome/free-solid-svg-icons';
@@ -13,12 +13,10 @@ import { faAt } from '@fortawesome/free-solid-svg-icons';
  */
 export const Footer: React.FC = ({ }) => {
     const [year, setYear] = useState<number | null>(null);
-    const [buildDate, setBuildDate] = useState<string | null>(null);
 
     useEffect(() => {
-        // done this way to avoid  client/server mismatch hydration errors.
+        // Done this way to avoid client/server mismatch hydration errors.
         setYear(new Date().getFullYear());
-        setBuildDate(new Date(NEXT_PUBLIC_BUILD_TIMESTAMP).toLocaleString());
     }, []);
 
     return (

@@ -90,14 +90,6 @@ will-change: $properties;
         color: $hover-colour !important;
         background-color: $bg-hover !important;
     }
-
-    .container-fluid .navbar-collapse {
-        @media (min-width: $mobile-min-width-breakpoint) {
-            a:after {
-                background-color: $hover-colour;
-            }
-        }
-    }
 }
 
 // === CODE BLOCK THEME MIXIN ===
