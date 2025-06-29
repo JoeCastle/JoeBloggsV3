@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import utils from '@/utils/utils';
 import { markdownToHTML } from '@/utils/markdownToHTML';
+import { getSiteUrl } from '@/utils/serverUtils';
 
 export interface PostMeta {
     slug: string;
@@ -20,7 +21,6 @@ export interface PostMeta {
 }
 
 const POSTS_DIR: string = path.join(process.cwd(), 'src', 'posts');
-const NEXT_PUBLIC_SITE_URL: string = utils.NEXT_PUBLIC_SITE_URL;
 
 /**
  * Get all of the blog posts from the posts folder.
@@ -29,6 +29,7 @@ const NEXT_PUBLIC_SITE_URL: string = utils.NEXT_PUBLIC_SITE_URL;
 export async function getAllPosts(): Promise<PostMeta[]> {
     const folders: string[] = await fs.readdir(POSTS_DIR);
     const posts: PostMeta[] = [];
+    const siteUrl: string = await getSiteUrl();
 
     for (const folder of folders) {
         const mdPath: string = path.join(POSTS_DIR, folder, `${folder}.md`);
@@ -48,7 +49,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
                 dateModified: data.dateModified,
                 readingTime,
                 wordCount,
-                canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${folder}`,
+                canonicalUrl: `${siteUrl}/blog/${folder}`,
                 coverImage: data.coverImage,
                 content: content,
                 tags: data.tags || [],
@@ -80,6 +81,7 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
         const wordCount: number = rawMarkdown.trim().split(/\s+/).length;
         const readingTime: string = utils.calculateReadingTime(rawMarkdown);
         const html: string = await markdownToHTML(rawMarkdown);
+        const siteUrl: string = await getSiteUrl();
 
         return {
             meta: {
@@ -90,7 +92,7 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
                 dateModified: data.dateModified,
                 readingTime,
                 wordCount,
-                canonicalUrl: `${NEXT_PUBLIC_SITE_URL}/blog/${slug}`,
+                canonicalUrl: `${siteUrl}/blog/${slug}`,
                 coverImage: data.coverImage,
                 content: rawMarkdown,
                 tags: data.tags || [],

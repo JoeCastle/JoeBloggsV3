@@ -1,51 +1,57 @@
 // app/layout.tsx
+export const dynamic = 'force-dynamic';
 import type { Metadata, Viewport } from 'next';
-import '../../icons.ts'
+import '../../icons.ts';
 import { Maven_Pro } from 'next/font/google';
 import ClientLayout from './clientlayout';
 import '../scss/site.scss';
+import { getSiteUrl } from '@/utils/serverUtils';
+import globals from '@/utils/globals';
 
 const mavenPro = Maven_Pro({ subsets: ['latin'], display: 'swap' });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+// Generate dynamic metadata
+export async function generateMetadata(): Promise<Metadata> {
+    const siteUrl: string = await getSiteUrl();
 
-export const metadata: Metadata = {
-    metadataBase: new URL(SITE_URL),
-    title: 'JoeBloggs | A blog by Joseph Castle',
-    description:
-        'The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.',
-    keywords: [
-    ],
-    authors: [{ name: 'Joseph Castle' }],
-    openGraph: {
-        title: 'JoeBloggs | A blog by Joseph Castle',
-        description:
-            'The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.',
-        url: SITE_URL,
-        images: [`${SITE_URL}/Blog_List.png`],
-        type: 'website',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'JoeBloggs | A blog by Joseph Castle',
-        description:
-            'The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.',
-        images: [`${SITE_URL}/Blog_List.png`],
-    },
-    icons: {
-        icon: '/favicon.ico',
-        shortcut: '/favicon-32x32.png',
-        apple: '/apple-touch-icon.png',
-    },
-    manifest: '/site.webmanifest',
-};
+    return {
+        metadataBase: new URL(siteUrl),
+        title: globals.metaData.title,
+        description: globals.metaData.description,
+        keywords: globals.metaData.keywords,
+        authors: [{ name: 'Joseph Castle' }],
+        openGraph: {
+            title: globals.metaData.title,
+            description:
+                globals.metaData.description,
+            url: siteUrl,
+            images: [`${siteUrl}/Blog_List.png`],
+            type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: globals.metaData.title,
+            description:
+                globals.metaData.description,
+            images: [`${siteUrl}/Blog_List.png`],
+        },
+        icons: {
+            icon: '/favicon.ico',
+            shortcut: '/favicon-32x32.png',
+            apple: '/apple-touch-icon.png',
+        },
+        manifest: '/site.webmanifest',
+    };
+}
 
 export const viewport: Viewport = {
     themeColor: '#1c6ef7',
     colorScheme: 'light dark',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+    const siteUrl: string = await getSiteUrl();
+
     return (
         <html lang="en">
             <head>
@@ -69,13 +75,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             '@context': 'https://schema.org',
                             '@type': 'Blog',
                             name: 'JoeBloggs',
-                            url: SITE_URL,
-                            "description": "The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.",
-                            // potentialAction: {
-                            //     '@type': 'SearchAction',
-                            //     target: `${SITE_URL}/search?q={search_term_string}`,
-                            //     'query-input': 'required name=search_term_string',
-                            // },
+                            url: siteUrl,
+                            description:
+                                globals.metaData.description,
                         }),
                     }}
                 />

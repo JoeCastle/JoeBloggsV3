@@ -11,6 +11,7 @@ interface StructuredDataProps {
     wordCount?: number;
     readingTimeMinutes?: number;
     keywords?: string[];
+    siteUrl?: string;
 }
 
 /**
@@ -28,7 +29,8 @@ export default function StructuredData({
     image,
     wordCount,
     readingTimeMinutes,
-    keywords
+    keywords,
+    siteUrl
 }: StructuredDataProps) {
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -52,7 +54,7 @@ export default function StructuredData({
             name: 'JoeBloggs',
             logo: {
                 '@type': 'ImageObject',
-                url: `${process.env.NEXT_PUBLIC_SITE_URL}/favicon-32x32.png`,
+                url: `${siteUrl}/favicon-32x32.png`,
             },
         },
         ...(image ? { image: [image] } : {}),

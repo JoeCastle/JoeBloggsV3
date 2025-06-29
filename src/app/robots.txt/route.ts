@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
+import { getSiteUrl } from '@/utils/serverUtils';
 
 /**
  * Generates the robots.txt file in the public folder.
  * @returns txt file.
  */
-export function GET() {
-    const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+export async function GET() {
+    const baseUrl: string = await getSiteUrl();
 
     const content: string = `
 User-agent: *

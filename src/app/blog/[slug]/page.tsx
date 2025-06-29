@@ -7,6 +7,7 @@ import { ScrollProgressBar } from '@/components/shared/ScrollProgressBar';
 import PostNavigation from '@/components/shared/PostNavigation';
 import { markdownToPlainText } from '@/utils/markdownToPlainText';
 import StructuredData from '@/components/shared/StructuredData';
+import { getSiteUrl } from '@/utils/serverUtils';
 
 interface Params {
     slug: string;
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
     const { meta } = post;
 
-    const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+    const baseUrl: string = await getSiteUrl();
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
 
     let imageUrl: string | undefined = `${baseUrl}/Blog_List.png`;
@@ -65,8 +66,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
                 images: [
                     {
                         url: imageUrl,
-                        width: 1200,
-                        height: 630,
                         alt: meta.title,
                     },
                 ],
@@ -102,7 +101,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
     }
 
     const { meta, content, markdown } = post;
-    const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+    const baseUrl: string = await getSiteUrl();
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
     const imageUrl: string = `${baseUrl}/Blog_List.png`;
 
@@ -126,6 +125,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                 wordCount={meta.wordCount}
                 readingTimeMinutes={readingTimeMinutes}
                 keywords={meta.tags}
+                siteUrl={baseUrl}
             />
 
             <BlogPost meta={meta} content={content} />

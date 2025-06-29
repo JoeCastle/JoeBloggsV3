@@ -1,12 +1,13 @@
 import { getAllPosts, PostMeta } from '@/utils/posts';
 import { NextResponse } from 'next/server';
+import { getSiteUrl } from '@/utils/serverUtils';
 
 /**
  * Generates the sitemap.xml file in the public folder.
  * @returns xml file.
  */
 export async function GET() {
-    const baseUrl: string = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const baseUrl: string = await getSiteUrl();
     const posts: PostMeta[] = await getAllPosts();
 
     const urls: string[] = posts.map((post) => {

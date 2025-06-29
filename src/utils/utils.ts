@@ -1,5 +1,3 @@
-const NEXT_PUBLIC_SITE_URL: string = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
-
 /**
  * Calculates my years of experience in the industry.
  * Yes I'm that lazy.
@@ -51,7 +49,6 @@ const formatDate = (date: string): string =>
 const utils = {
     getYearsOfExperience,
     calculateReadingTime,
-    NEXT_PUBLIC_SITE_URL,
     formatDate
 };
 
