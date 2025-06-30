@@ -26,7 +26,7 @@ There's no single "best" language, but here's a quick comparison to help you dec
 |-------------|-------------------------|----------------------------------------|-----------------------|
 | JavaScript  | Web development         | Huge community, easy to start, in-demand | Can be quirky, async can confuse beginners |
 | Python      | Data science, scripting | Readable, versatile, lots of tutorials | Slower for some apps  |
-| Java/C#     | Enterprise,             | Strong typing, jobs in big companies   | Verbose, steeper learning curve |
+| Java/C#     | Enterprise, mobile      | Strong typing, jobs in big companies   | Verbose, steeper learning curve |
 
 **My advice:** Pick one that matches your interests and stick with it long enough to build something real. Consistency beats chasing the "perfect" language.
 
@@ -45,7 +45,7 @@ The languages you use will change. Your needs will change.
 
 **Short answer:** No. Many developers are self-taught or come from bootcamps. What matters most is your ability to solve problems, build things, and communicate.
 
-According to Stack Overflow's 2023 survey, over 40% of developers don't have a CS degree.
+According to Stack Overflow's 2024 survey, about 40% of developers don't have a CS degree, with about 20% having no degree at all.
 
 **Alternative paths:**
 - Self-study (YouTube, blogs, open-source, personal projects etc)

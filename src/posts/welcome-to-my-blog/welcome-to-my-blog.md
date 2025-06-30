@@ -1,13 +1,22 @@
 ---
 title: "Welcome to My Blog"
-summary: "A warm introduction to my blog, my background, and what you can expect as a reader."
+summary: "A brief introduction to my blog, my background, and what you can expect as a reader."
 date: "2025-04-27"
-dateModified: "2025-06-24"
+dateModified: "2025-06-29"
+tags:
+  - introduction
+  - developer blog
+  - developer advice
+  - software development
+  - junior developer
+  - career tips
 ---
 
 # Welcome!
 
-Hi, I'm Joe — a software developer, sci-fi enthusiast, and lifelong learner. I started this blog to share my journey, lessons learned, and the occasional rant.
+Hi, I'm Joe, a software developer and sci-fi enthusiast. I started JoeBloggs to share my journey, lessons learned, and the occasional rant.
+
+I'm a Senior Full-Stack Software Developer based in the UK. I have experience building bespoke web applications using React, TypeScript, .NEt and SQL Server.
 
 ## Why This Blog?
 
@@ -23,7 +32,7 @@ When I was starting out, I found the tech world both exciting and overwhelming. 
 
 ## My Goal
 
-I believe learning should be fun, inclusive, and community-driven. Whether you're just starting out or looking to level up, I hope you'll find something here to inspire and empower you.
+I believe learning should be fun, inclusive, and community-driven. I hope you'll find something here to inspire you and point you in the right direction.
 
 ## Where to find me
 

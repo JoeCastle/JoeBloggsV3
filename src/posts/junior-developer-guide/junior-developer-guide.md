@@ -12,7 +12,7 @@ tags:
   - programming
 ---
 
-Welcome! If you're a junior software developer just starting out in the tech industry, this guide is for you. I wrote this because I remember how tough those first months can be — full of questions, doubts, and the occasional "am I cut out for this?" moment. Here, you'll find practical lessons, mindset shifts, and career tips that many of us learned the hard way — so you don't have to.
+Welcome! If you're a junior software developer just starting out in the tech industry, this guide is for you. I wrote this because I remember how tough those first months can be, full of questions, doubts, and the occasional "am I cut out for this?" moment. Here, you'll find practical lessons, mindset shifts, and career tips that many of us learned the hard way, so you don't have to.
 
 ---
 
@@ -40,7 +40,7 @@ Welcome! If you're a junior software developer just starting out in the tech ind
 
 ## 1. Ask Questions as a Junior Developer
 
-It's OK to ask questions — even ones you think are "stupid." What's not OK is asking the same question over and over without learning from the answer.
+It's OK to ask questions, even ones you think are "stupid." What's not OK is asking the same question over and over without learning from the answer.
 
 Early in my career, I was afraid to ask questions. I thought I'd look silly. But when I finally did, I realized everyone was happy to help and I learned and progressed much faster.
 
@@ -54,7 +54,7 @@ Remember that the senior you are talking to was a junior once too. They know tha
 
 ## 2. How and When to Ask for Help
 
-Asking for help is a sign of good judgment—not failure.
+Asking for help is a sign of good judgment, not failure.
 
 - Try solving the problem first.
 - Google it (<a href="https://www.freecodecamp.org/news/how-to-google-like-a-pro/" target="_blank" rel="noopener noreferrer">How to Google Like a Pro</a>).
@@ -283,7 +283,7 @@ If you disappeared tomorrow, would anyone else be able to understand your work?
 
 ## Final Thoughts
 
-Being a junior software developer is tough—but you're not alone. Every senior dev has been exactly where you are now. Stick with it, ask questions, build things, and learn a little every day.
+Being a junior software developer is tough, but you're not alone. Every senior dev has been exactly where you are now. Stick with it, ask questions, build things, and learn a little every day.
 
 ---
 

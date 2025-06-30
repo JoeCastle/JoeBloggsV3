@@ -74,8 +74,8 @@ This project uses:
 
 ## Available Scripts
 
-- `npm run dev` — Run the dev server
-- `npm run build` — Create a production build
+- `npm run dev` - Run the dev server
+- `npm run build` - Create a production build
 - ~~`npm test`~~
 - `npm run pretty`
 - `npm run update-project-date`
