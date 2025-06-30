@@ -1,4 +1,5 @@
-export const dynamicParams = true;
+export const dynamicParams = false;
+export const dynamic = 'force-static';
 import { getAllPosts, getPostBySlug, PostMeta } from '../../../utils/posts';
 import BlogPost from '../../../components/BlogPost';
 import type { Metadata } from 'next';

@@ -15,8 +15,8 @@ try {
 }
 
 const nextConfig: NextConfig = {
-    // Required for Cloudflare Pages SSR support
-    output: 'standalone',
+    // Static export for Cloudflare Pages
+    output: 'export',
 
     // Transpile Font Awesome packages for SSG compatibility
     transpilePackages: [
@@ -25,6 +25,9 @@ const nextConfig: NextConfig = {
         '@fortawesome/free-brands-svg-icons',
         '@fortawesome/react-fontawesome',
     ],
+    images: {
+        unoptimized: true,
+    },
     env: {
         NEXT_PUBLIC_APP_VERSION: appVersion,
         NEXT_PUBLIC_GIT_COMMIT_HASH: gitCommitHash,

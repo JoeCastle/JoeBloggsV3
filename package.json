@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build": "npm run generate-static-files && next build",
+        "generate-static-files": "tsx scripts/generate-static-files.ts",
         "start": "next start",
         "lint": "next lint"
     },
@@ -34,9 +35,12 @@
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
+        "dotenv": "^17.0.0",
         "eslint": "^9",
         "eslint-config-next": "15.3.1",
         "tailwindcss": "^4",
+        "ts-node": "^10.9.2",
+        "tsx": "^4.20.3",
         "typescript": "^5.8.3"
     }
 }

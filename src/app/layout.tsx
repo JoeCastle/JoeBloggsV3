@@ -1,5 +1,4 @@
 // app/layout.tsx
-export const dynamic = 'force-dynamic';
 import type { Metadata, Viewport } from 'next';
 import '../../icons.ts';
 import { Maven_Pro } from 'next/font/google';
