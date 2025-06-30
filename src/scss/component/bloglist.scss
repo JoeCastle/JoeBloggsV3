@@ -96,7 +96,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 0.85rem;
-    color: rgba($light-primary-font-colour, 0.6);
+    color: $light-muted-color;
     @include transition-properties(color);
 
     .blog-tile-meta {
@@ -107,21 +107,21 @@
         .blog-tile-date,
         .blog-tile-reading-time {
             font-size: 0.8rem;
-            color: inherit;
+            color: $light-primary-font-colour;
         }
 
         .blog-tile-separator {
             content: '·';
             margin: 0 0.35rem;
-            color: inherit;
-            opacity: 0.6;
+            color: $light-muted-color;
+            opacity: 0.8;
         }
     }
 
     .blog-tile-cta {
         font-weight: 500;
         font-size: 0.8rem;
-        color: $standard-blue-background;
+        color: $accessible-blue;
         @include transition-properties(color);
 
         &:hover {
@@ -163,10 +163,23 @@
     }
 
     .blog-tile-footer {
-        color: rgba($dark-primary-font-colour, 0.6);
+        color: $dark-muted-color;
+
+        .blog-tile-meta {
+
+            .blog-tile-date,
+            .blog-tile-reading-time {
+                color: $dark-primary-font-colour;
+            }
+
+            .blog-tile-separator {
+                color: $dark-muted-color;
+                opacity: 0.8;
+            }
+        }
 
         .blog-tile-cta {
-            color: color.scale($standard-blue-background, $lightness: 15%);
+            color: $accessible-blue-dark;
         }
     }
 }
