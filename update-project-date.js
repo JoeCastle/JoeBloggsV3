@@ -1,5 +1,4 @@
 import fs from 'fs-extra';
-import * as xml2js from 'xml2js';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -16,13 +15,19 @@ const updateEnvLocalVersionDate = async () => {
         const pattern = /^APP_VERSION_DATE=(.*)$/m;
         const updatedEnvLocalContent = envLocalContent.replace(pattern, `NEXT_PUBLIC_APP_VERSION_DATE=${Date.now()}`);
 
+        // Local
         await fs.writeFile(envLocalPath, updatedEnvLocalContent, 'utf-8');
         console.log('Updated .env.local NEXT_PUBLIC_APP_VERSION_DATE');
 
-        // If you intended to update .env too, copy the update:
+        // env
         const envPath = path.join(__dirname, '.env');
         await fs.writeFile(envPath, updatedEnvLocalContent, 'utf-8');
         console.log('Updated .env NEXT_PUBLIC_APP_VERSION_DATE');
+
+        // prod
+        const prodPath = path.join(__dirname, '.env');
+        await fs.writeFile(prodPath, updatedEnvLocalContent, 'utf-8');
+        console.log('Updated .env.production NEXT_PUBLIC_APP_VERSION_DATE');
     } catch (error) {
         console.error('Error updating .env.local or .env:', error);
     }

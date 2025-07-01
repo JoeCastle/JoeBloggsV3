@@ -2,7 +2,7 @@
 title: "Welcome to My Blog"
 summary: "A brief introduction to my blog, my background, and what you can expect as a reader."
 date: "2025-04-27"
-dateModified: "2025-06-29"
+dateModified: "2025-07-01"
 tags:
   - introduction
   - developer blog
@@ -16,7 +16,7 @@ tags:
 
 Hi, I'm Joe, a software developer and sci-fi enthusiast. I started JoeBloggs to share my journey, lessons learned, and the occasional rant.
 
-I'm a Senior Full-Stack Software Developer based in the UK. I have experience building bespoke web applications using React, TypeScript, .NEt and SQL Server.
+I'm a Senior Full-Stack Software Developer based in the UK. I have experience building bespoke web applications using React, TypeScript, .NET and SQL Server.
 
 ## Why This Blog?
 

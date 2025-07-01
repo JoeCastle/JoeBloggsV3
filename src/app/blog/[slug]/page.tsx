@@ -9,6 +9,7 @@ import PostNavigation from '@/components/shared/PostNavigation';
 import { markdownToPlainText } from '@/utils/markdownToPlainText';
 import StructuredData from '@/components/shared/StructuredData';
 import { getSiteUrl } from '@/utils/serverUtils';
+import utils from '@/utils/utils';
 
 interface Params {
     slug: string;
@@ -50,23 +51,27 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
     return {
         metadataBase: new URL(baseUrl),
-        title: `${meta.title} - JoeBloggs`,
+        title: `${meta.title} | JoeBloggs`,
         description: meta.summary,
         keywords: meta.tags?.join(', '),
         alternates: {
             canonical: fullUrl,
         },
         openGraph: {
-            title: `${meta.title} - JoeBloggs`,
+            title: `${meta.title} | JoeBloggs`,
             description: meta.summary,
             url: fullUrl,
             type: 'article',
             publishedTime: meta.date,
-            tags: meta.tags,
+            modifiedTime: meta.dateModified,
+            authors: ['Joseph Castle'],
+            tags: meta.metaTags,
             ...(imageUrl && {
                 images: [
                     {
                         url: imageUrl,
+                        width: 1200,
+                        height: 630,
                         alt: meta.title,
                     },
                 ],
@@ -74,7 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
         },
         twitter: {
             card: 'summary_large_image',
-            title: `${meta.title} - JoeBloggs`,
+            title: `${meta.title} | JoeBloggs`,
             description: meta.summary,
             ...(imageUrl && { images: [imageUrl] }),
         },
@@ -122,7 +127,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
                 datePublished={meta.date}
                 dateModified={meta.dateModified}
                 image={imageUrl}
-                articleBody={markdownToPlainText(markdown).slice(0, 500)}
+                articleBody={utils.truncateTextAtWordBoundary(markdownToPlainText(markdown), 500)}
                 wordCount={meta.wordCount}
                 readingTimeMinutes={readingTimeMinutes}
                 keywords={meta.tags}

@@ -15,12 +15,14 @@
     margin-left: 20px;
     margin-right: 20px;
     flex-wrap: nowrap;
+    width: 100%;
 
     .nav-link {
         text-decoration: none;
         color: $standard-blue-background;
         display: flex;
         flex-direction: column;
+        flex-basis: 50%;
         @include transition-properties(color);
 
         &:hover .nav-title {
