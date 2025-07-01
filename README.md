@@ -12,7 +12,7 @@ The site is built with modern technologies like **Next.js**, **React**, **TypeSc
 - **Canonical URLs:** Each blog post includes a canonical URL for better SEO and duplicate content prevention.
 - **Reading time and word count:** Estimated reading time and word count are automatically calculated and displayed for every post.
 - **Responsive design:** Clean, mobile-first layouts built with semantic HTML and SCSS.
-- **Dark mode and light mode:** Theme automatically adapts to user preference, including code block and UI colors.
+- **Dark mode and light mode:** Theme button to switch to and from dark mode, including code block and UI colors.
 - **Markdown enhancements:** Support for GitHub-flavoured markdown (tables, strikethroughs, task lists, etc.) via `remark-gfm`.
 - **Automatic Generation of public files:** Dynamic `robots.txt`, `sitemap.xml`, `rss.xml` and `recent-posts.json` files generated on build.
 
