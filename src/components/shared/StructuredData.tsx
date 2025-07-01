@@ -39,8 +39,10 @@ export default function StructuredData({
             '@type': 'WebPage',
             '@id': url,
         },
+        name: title,
         headline: title,
         description,
+        inLanguage: 'en-GB',
         datePublished,
         dateModified: dateModified || datePublished,
         url,
@@ -62,6 +64,12 @@ export default function StructuredData({
         ...(wordCount ? { wordCount } : {}),
         ...(readingTimeMinutes ? { timeRequired: `PT${readingTimeMinutes}M` } : {}),
         ...(keywords?.length ? { keywords: keywords.join(', ') } : {}),
+        ...(keywords?.length ? {
+            about: keywords.map(tag => ({
+                '@type': 'Thing',
+                name: tag,
+            })),
+        } : {}),
     };
 
     return (

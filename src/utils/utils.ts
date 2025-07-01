@@ -46,10 +46,30 @@ const formatDate = (date: string): string =>
         day: 'numeric',
     });
 
+const truncateTextAtWordBoundary = (text: string, maxLength: number = 500): string => {
+    if (text.length <= maxLength) return text;
+
+    const truncated = text.slice(0, maxLength);
+    const lastSpace = truncated.lastIndexOf(' ');
+
+    if (lastSpace === -1) return truncated + '…';
+
+    let clean = truncated.slice(0, lastSpace).trim();
+
+    // Ensure we end with a period if it's missing
+    if (!/[.?!]$/.test(clean)) {
+        clean += '…';
+    }
+
+    return clean;
+}
+
+
 const utils = {
     getYearsOfExperience,
     calculateReadingTime,
-    formatDate
+    formatDate,
+    truncateTextAtWordBoundary
 };
 
 export default utils;

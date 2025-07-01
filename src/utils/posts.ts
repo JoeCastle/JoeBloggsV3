@@ -17,6 +17,7 @@ export interface PostMeta {
     coverImage: string;
     content: string;
     tags?: string[];
+    metaTags?: string[];
     isLive: boolean;
 }
 
@@ -53,6 +54,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
                 coverImage: data.coverImage,
                 content: content,
                 tags: data.tags || [],
+                metaTags: data.metaTags || [],
                 isLive: data.isLive
             });
         }
@@ -96,6 +98,7 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
                 coverImage: data.coverImage,
                 content: rawMarkdown,
                 tags: data.tags || [],
+                metaTags: data.metaTags || [],
                 isLive: data.isLive
             },
             content: html,

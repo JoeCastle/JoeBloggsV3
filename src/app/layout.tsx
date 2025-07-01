@@ -52,10 +52,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     const siteUrl: string = await getSiteUrl();
 
     return (
-        <html lang="en">
+        <html lang="en-GB">
             <head>
                 {/* Extra global <head> content */}
-                <meta httpEquiv="Content-Language" content="en-GB" />
                 <meta name="version" content={process.env.NEXT_PUBLIC_APP_VERSION_DATE} />
                 <meta name="versionNumber" content={process.env.NEXT_PUBLIC_APP_VERSION} />
 
