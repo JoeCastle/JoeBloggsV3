@@ -185,7 +185,7 @@
 }
 
 // Responsive
-@media (max-width: 600px) {
+@media (max-width: $mobile-max-width-breakpoint) {
     .blog-tile {
         padding: 1.25rem;
     }
