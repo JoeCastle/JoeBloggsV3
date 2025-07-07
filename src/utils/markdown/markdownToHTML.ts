@@ -5,6 +5,7 @@ import rehype from 'remark-rehype';
 import rehypeSlug from 'rehype-slug';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
+import { rehypeWrapTables } from './rehypeWrapTables';
 
 /**
  * Renders the markdown content from the blog posts to HTML.
@@ -18,6 +19,7 @@ export async function markdownToHTML(markdown: string): Promise<string> {
         .use(rehype, { allowDangerousHtml: true })          // Preserve inline HTML like <a>
         .use(rehypeSlug)
         .use(rehypeHighlight)                               // Syntax highlighting for ``` code blocks
+        .use(rehypeWrapTables)                              // Adds wrapper for table components
         .use(rehypeStringify, { allowDangerousHtml: true }) // Output raw HTML like <a>, <img>, etc.
         .process(markdown);
 

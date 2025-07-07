@@ -46,15 +46,21 @@ const formatDate = (date: string): string =>
         day: 'numeric',
     });
 
+/**
+ * Gracefully truncates string to max length. Used for JsonLD structured data articleBody prop.
+ * @param text The markdown to be truncated.
+ * @param maxLength The length at which the markdown should be truncated.
+ * @returns Truncated string.
+ */
 const truncateTextAtWordBoundary = (text: string, maxLength: number = 500): string => {
     if (text.length <= maxLength) return text;
 
-    const truncated = text.slice(0, maxLength);
-    const lastSpace = truncated.lastIndexOf(' ');
+    const truncated: string = text.slice(0, maxLength);
+    const lastSpace: number = truncated.lastIndexOf(' ');
 
     if (lastSpace === -1) return truncated + '…';
 
-    let clean = truncated.slice(0, lastSpace).trim();
+    let clean: string = truncated.slice(0, lastSpace).trim();
 
     // Ensure we end with a period if it's missing
     if (!/[.?!]$/.test(clean)) {
