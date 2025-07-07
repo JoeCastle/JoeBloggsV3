@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import utils from '@/utils/utils';
-import { markdownToHTML } from '@/utils/markdownToHTML';
+import { markdownToHTML } from '@/utils/markdown/markdownToHTML';
 import { getSiteUrl } from '@/utils/serverUtils';
 
 export interface PostMeta {

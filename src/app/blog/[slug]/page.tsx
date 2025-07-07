@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ScrollProgressBar } from '@/components/shared/ScrollProgressBar';
 import PostNavigation from '@/components/shared/PostNavigation';
-import { markdownToPlainText } from '@/utils/markdownToPlainText';
+import { markdownToPlainText } from '@/utils/markdown/markdownToPlainText';
 import StructuredData from '@/components/shared/StructuredData';
 import { getSiteUrl } from '@/utils/serverUtils';
 import utils from '@/utils/utils';
