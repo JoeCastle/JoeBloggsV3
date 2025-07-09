@@ -79,8 +79,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                         }),
                     }}
                 />
+
+                {/* Cloudflare Web Analytics */}
+                <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f9e989d4f6d04b2f97c3bea642c11991"}'></script>
+                {/* End Cloudflare Web Analytics */}
             </head>
             <body className={mavenPro.className}>
+
                 <ClientLayout>{children}</ClientLayout>
             </body>
         </html>
