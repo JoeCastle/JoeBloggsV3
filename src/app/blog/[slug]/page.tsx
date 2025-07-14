@@ -4,7 +4,7 @@ import { getAllPosts, getPostBySlug, PostMeta } from '../../../utils/posts';
 import BlogPost from '../../../components/BlogPost';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ScrollProgressBar } from '@/components/shared/ScrollProgressBar';
+import ScrollProgressBar from '@/components/shared/ScrollProgressBar';
 import PostNavigation from '@/components/shared/PostNavigation';
 import { markdownToPlainText } from '@/utils/markdown/markdownToPlainText';
 import StructuredData from '@/components/shared/StructuredData';

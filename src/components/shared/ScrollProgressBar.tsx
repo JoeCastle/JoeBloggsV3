@@ -5,7 +5,7 @@ import { JSX, useEffect, useState } from 'react';
  * Progress bar component at the top of a blog post that shows reading progress as you scroll. 
  * @returns 
  */
-export const ScrollProgressBar = (): JSX.Element => {
+const ScrollProgressBar = (): JSX.Element => {
     const [scroll, setScroll] = useState<number>(0);
 
     useEffect(() => {
@@ -34,3 +34,5 @@ export const ScrollProgressBar = (): JSX.Element => {
         </div>
     );
 };
+
+export default ScrollProgressBar;

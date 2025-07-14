@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import globals from '../utils/globals';
 import { getAllPosts } from '@/utils/posts';
-import BlogList from '@/components/BlogList';
 import { getSiteUrl } from '@/utils/serverUtils';
+import HomePage from './HomePage';
 
 export async function generateMetadata(): Promise<Metadata> {
     const siteUrl: string = await getSiteUrl();
@@ -37,10 +37,5 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
     const posts = await getAllPosts();
-
-    return (
-        <div>
-            <BlogList posts={posts} />
-        </div>
-    );
+    return <HomePage posts={posts} />;
 }

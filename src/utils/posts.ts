@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import utils from '@/utils/utils';
 import { markdownToHTML } from '@/utils/markdown/markdownToHTML';
 import { getSiteUrl } from '@/utils/serverUtils';
+import { Dirent } from 'fs';
 
 export interface PostMeta {
     slug: string;
@@ -21,19 +22,22 @@ export interface PostMeta {
     isLive: boolean;
 }
 
-const POSTS_DIR: string = path.join(process.cwd(), 'src', 'posts');
+const POSTS_DIR: string = path.join(process.cwd(), 'src', 'posts')
 
 /**
  * Get all of the blog posts from the posts folder.
  * @returns Array of posts with meta data.
  */
 export async function getAllPosts(): Promise<PostMeta[]> {
-    const folders: string[] = await fs.readdir(POSTS_DIR);
+    const folders: Dirent[] = await fs.readdir(POSTS_DIR, { withFileTypes: true })
     const posts: PostMeta[] = [];
     const siteUrl: string = await getSiteUrl();
 
     for (const folder of folders) {
-        const mdPath: string = path.join(POSTS_DIR, folder, `${folder}.md`);
+        if (!folder.isDirectory()) continue;
+
+        const folderName: string = folder.name;
+        const mdPath: string = path.join(POSTS_DIR, folderName, `${folderName}.md`);
         const file: string = await fs.readFile(mdPath, 'utf8');
         const { data, content } = matter(file);
 
@@ -43,7 +47,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         // Don't add draft posts.
         if (data.isLive !== false) {
             posts.push({
-                slug: folder,
+                slug: folderName,
                 title: data.title,
                 summary: data.summary,
                 date: data.date,
