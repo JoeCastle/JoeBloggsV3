@@ -18,10 +18,12 @@ interface Props {
 
 /**
  * Handles the next and previous navigation for a blog post.
- * @param param0
- * @returns
+ * @param props Array of posts and the current slug.
+ * @returns 
  */
-export default function PostNavigation({ posts, currentSlug }: Props) {
+const PostNavigation: React.FC<Props> = (props: Props) => {
+    const { posts, currentSlug } = props;
+
     const index: number = posts.findIndex((p: PostMeta) => p.slug === currentSlug);
     if (index === -1) return null;
 
@@ -73,3 +75,5 @@ export default function PostNavigation({ posts, currentSlug }: Props) {
         </div>
     );
 }
+
+export default PostNavigation;

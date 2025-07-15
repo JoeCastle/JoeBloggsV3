@@ -4,12 +4,14 @@ import { getAllPosts, getPostBySlug, PostMeta } from '../../../utils/posts';
 import BlogPost from '../../../components/BlogPost';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ScrollProgressBar } from '@/components/shared/ScrollProgressBar';
+import ScrollProgressBar from '@/components/shared/ScrollProgressBar';
 import PostNavigation from '@/components/shared/PostNavigation';
 import { markdownToPlainText } from '@/utils/markdown/markdownToPlainText';
 import StructuredData from '@/components/shared/StructuredData';
 import { getSiteUrl } from '@/utils/serverUtils';
 import utils from '@/utils/utils';
+import ShareButtons from '../../../components/shared/ShareButtons';
+import '../../../scss/shared/sharebuttons.scss';
 
 interface Params {
     slug: string;
@@ -135,6 +137,10 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             />
 
             <BlogPost meta={meta} content={content} />
+
+            <div className="content-width-wrapper">
+                <ShareButtons title={meta.title} url={fullUrl} />
+            </div>
 
             <PostNavigation posts={allPosts} currentSlug={slug} />
         </>

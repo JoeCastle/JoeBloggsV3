@@ -206,13 +206,27 @@ will-change: $properties;
 .hljs-emphasis,
 .hljs-strong,
 .hljs-link {
-    transition:
-        color $global-animation-time ease-in-out,
-        background-color $global-animation-time ease-in-out,
-        border-color $global-animation-time ease-in-out,
-        font-style $global-animation-time ease-in-out,
-        font-weight $global-animation-time ease-in-out;
-    will-change: color, background-color, border-color, font-style, font-weight;
+    @include transition-properties((color, background-color, border-color, font-style, font-weight));
+}
+
+// === SHARE BUTTONS THEME MIXIN ===
+@mixin share-buttons-theme($theme, $is-dark: false) {
+    .share-buttons {
+        .share-btn {
+            background: map.get($theme, background);
+            color: map.get($theme, text);
+
+            @include transition-properties((color, background));
+
+            &:hover,
+            &:focus {
+                background: map.get($theme, accent);
+                color: if($is-dark, #222, #fff);
+
+                @include transition-properties((color, background));
+            }
+        }
+    }
 }
 
 // === LIGHT THEME ===
@@ -221,6 +235,7 @@ will-change: $properties;
     @include transition-properties((color, background-color));
     @include apply-theme-to-elements($light-theme, false);
     @include apply-code-theme(false);
+    @include share-buttons-theme($light-theme, false);
 
     nav.navbar {
         @include navbar-theme(false);
@@ -232,6 +247,7 @@ will-change: $properties;
     @include apply-theme($dark-theme);
     @include apply-theme-to-elements($dark-theme, true);
     @include apply-code-theme(true);
+    @include share-buttons-theme($dark-theme, true);
 
     nav.navbar {
         @include navbar-theme(true);

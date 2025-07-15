@@ -3,6 +3,7 @@
 Welcome to my personal blog! This is where I share my thoughts, projects, and frustrations.  
 The site is built with modern technologies like **Next.js**, **React**, **TypeScript**, and **SCSS**.
 
+
 ## Features
 
 - **Markdown-based blog posts:** Posts are written in `.md` files organized by folder, with related images stored locally.
@@ -15,6 +16,9 @@ The site is built with modern technologies like **Next.js**, **React**, **TypeSc
 - **Dark mode and light mode:** Theme button to switch to and from dark mode, including code block and UI colors.
 - **Markdown enhancements:** Support for GitHub-flavoured markdown (tables, strikethroughs, task lists, etc.) via `remark-gfm`.
 - **Automatic Generation of public files:** Dynamic `robots.txt`, `sitemap.xml`, `rss.xml` and `recent-posts.json` files generated on build.
+- **Reading Progress Indicator** Custom progress bar as users scroll through a post.
+- **Social Media Sharing** Buttons to share posts on a variety of social media websites.
+
 
 ## Tech Stack
 
@@ -34,6 +38,7 @@ This project uses:
 
 - [Node.js](https://nodejs.org/) installed
 
+
 ### Installation
 
 1. Clone the repository:
@@ -48,6 +53,7 @@ This project uses:
    npm install
    ```
 
+
 ### Running the Project
 
 1. Start the development server:
@@ -56,6 +62,7 @@ This project uses:
    ```
 
 2. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the blog.
+
 
 ## Project Structure Overview
 
@@ -76,10 +83,12 @@ This project uses:
 
 - `npm run dev` - Run the dev server
 - `npm run build` - Create a production build
-- ~~`npm test`~~
+- `npm test`
+- `npm run test:ui`
 - `npm run pretty`
 - `npm run update-project-date`
    - Updates the date in `.env.local` to the current date.
+
 
 ## TODO:
 
@@ -90,8 +99,9 @@ This project uses:
 - [x] Add list of posts.
 - [x] Add SEO metadata per page.
 - [x] Update styling and structure of the list and post pages.
-- [X] Write blog posts.
-- [ ] Add tests.
+- [x] Write blog posts.
+- [x] Add tests.
+
 
 ## License
 
