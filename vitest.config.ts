@@ -13,5 +13,11 @@ export default defineConfig({
         setupFiles: ['./vitest.setup.ts'],
         include: ['src/**/*.{test,spec}.{ts,tsx}'],
         ui: true,
+        alias: {
+            '^.+\\.scss$': './__mocks__/styleMock.ts',
+        },
+    },
+    css: {
+        postcss: { plugins: [] }, // disables PostCSS during tests
     },
 });

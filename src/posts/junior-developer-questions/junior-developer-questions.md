@@ -2,7 +2,7 @@
 title: "Junior Developer Questions Answered: Language, Portfolio, Career"
 summary: "Junior developers ask: which language to learn, how to build a portfolio, get experience, and thrive in their first tech job. Includes real advice, tips, and resources."
 date: "2025-05-26"
-dateModified: "2025-07-01"
+dateModified: "2025-07-15"
 tags:
   - junior developer
   - developer advice
@@ -28,6 +28,8 @@ Starting a career in software development can feel overwhelming. If you're just 
 - What makes a junior developer stand out?
 
 This post covers all of that, with practical advice, real-world resources, and answers based on my own journey from beginner to professional.
+
+---
 
 ## Table of Contents
 

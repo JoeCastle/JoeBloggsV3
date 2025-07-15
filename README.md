@@ -16,6 +16,8 @@ The site is built with modern technologies like **Next.js**, **React**, **TypeSc
 - **Dark mode and light mode:** Theme button to switch to and from dark mode, including code block and UI colors.
 - **Markdown enhancements:** Support for GitHub-flavoured markdown (tables, strikethroughs, task lists, etc.) via `remark-gfm`.
 - **Automatic Generation of public files:** Dynamic `robots.txt`, `sitemap.xml`, `rss.xml` and `recent-posts.json` files generated on build.
+- **Reading Progress Indicator** Custom progress bar as users scroll through a post.
+- **Social Media Sharing** Buttons to share posts on a variety of social media websites.
 
 
 ## Tech Stack
