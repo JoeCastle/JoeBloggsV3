@@ -1,0 +1,80 @@
+@use '../shared/variables.scss' as *;
+@use '../shared/theme.scss' as *;
+
+.share-buttons {
+    margin: 1.8rem 0 0;
+    padding-top: 1.05rem;
+    border-top: 1px solid $light-divider;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .share-label {
+        font-size: 0.76rem;
+        letter-spacing: 0.015em;
+        text-transform: uppercase;
+        color: rgba($light-primary-font-colour, 0.66);
+        @include transition-properties((color));
+    }
+
+    .share-btn-row {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+
+        button {
+            line-height: 0;
+            border-radius: 999px;
+            @include transition-properties((transform));
+
+            &:hover {
+                transform: translateY(-1px);
+            }
+        }
+    }
+
+    .share-btn {
+        border: 1px solid $light-divider;
+        background: $light-secondary-background-colour;
+        color: $light-primary-font-colour;
+        font-size: 0.82rem;
+        padding: 0.45rem 0.8rem;
+        border-radius: 999px;
+        @include transition-properties((color, background-color, border-color));
+    }
+}
+
+.theme-container.dark-theme {
+    .share-buttons {
+        border-top-color: $dark-divider;
+
+        .share-label {
+            color: rgba($dark-primary-font-colour, 0.66);
+        }
+
+        .share-btn {
+            border-color: rgba($dark-primary-font-colour, 0.24);
+            background: rgba($dark-primary-font-colour, 0.08);
+            color: $dark-primary-font-colour;
+        }
+    }
+}
+
+@media (max-width: $mobile-max-width-breakpoint) {
+    .share-buttons {
+        margin-top: 1.4rem;
+        padding-top: 0.9rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+
+        .share-btn-row {
+            width: 100%;
+            justify-content: flex-start;
+            gap: 0.38rem;
+        }
+    }
+}

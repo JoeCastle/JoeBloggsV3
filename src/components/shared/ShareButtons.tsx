@@ -49,40 +49,38 @@ const ShareButtons: React.FC<ShareButtonsProps> = (props: ShareButtonsProps) => 
     };
 
     return (
-        <div className="content-width-wrapper">
-            <div className="share-buttons">
-                <span className="share-label">Share this post:</span>
-                <div className="share-btn-row">
-                    {canShare ? (
-                        <button
-                            onClick={handleNativeShare}
-                            className="share-btn"
-                        >
-                            Share
-                        </button>
-                    ) : (
-                        <>
-                            <FacebookShareButton url={url} quote={title}>
-                                <FacebookIcon size={iconSize} round />
-                            </FacebookShareButton>
-                            <TwitterShareButton url={url} title={title}>
-                                <TwitterIcon size={iconSize} round />
-                            </TwitterShareButton>
-                            <LinkedinShareButton url={url} title={title}>
-                                <LinkedinIcon size={iconSize} round />
-                            </LinkedinShareButton>
-                            <RedditShareButton url={url} title={title}>
-                                <RedditIcon size={iconSize} round />
-                            </RedditShareButton>
-                            <EmailShareButton url={url} subject={title}>
-                                <EmailIcon size={iconSize} round />
-                            </EmailShareButton>
-                            <WhatsappShareButton url={url} title={title}>
-                                <WhatsappIcon size={iconSize} round />
-                            </WhatsappShareButton>
-                        </>
-                    )}
-                </div>
+        <div className="share-buttons">
+            <span className="share-label">Share this post:</span>
+            <div className="share-btn-row">
+                {canShare ? (
+                    <button
+                        onClick={handleNativeShare}
+                        className="share-btn"
+                    >
+                        Share
+                    </button>
+                ) : (
+                    <>
+                        <FacebookShareButton url={url} quote={title}>
+                            <FacebookIcon size={iconSize} round />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={url} title={title}>
+                            <TwitterIcon size={iconSize} round />
+                        </TwitterShareButton>
+                        <LinkedinShareButton url={url} title={title}>
+                            <LinkedinIcon size={iconSize} round />
+                        </LinkedinShareButton>
+                        <RedditShareButton url={url} title={title}>
+                            <RedditIcon size={iconSize} round />
+                        </RedditShareButton>
+                        <EmailShareButton url={url} subject={title}>
+                            <EmailIcon size={iconSize} round />
+                        </EmailShareButton>
+                        <WhatsappShareButton url={url} title={title}>
+                            <WhatsappIcon size={iconSize} round />
+                        </WhatsappShareButton>
+                    </>
+                )}
             </div>
         </div>
     );

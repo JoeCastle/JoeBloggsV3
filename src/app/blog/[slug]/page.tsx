@@ -138,11 +138,10 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
             <BlogPost meta={meta} content={content} />
 
-            <div className="content-width-wrapper">
+            <div className="content-width-wrapper post-footer-region">
                 <ShareButtons title={meta.title} url={fullUrl} />
+                <PostNavigation posts={allPosts} currentSlug={slug} />
             </div>
-
-            <PostNavigation posts={allPosts} currentSlug={slug} />
         </>
     );
 }

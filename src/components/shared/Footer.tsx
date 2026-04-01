@@ -25,7 +25,7 @@ export const Footer: React.FC = ({ }) => {
                 <div>
                     <h3>Joseph Castle</h3>
                     <p>
-                        A Senior Full-Stack Software Developer with {utils.getYearsOfExperience()} years of experience building bespoke web applications with React, .NET and SQL
+                        A Senior Full-Stack Software Developer with {utils.getYearsOfExperience()}+ years of experience building bespoke web applications with React, .NET and SQL
                         Server.
                     </p>
                 </div>

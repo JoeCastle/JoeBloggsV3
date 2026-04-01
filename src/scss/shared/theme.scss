@@ -221,6 +221,8 @@ will-change: $properties;
     @include transition-properties((color, background-color));
     @include apply-theme-to-elements($light-theme, false);
     @include apply-code-theme(false);
+    background-image: radial-gradient(120% 70% at 50% -12%, rgba($standard-blue-background, 0.11) 0%, rgba($standard-blue-background, 0.05) 38%, rgba($standard-blue-background, 0) 72%);
+    background-repeat: no-repeat;
 
     nav.navbar {
         @include navbar-theme(false);
@@ -232,6 +234,8 @@ will-change: $properties;
     @include apply-theme($dark-theme);
     @include apply-theme-to-elements($dark-theme, true);
     @include apply-code-theme(true);
+    background-image: radial-gradient(120% 72% at 50% -14%, rgba($standard-blue-background, 0.2) 0%, rgba($standard-blue-background, 0.11) 34%, rgba($standard-blue-background, 0) 74%);
+    background-repeat: no-repeat;
 
     nav.navbar {
         @include navbar-theme(true);

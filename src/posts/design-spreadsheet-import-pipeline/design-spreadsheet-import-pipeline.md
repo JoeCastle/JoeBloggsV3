@@ -34,7 +34,7 @@ title: Designing a production-safe spreadsheet import pipeline
 -   [Conclusion](#conclusion)
 -   [Where to Find Me](#where-to-find-me)
 
-------------------------------------------------------------------------
+
 
 ## Introduction
 
@@ -46,7 +46,7 @@ In reality, this meant transforming tens of thousands of records across multiple
 
 That is not what most people think of when they hear "import some spreadsheets".
 
-------------------------------------------------------------------------
+
 
 ## The situation
 
@@ -70,7 +70,7 @@ I was the only developer on the project at the time, so this ended up being full
 
 I had also never written VBA before.
 
-------------------------------------------------------------------------
+
 
 ## What the data actually looked like
 
@@ -101,7 +101,7 @@ It was:
 
 > take semi-structured, presentation-oriented spreadsheets and transform them into consistent, relational data without breaking production integrity
 
-------------------------------------------------------------------------
+
 
 ## The first wrong assumption
 
@@ -117,7 +117,7 @@ The biggest shift was realising:
 
 Once I accepted that, the design changed.
 
-------------------------------------------------------------------------
+
 
 ## Choosing the tool
 
@@ -127,16 +127,16 @@ I went with VBA instead.
 
 Not because it is ideal, but because it was the most pragmatic choice here:
 
--   the source of truth was Excel\
--   it runs directly where the data lives\
--   no setup or dependencies for other developers\
+-   the source of truth was Excel
+-   it runs directly where the data lives
+-   no setup or dependencies for other developers
 -   fast to iterate on
 
 This was not something that needed to run as part of the product. It needed to be run a handful of times, safely.
 
 Given that, minimising friction mattered more than using a "cleaner" stack.
 
-------------------------------------------------------------------------
+
 
 ## Alternative approaches considered
 
@@ -150,7 +150,7 @@ Given that this needed to run a limited number of times, directly against Excel-
 
 It was not the most elegant option, but it allowed me to build a repeatable and production-safe process quickly.
 
-------------------------------------------------------------------------
+
 
 ## The core transformation
 
@@ -187,7 +187,7 @@ The important point is that the source sheet was column-oriented and presentatio
 
 That was the core transformation problem.
 
-------------------------------------------------------------------------
+
 
 ## Identity was the critical part
 
@@ -213,13 +213,11 @@ If it did not, generate a new one.
 
 That avoided duplicating live data and kept foreign keys consistent.
 
-------------------------------------------------------------------------
+
 
 ## The most dangerous bug
 
-The worst issue I hit was not a crash.
-
-It was silent corruption.
+The worst issue I hit was a silent corruption.
 
 In an early version, output columns were written based on position rather than explicit mapping. That meant a small shift could put values in the wrong columns without failing.
 
@@ -239,7 +237,7 @@ outWS.Cells(outRow, cSalesCat).Value = catName
 
 That change made the output deterministic and significantly safer.
 
-------------------------------------------------------------------------
+
 
 ## A debugging moment that changed the approach
 
@@ -266,7 +264,7 @@ Instead of asking "why is this value wrong?", I started asking:
 
 Once that was visible, the fix became straightforward.
 
-------------------------------------------------------------------------
+
 
 ## Trade-off: flexibility vs strictness
 
@@ -287,7 +285,7 @@ I settled on a middle ground:
 
 That kept the process flexible without making it unsafe.
 
-------------------------------------------------------------------------
+
 
 ## Making it testable and safe
 
@@ -310,7 +308,7 @@ Only once that was clean did I run the import in production.
 
 No rollbacks were required.
 
-------------------------------------------------------------------------
+
 
 ## The result
 
@@ -328,7 +326,7 @@ The final process:
 -   was repeatable for future data
 -   significantly reduced the risk of human error
 
-------------------------------------------------------------------------
+
 
 ## What I would change
 
@@ -338,13 +336,9 @@ The macro worked, but the complexity was not Excel automation. It was the transf
 
 A small, testable pipeline with repeatable fixtures for edge cases would make regression testing much easier as the rules evolve.
 
-------------------------------------------------------------------------
+
 
 ## Conclusion
-
-It would be easy to describe this as "I wrote a VBA macro".
-
-That misses the point.
 
 The difficult parts were:
 
@@ -364,6 +358,8 @@ The biggest takeaway from this was simple:
 That is where most of the work actually is.
 
 And that is the difference between something that runs and something you can trust.
+
+------------------------------------------------------------------------
 
 ## Where to Find Me
 
