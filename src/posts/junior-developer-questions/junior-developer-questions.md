@@ -2,7 +2,7 @@
 title: "Junior Developer Questions Answered: Language, Portfolio, Career"
 summary: "Junior developers ask: which language to learn, how to build a portfolio, get experience, and thrive in their first tech job. Includes real advice, tips, and resources."
 date: "2025-05-26"
-dateModified: "2025-07-15"
+dateModified: "2026-03-27"
 tags:
   - junior developer
   - developer advice
@@ -84,7 +84,7 @@ According to Stack Overflow's 2024 survey, about 40% of developers don't have a 
 - Coding bootcamps
 
 
-**Long answer:** It depends. It's an option that provide structured learning and shows employers that you can work to deadlines. You're presented with and guided through a wide range of topics.
+**Long answer:** It depends. It's an option that provides structured learning and shows employers that you can work to deadlines. You're presented with and guided through a wide range of topics.
 
 It's an additional certification that you can add to your CV. You will be competing with other developers, so if another developer has similar experience and projects as you do, them having a degree could shift it in their favour.
 
@@ -92,7 +92,7 @@ However, employers will be more impressed by projects and experience. So work on
 
 Also, you'd be surprised by how many candidates finish a degree but are unable to code.
 
-Realisticly you can get the equivalent of a degree for free online. You mainly lose out on the structure, guidance and certificate. The main benefit of skipping a degree is no student loan.
+Realistically you can get the equivalent of a degree for free online. You mainly lose out on the structure, guidance and certificate. The main benefit of skipping a degree is no student loan.
 
 Most importantly:
 - Can you solve problems?
@@ -174,7 +174,7 @@ My goal is to achieve C but I'm only able to output D.
 I've tried X, Y and Z.
 Do you know how to achieve this or where I'm going wrong?"
 
-The second message rovides much more context and helps others exclude approaches you have already tried.
+The second message provides much more context and helps others exclude approaches you have already tried.
 
 And please use punctuation. It makes messages, especially long ones, much easier to read.
 

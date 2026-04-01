@@ -11,7 +11,7 @@ import StructuredData from '@/components/shared/StructuredData';
 import { getSiteUrl } from '@/utils/serverUtils';
 import utils from '@/utils/utils';
 import ShareButtons from '../../../components/shared/ShareButtons';
-import '../../../scss/shared/sharebuttons.scss';
+//import '../../../scss/shared/sharebuttons.scss';
 
 interface Params {
     slug: string;
