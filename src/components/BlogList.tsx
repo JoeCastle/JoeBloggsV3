@@ -10,8 +10,8 @@ const BlogList = ({ posts }: BlogListProps) => {
     return (
         <div className="blog-list-container">
             <header className="blog-header">
-                <h1>JoeBloggs - A blog by Joseph Castle</h1>
-                <p className="subtitle">Writing about programming and career advice.</p>
+                <h1>JoeBloggs</h1>
+                <p className="subtitle">Writing about programming, software engineering, and career advice.</p>
             </header>
 
             <section className="blog-tile-list">

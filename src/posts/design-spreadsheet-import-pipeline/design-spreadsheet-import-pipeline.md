@@ -1,12 +1,12 @@
 ---
-date: 2026-04-01
-dateModified: 2026-04-01
+date: 2026-04-02
+dateModified: 2026-04-02
 isLive: true
 metaTags:
 - spreadsheet to sql server import pipeline
 - excel data transformation to relational database
 - handling messy spreadsheet data in production systems
-summary: A real-world case study on transforming messy Excel spreadsheets into reliable, production-ready relational data using VBA and SQL Server.
+summary: A case study in designing a safe data ingestion pipeline from inconsistent Excel reports into a live relational system.
 tags:
 - data-import
 - excel
@@ -19,6 +19,7 @@ title: Designing a production-safe spreadsheet import pipeline
 
 -   [Introduction](#introduction)
 -   [The situation](#the-situation)
+-   [High-level approach](#high-level-approach)
 -   [What the data actually looked like](#what-the-data-actually-looked-like)
 -   [The first wrong assumption](#the-first-wrong-assumption)
 -   [Choosing the tool](#choosing-the-tool)
@@ -40,12 +41,13 @@ title: Designing a production-safe spreadsheet import pipeline
 
 A couple of months after joining a new project, I was asked to import a set of spreadsheets into our system.
 
-At first glance it sounded straightforward. We had 30+ Excel files from a customer, and more were expected later. The goal was to get that data into an existing production system backed by Azure SQL.
+At first glance it sounded straightforward. We had 30+ Excel files from a customer, and more were expected later, all of which needed to be imported into an existing production system backed by Azure SQL. In reality, this meant transforming tens of thousands of records across multiple relational tables, where a subtle mistake would not fail loudly, but silently corrupt production data.
 
-In reality, this meant transforming tens of thousands of records across multiple relational tables, where a subtle mistake would not fail loudly, but silently corrupt production data.
+This was not a simple spreadsheet import.
 
-That is not what most people think of when they hear "import some spreadsheets".
-
+> **Note**
+> The sample data and identifiers shown here have been anonymised and simplified. 
+> The structure and challenges are real, but names and values have been changed.
 
 
 ## The situation
@@ -59,24 +61,50 @@ The spreadsheets represented real customer data across multiple projects. If the
 -   inconsistent relationships between entities
 -   difficult cleanup in production
 
-I was the only developer on the project at the time, so this ended up being fully owned on my side. That included:
+I was the only developer on the project at the time, so this ended up being fully owned on my side. 
 
--   understanding an unfamiliar and unintuitive database schema
--   working with a non-technical PM to clarify what the data actually meant
--   building the transformation
--   designing the import process
--   testing against a production backup
--   documenting everything so it could be repeated later
+That included understanding an unfamiliar and unintuitive database schema on a project I had only recently joined, working with a non-technical PM to clarify what the data actually meant, building the transformation, designing the import process, testing against a production backup, and documenting everything so it could be repeated later. I had also never written VBA before.
 
-I had also never written VBA before.
+I effectively acted as the technical owner for this work, making decisions across data modelling, transformation design, and production import strategy.
 
+What made this interesting was that none of these challenges existed in isolation. I was learning an unfamiliar part of the system, working with inconsistent customer data, and trying to design a process that would still be usable months later when more files arrived.
+
+I also documented the process heavily because I already knew more files were coming later, and I did not want the workflow to live only in my head.
+
+
+## High-level approach
+
+At a high level, the process looked like this:
+
+- take raw Excel spreadsheets from the customer  
+- run a VBA-based transformation to normalise and flatten the data  
+- output import-ready CSV files  
+- load those into staging tables in SQL Server  
+- run controlled SQL scripts to insert into relational tables in the correct order  
+
+This separation allowed me to validate the transformation before anything touched production.
+
+The import order mattered because several tables depended on previously inserted records, so correctness was not just about values, but about preserving relational dependencies throughout the process.
+
+<p class="mermaid-caption">High-level import pipeline</p>
+
+```mermaid
+flowchart TD
+  A[Customer Excel Files] --> B[Parse and Normalize in VBA]
+  B --> C[Import-Ready CSV Outputs]
+  C --> D[Load into SQL Server Staging Tables]
+  D --> E[Run SQL Inserts in Dependency Order]
+  E --> F[Validated Production Data]
+```
 
 
 ## What the data actually looked like
 
-The spreadsheets looked structured. Rows, columns, headers.
+The spreadsheets looked structured at a glance, but they were not structured data in the way a parser could safely rely on. They looked like tables, but they behaved more like reports, with important meaning implied by layout rather than explicit structure.
 
-They were not structured data.
+Section headers changed the meaning of columns. Merged cells shifted how headers were interpreted. Some values were visual summaries rather than real data.
+
+That meant I could not treat the spreadsheets as reliable input. I had to treat them as something closer to semi-structured documents that needed interpretation before they could be transformed.
 
 Across the files I was dealing with:
 
@@ -101,6 +129,8 @@ It was:
 
 > take semi-structured, presentation-oriented spreadsheets and transform them into consistent, relational data without breaking production integrity
 
+In practice, not every problem was worth solving in code. Some spreadsheets still needed manual cleanup before they could be processed safely, and I documented that as part of the repeatable workflow rather than pretending the input was cleaner than it was.
+
 
 
 ## The first wrong assumption
@@ -115,46 +145,39 @@ The biggest shift was realising:
 
 > this is not a mapping problem, it is a normalization problem
 
-Once I accepted that, the design changed.
+Once I realised this was a normalization problem, the approach became iterative.
+
+I built a rough first pass, tested it against multiple spreadsheets, and then refined it as edge cases appeared. Each iteration exposed new assumptions that did not hold, which led to adjustments in how categories were detected, how ranges were expanded, and how output was structured.
+
+Over time, the process became less about “getting a file out” and more about making the transformation predictable and safe.
 
 
 
 ## Choosing the tool
 
-I considered building a small tool in C# or JavaScript, which are my usual languages.
-
-I went with VBA instead.
-
-Not because it is ideal, but because it was the most pragmatic choice here:
-
--   the source of truth was Excel
--   it runs directly where the data lives
--   no setup or dependencies for other developers
--   fast to iterate on
+I considered building a small tool in C# or JavaScript, which are my usual languages, but I went with VBA instead. Not because it is ideal, but because it was the most pragmatic choice here: the source of truth was Excel, it ran directly where the data lived, it required no extra setup for other developers, and it was fast to iterate on.
 
 This was not something that needed to run as part of the product. It needed to be run a handful of times, safely.
 
 Given that, minimising friction mattered more than using a "cleaner" stack.
 
+I also had to factor in who would run this in the future. This was not just a one-off script. It needed to be something that could be understood and reused by someone else, potentially months later.
 
 
 ## Alternative approaches considered
 
-There were other viable approaches.
-
-A C# tool would have provided stronger typing, better testability, and cleaner separation of transformation logic. A Python script would have been a good fit for reshaping semi-structured spreadsheet data. A SQL-heavy staging approach or ETL tooling could also have handled parts of the pipeline.
+There were other viable approaches. A C# tool would have provided stronger typing, better testability, and cleaner separation of transformation logic. A Python script would have been a good fit for reshaping semi-structured spreadsheet data. A SQL-heavy staging approach or ETL tooling could also have handled parts of the pipeline.
 
 In practice, each of these introduced additional setup, friction, or complexity relative to the task at hand.
 
 Given that this needed to run a limited number of times, directly against Excel-based input, and be easy to hand over, VBA was the most pragmatic choice.
 
-It was not the most elegant option, but it allowed me to build a repeatable and production-safe process quickly.
-
+Technically, some of these approaches may have been cleaner. But in this case, reducing friction and enabling fast iteration mattered more than long-term elegance.
 
 
 ## The core transformation
 
-The shape of the data was the real challenge.
+The real challenge was not reading the spreadsheets. It was reshaping the data safely.
 
 A typical row in the spreadsheet looked like this:
 
@@ -162,19 +185,38 @@ A typical row in the spreadsheet looked like this:
 |------|------|-----------|-----------|---------------|--------------------|-------------|
 | 27   | Eaton 309 | 470 | 1001 | 0 | 0 | 1471 |
 
-At first glance, that looks like one record. It was not.
+At first glance, that looks like a single record. It is not.
 
-In the target model, that single row actually represented:
+What looks like one row is actually a compressed representation of multiple entities and multiple category values. The spreadsheet is column-oriented and designed for presentation, not for relational storage.
 
--   one Plot
--   one CostingSheet
--   multiple CostingSheetLines
--   multiple CostingSheetItems
--   category references such as BuildStage
+To make that explicit, this is what that single row becomes during transformation:
 
-The "Plot Totals" column is intentionally ignored during transformation, as it is a report artifact rather than a real data field.
+```transform
+Spreadsheet row:
+Plot 27 | Eaton 309 | Main Roof 470 | First Fix 1001 | Kitchen Units 0
 
-So the transformed output became something like this:
+↓ expand into category rows
+
+Relational rows:
+(27, Eaton 309, Main Roof, 470)
+(27, Eaton 309, First Fix, 1001)
+(27, Eaton 309, Kitchen Units, 0)
+(27, Eaton 309, Toilet Accessories, 0)
+```
+
+This expansion step is the core of the transformation. Each category column becomes its own row, which can then be mapped cleanly into the relational model.
+
+In the target system, that single spreadsheet row actually represented:
+
+- one Plot  
+- one CostingSheet  
+- multiple CostingSheetLines  
+- multiple CostingSheetItems  
+- category references such as BuildStage  
+
+The “Plot Totals” column is intentionally ignored during transformation, as it is a report artifact rather than a real data field.
+
+Once expanded and mapped, the output becomes something like this:
 
 | PlotId | PlotName | CostingSheetId | CostingSheetName | SalesCategory | BuildStageId | IsAdditional | Amount |
 |--------|----------|----------------|------------------|---------------|--------------|--------------|--------|
@@ -183,9 +225,9 @@ So the transformed output became something like this:
 | P-27 | 27 | CS-27-EATON309 | Eaton 309 | Kitchen Units | BS-KITCHENUNITS | 1 | 0 |
 | P-27 | 27 | CS-27-EATON309 | Eaton 309 | Toilet Accessories | BS-TOILETACCESSORIES | 1 | 0 |
 
-The important point is that the source sheet was column-oriented and presentation-oriented, while the output had to become row-oriented and relational.
+The important point is that the source sheet is column-oriented and presentation-driven, while the output must be row-oriented and relational.
 
-That was the core transformation problem.
+That mismatch is the core transformation problem.
 
 
 
@@ -197,19 +239,20 @@ Not all IDs behave the same way.
 
 I had to distinguish between:
 
--   **existing, stable IDs**\
-categories and build stages already in production
--   **project-level identities**\
-plots that should remain consistent within a project
--   **row-level identities**\
-costing sheet lines that must be unique per record
+- **existing, stable IDs**
+  - categories and build stages already in production
+- **project-level identities**
+  - plots that should remain consistent within a project
+- **row-level identities**
+  - costing sheet lines that must be unique per record
 
 If you get that wrong, you do not just get bad data. You get duplicated entities, broken foreign keys, and inconsistent relationships.
 
 To handle this, I introduced a reference file that mapped known category names to existing IDs from the database.
 
-If a category existed, reuse its ID.\
-If it did not, generate a new one.
+Without this, the import would have created duplicate entities and broken relationships across the system, which would have been difficult to detect and even harder to correct once in production.
+
+If a category existed, reuse its ID. If it did not, generate a new one.
 
 That avoided duplicating live data and kept foreign keys consistent.
 
@@ -217,9 +260,7 @@ That avoided duplicating live data and kept foreign keys consistent.
 
 ## The most dangerous bug
 
-The worst issue I hit was a silent corruption.
-
-In an early version, output columns were written based on position rather than explicit mapping. That meant a small shift could put values in the wrong columns without failing.
+The worst issue I hit was silent corruption. In an early version, output columns were written based on position rather than explicit mapping. That meant a small shift could put values in the wrong columns without failing.
 
 The file would still generate. Row counts would look reasonable. But the data would be wrong.
 
@@ -227,7 +268,7 @@ That is far worse than a hard failure.
 
 The fix was to stop relying on position and always map by column name:
 
-``` vba
+```vb
 cPlotId = ColumnIndexOf(outWS, "PlotId")
 cSalesCat = ColumnIndexOf(outWS, "SalesCategory")
 
@@ -264,6 +305,7 @@ Instead of asking "why is this value wrong?", I started asking:
 
 Once that was visible, the fix became straightforward.
 
+With more than 30 files in play, the log was not just for debugging code. It became part of the operational process, making it obvious which file had failed, why it failed, and what needed to be fixed before rerunning the batch.
 
 
 ## Trade-off: flexibility vs strictness
@@ -308,24 +350,28 @@ Only once that was clean did I run the import in production.
 
 No rollbacks were required.
 
+At that point, the goal was no longer just to make the process work. It was to be confident that it would not introduce subtle errors into a live system. A successful run was not one that completed without crashing, but one where the resulting data could be trusted.
+
+I deliberately kept the import process project-by-project rather than fully batching everything at once, because it made validation and rollback reasoning much safer.
 
 
 ## The result
+
+More spreadsheets arrived later, and the same process was reused with only minor adjustments.
 
 -   30+ spreadsheets
 -   30+ projects
 -   ~75,000 transformed records
 -   ~80,000-85,000 inserts across related tables
 
-Manual processing would likely have taken months and been error-prone.
-
-The final process:
+The final process had a few key characteristics:
 
 -   ran in minutes
 -   could be executed per project for safety
 -   was repeatable for future data
 -   significantly reduced the risk of human error
 
+Based on rough estimates, doing this manually would likely have taken 400 to 600 hours of effort, roughly 2.5 to 4 months of work. The final process reduced that to a repeatable workflow that could be run in minutes per batch, with significantly lower risk of human error and much better traceability.
 
 
 ## What I would change
@@ -349,17 +395,10 @@ The difficult parts were:
 -   preventing silent corruption
 -   building something repeatable and supportable
 
-The macro was just the implementation.
+The macro was just the implementation. The biggest takeaway for me was that spreadsheet imports stop being "just automation" the moment the source is inconsistent and the destination is a live relational system.
 
-The biggest takeaway from this was simple:
+That is where most of the work actually is, and it is the difference between something that runs and something you can trust.
 
-> spreadsheet imports stop being "just automation" the moment the source is inconsistent and the destination is a live relational system
-
-That is where most of the work actually is.
-
-And that is the difference between something that runs and something you can trust.
-
-------------------------------------------------------------------------
 
 ## Where to Find Me
 

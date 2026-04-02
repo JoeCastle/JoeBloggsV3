@@ -15,6 +15,8 @@ The site is built with modern technologies like **Next.js**, **React**, **TypeSc
 - **Responsive design:** Clean, mobile-first layouts built with semantic HTML and SCSS.
 - **Dark mode and light mode:** Theme button to switch to and from dark mode, including code block and UI colors.
 - **Markdown enhancements:** Support for GitHub-flavoured markdown (tables, strikethroughs, task lists, etc.) via `remark-gfm`.
+- **Mermaid diagrams in posts:** Fenced `mermaid` blocks render as diagrams in blog post content with responsive, article-scoped styling.
+- **Transformation visual blocks:** Fenced `transform` blocks render as a custom editorial visual for row/shape transformations without affecting normal code blocks.
 - **Automatic Generation of public files:** Dynamic `robots.txt`, `sitemap.xml`, `rss.xml` and `recent-posts.json` files generated on build.
 - **Reading Progress Indicator:** Custom progress bar as users scroll through a post.
 - **Social Media Sharing:** Buttons to share posts on a variety of social media websites.
@@ -28,9 +30,42 @@ This project uses:
 - [React](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [SCSS](https://sass-lang.com/)
-- [Marked](https://marked.js.org/) for Markdown-to-HTML rendering
+- [unified](https://unifiedjs.com/) + [remark](https://github.com/remarkjs/remark) + [rehype](https://github.com/rehypejs/rehype) for Markdown-to-HTML processing
 - [remark-gfm](https://github.com/remarkjs/remark-gfm) for GitHub flavoured markdown
+- [rehype-highlight](https://github.com/rehypejs/rehype-highlight) for syntax highlighted code blocks
+- [Mermaid](https://mermaid.js.org/) for rendered diagrams inside blog posts
 - [FontAwesome](https://fontawesome.com/) (with selective icon imports)
+
+## Markdown Authoring Notes
+
+Blog posts support standard markdown plus custom fenced blocks in article content.
+
+### Mermaid diagrams
+
+Use a mermaid fenced block to render flowcharts and other Mermaid diagrams:
+
+```mermaid
+flowchart TD
+   A[Source Data] --> B[Normalise]
+   B --> C[Staging]
+   C --> D[Production]
+```
+
+### Transformation visuals
+
+Use a transform fenced block for explanatory data-shape transitions:
+
+```transform
+Spreadsheet row:
+Plot 27 | Eaton 309 | Main Roof 470
+
+↓ expand into category rows
+
+Relational rows:
+(27, Eaton 309, Main Roof, 470)
+```
+
+This renders as a custom article-friendly visual block. Other fenced code block languages continue to render as normal syntax-highlighted code.
 
 ## Getting Started
 

@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const isDarkModeDefault: boolean = globals.isDarkModeDefault;
 
 export default function ClientLayout({ children }: { children: React.ReactNode; }) {
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
     const isScrollToTopButtonDisabled = useRef(false);
 
