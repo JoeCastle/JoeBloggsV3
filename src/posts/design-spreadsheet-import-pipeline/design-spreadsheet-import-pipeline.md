@@ -1,18 +1,23 @@
 ---
-date: 2026-04-02
-dateModified: 2026-04-02
+title: "Designing a production-safe spreadsheet import pipeline"
+summary: "A practical case study on transforming inconsistent Excel spreadsheets into SQL Server using a production-safe import pipeline, staging tables, and robust ID mapping."
+date: "2026-04-02"
+dateModified: "2026-04-03"
 isLive: true
-metaTags:
-- spreadsheet to sql server import pipeline
-- excel data transformation to relational database
-- handling messy spreadsheet data in production systems
-summary: A case study in designing a safe data ingestion pipeline from inconsistent Excel reports into a live relational system.
 tags:
-- data-import
-- excel
-- sql-server
-- vba macro
-title: Designing a production-safe spreadsheet import pipeline
+  - data-import
+  - excel
+  - sql-server
+  - vba macro
+metaTags:
+  - spreadsheet to sql server import
+  - excel to sql server pipeline
+  - excel data transformation
+  - spreadsheet data normalization
+  - sql server staging tables
+  - relational data import strategy
+  - production safe data migration
+  - vba excel import automation
 ---
 
 ## Table of Contents

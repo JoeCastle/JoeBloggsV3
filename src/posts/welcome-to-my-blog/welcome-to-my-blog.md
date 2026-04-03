@@ -1,8 +1,8 @@
 ---
 title: "Welcome to My Blog"
-summary: "A brief introduction to my blog, my background, and what you can expect as a reader."
+summary: "An introduction to my developer blog, my background in React, .NET, and SQL Server, and the practical software engineering content you can expect."
 date: "2025-04-27"
-dateModified: "2025-07-01"
+dateModified: "2026-04-03"
 tags:
   - introduction
   - developer blog
@@ -10,6 +10,13 @@ tags:
   - software development
   - junior developer
   - career tips
+metaTags:
+  - software developer blog introduction
+  - personal developer blog
+  - junior developer career advice
+  - software engineering lessons learned
+  - react dotnet sql server developer
+  - uk software developer blog
 ---
 
 # Welcome!

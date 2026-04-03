@@ -67,6 +67,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     }
 
     const { meta } = post;
+    const seoKeywords: string[] = Array.from(new Set([...(meta.tags ?? []), ...(meta.metaTags ?? [])]));
 
     const baseUrl: string = await getSiteUrl();
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
@@ -82,7 +83,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
         metadataBase: new URL(baseUrl),
         title: `${meta.title} | JoeBloggs`,
         description: meta.summary,
-        keywords: meta.tags?.join(', '),
+        keywords: seoKeywords.join(', '),
         alternates: {
             canonical: fullUrl,
         },

@@ -2,7 +2,7 @@
 title: "Essential Guide for Junior Software Developers: Tips, Mindset, and Best Practices"
 summary: "Essential guide for junior software developers: practical tips, mindset shifts, real‑world stories and resources to help you thrive in your tech career."
 date: "2025-05-24"
-dateModified: "2025-07-01"
+dateModified: "2026-04-03"
 tags:
   - junior developer
   - developer advice
@@ -11,12 +11,14 @@ tags:
   - code quality
   - tech career
 metaTags:
+  - junior software developer guide
   - junior developer tips
-  - asking good questions at work
-  - managing imposter syndrome
+  - how to ask for help at work
+  - managing developer imposter syndrome
   - developer productivity habits
-  - build projects for juniors
-  - software best practices
+  - build projects as a junior developer
+  - software development best practices
+  - early career software engineer advice
 ---
 
 Starting as a junior software developer can feel overwhelming and full of questions. You may be thinking:

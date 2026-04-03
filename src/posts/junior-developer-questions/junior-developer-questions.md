@@ -2,7 +2,7 @@
 title: "Junior Developer Questions Answered: Language, Portfolio, Career"
 summary: "Junior developers ask: which language to learn, how to build a portfolio, get experience, and thrive in their first tech job. Includes real advice, tips, and resources."
 date: "2025-05-26"
-dateModified: "2026-03-27"
+dateModified: "2026-04-03"
 tags:
   - junior developer
   - developer advice
@@ -11,12 +11,13 @@ tags:
   - coding projects
   - tech career
 metaTags:
-  - junior developer
-  - how to become a developer
-  - programming languages
-  - developer portfolio
+  - junior developer questions answered
+  - how to become a software developer
+  - best programming language for beginners
+  - junior developer portfolio tips
   - coding projects for beginners
-  - first tech job tips
+  - first tech job preparation
+  - junior developer interview preparation
   - developer career advice
 ---
 
