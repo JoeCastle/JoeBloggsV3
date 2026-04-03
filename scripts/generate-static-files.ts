@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import fs from 'fs/promises';
 import path from 'path';
-import { getAllPosts } from '../src/utils/posts';
+import { getAllPosts, validateLivePostSeoFrontmatter } from '../src/utils/posts';
 import { getSiteUrl } from '../src/utils/serverUtils';
 import globals from '../src/utils/globals';
 
@@ -75,6 +75,15 @@ async function generateRecentPosts(posts: any[]) {
 async function main() {
     const publicDir = path.join(process.cwd(), 'public');
     const siteUrl = await getSiteUrl();
+    const seoValidationIssues = await validateLivePostSeoFrontmatter();
+
+    if (seoValidationIssues.length > 0) {
+        const details = seoValidationIssues
+            .map(({ slug, filePath, issues }) => `- ${slug} (${filePath})\n  - ${issues.join('\n  - ')}`)
+            .join('\n');
+        throw new Error(`SEO frontmatter validation failed for live posts:\n${details}`);
+    }
+
     const posts = await getAllPosts();
 
     // rss.xml

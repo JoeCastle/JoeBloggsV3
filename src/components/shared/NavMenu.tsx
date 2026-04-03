@@ -10,9 +10,10 @@ interface Props {
 }
 
 /**
- * The navbar at the top of the page.
- * @param props
- * @returns
+ * Renders the top navigation bar.
+ * @param props Component props.
+ * @param props.isDarkMode Whether dark theme styling is active.
+ * @returns Navigation JSX.
  */
 export const NavMenu: React.FC<Props> = ({ isDarkMode }) => {
     return (

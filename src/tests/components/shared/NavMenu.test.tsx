@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { NavMenu } from './NavMenu';
+import { NavMenu } from '@/components/shared/NavMenu';
 
 describe('NavMenu', () => {
     it('renders navigation links', () => {

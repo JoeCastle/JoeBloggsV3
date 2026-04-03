@@ -15,9 +15,20 @@ interface StructuredDataProps {
 }
 
 /**
- * Generates the JSON-LD Structured Data for the blog post meta data.
- * @param param0 
- * @returns Script tag "application/ld+json" containing the appropriate meta data.
+ * Builds a JSON-LD script payload for blog post structured data.
+ * @param param0 Component props.
+ * @param param0.url Canonical blog post URL.
+ * @param param0.title Blog post title.
+ * @param param0.description Blog post summary/description.
+ * @param param0.datePublished Post published date.
+ * @param param0.dateModified Optional modified date.
+ * @param param0.articleBody Optional article text snippet.
+ * @param param0.image Optional image URL.
+ * @param param0.wordCount Optional word count.
+ * @param param0.readingTimeMinutes Optional reading time in minutes.
+ * @param param0.keywords Optional keyword list.
+ * @param param0.siteUrl Optional site base URL used for publisher logo.
+ * @returns JSON-LD script element.
  */
 export default function StructuredData({
     url,

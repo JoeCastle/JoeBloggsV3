@@ -27,13 +27,13 @@ const numOfSummaryProjectsToDisplay: number = 8;
 /** The number of technologies to display on each project tile in the projects section on the homepage. */
 const numOfTechsToDisplayPerProject: number = 7;
 
-const isDarkModeDefault: boolean = true;
+const isDarkModeDefault: boolean = false;
 
 const metaData: MetaDataType = {
     title: 'JoeBloggs | A blog by Joseph Castle',
     description: 'The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.',
     keywords:
-        'joseph castle, joe castle, full stack, software developer, web developer, senior software engineer, senior developer, full stack software engineer, react developer, typescript developer, .NET developer, C# developer, SQL Server expert, UK software engineer, blog',
+        'joseph castle, joe castle, software developer blog, uk software engineer blog, full stack developer, senior software engineer, react developer, typescript developer, next.js blog, .NET developer, C# developer, SQL Server developer, junior developer advice, software engineering career tips',
 };
 
 const globals = {

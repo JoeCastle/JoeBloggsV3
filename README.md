@@ -1,108 +1,186 @@
 # JoeBloggsV3
 
-Welcome to my personal blog! This is where I share my thoughts, projects, and frustrations.  
-The site is built with modern technologies like **Next.js**, **React**, **TypeScript**, and **SCSS**.
+A personal blog focused on high-quality technical writing, performance, and maintainable frontend architecture.
 
+Built with Next.js App Router, TypeScript, and a custom markdown processing pipeline.
 
-## Features
+## Project Links
 
-- **Markdown-based blog posts:** Posts are written in `.md` files organized by folder, with related images stored locally.
-- **Frontmatter metadata:** Each post includes structured frontmatter (`title`, `summary`, `date`, `dateModified`) automatically parsed.
-- **Static Site Generation (SSG):** Each blog post and the homepage is pre-rendered at build time for performance and SEO.
-- **Automatic SEO metadata:** Dynamic `<title>`, `<meta>` descriptions, Open Graph, and Twitter Card metadata per post.
-- **Canonical URLs:** Each blog post includes a canonical URL for better SEO and duplicate content prevention.
-- **Reading time and word count:** Estimated reading time and word count are automatically calculated and displayed for every post.
-- **Responsive design:** Clean, mobile-first layouts built with semantic HTML and SCSS.
-- **Dark mode and light mode:** Theme button to switch to and from dark mode, including code block and UI colors.
-- **Markdown enhancements:** Support for GitHub-flavoured markdown (tables, strikethroughs, task lists, etc.) via `remark-gfm`.
-- **Automatic Generation of public files:** Dynamic `robots.txt`, `sitemap.xml`, `rss.xml` and `recent-posts.json` files generated on build.
-- **Reading Progress Indicator** Custom progress bar as users scroll through a post.
-- **Social Media Sharing** Buttons to share posts on a variety of social media websites.
+- Live site: [JoeBloggs](https://blog.joecastle.co.uk/)
+- Repository: [GitHub](https://github.com/JoeCastle/JoeBloggsV3)
 
+## At a Glance
+
+- Markdown-driven publishing with custom mermaid and transform blocks
+- SEO-ready pages with canonical links and JSON-LD structured data
+- Static generation for fast content delivery
+- Layered test suite (Vitest, Playwright, Lighthouse CI)
+- Accessible, responsive UI with light/dark theme support
+
+## Key Features
+
+- Markdown-first publishing with per-post folders and local assets
+- Frontmatter parsing and validation for structured post metadata
+- Static generation for homepage and blog post routes
+- Dynamic per-page SEO metadata (title, description, Open Graph, Twitter cards)
+- Canonical URLs and BlogPosting JSON-LD structured data
+- Automatic reading-time and word-count extraction
+- Responsive layouts with light/dark theme support
+- Markdown enhancements with GitHub Flavored Markdown support
+- Mermaid diagram rendering from fenced mermaid blocks
+- Custom transform visual blocks from fenced transform blocks
+- Build-time generation of robots.txt, sitemap.xml, rss.xml, and recent-posts.json
+- Reading progress indicator for long-form posts
+- Social sharing actions for post pages
+
+## Engineering Highlights
+
+- Custom content pipeline using unified/remark/rehype with project-specific plugins
+- Defensive post loading and frontmatter validation to handle malformed content safely
+- E2E reliability helpers to reduce flake in accessibility, SEO, and visual tests
+- Automated generation of sitemap, robots, RSS, and recent-post metadata artifacts
+- Clear separation of route logic, rendering components, and utility modules
 
 ## Tech Stack
 
-This project uses:
+- Next.js (App Router)
+- React
+- TypeScript
+- SCSS (Sass)
+- unified + remark + rehype pipeline
+- remark-gfm
+- rehype-highlight
+- Mermaid
+- FontAwesome
+- Vitest + Testing Library
+- Playwright + @axe-core/playwright
+- Lighthouse CI
 
-- [Next.js](https://nextjs.org/)
-- [React](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [SCSS](https://sass-lang.com/)
-- [Marked](https://marked.js.org/) for Markdown-to-HTML rendering
-- [remark-gfm](https://github.com/remarkjs/remark-gfm) for GitHub flavoured markdown
-- [FontAwesome](https://fontawesome.com/) (with selective icon imports)
+## Markdown Authoring
+
+Posts support standard markdown plus custom fenced blocks.
+
+
+
+## Architecture: Markdown to Render
+
+```mermaid
+flowchart LR
+   A[Post Markdown File src/posts/<slug>/<slug>.md] --> B[Load Post by Slug getPostBySlug]
+   B --> C[Parse Frontmatter gray-matter]
+   C --> D[Convert Markdown to HTML markdownToHTML]
+
+   D --> E[Parse Markdown remarkParse plus remarkGfm]
+   E --> F[Convert Markdown AST to HAST remarkRehype]
+   F --> G[Apply Rehype Plugins]
+
+   G --> G1[Mermaid Block Transform rehypeMermaid]
+   G --> G2[Transform Visual Block Transform rehypeTransformVisual]
+   G --> G3[Code Highlighting rehypeHighlight]
+   G --> G4[Table Wrapper Injection rehypeWrapTables]
+
+   G1 --> H[Rendered HTML]
+   G2 --> H
+   G3 --> H
+   G4 --> H
+
+   H --> I[Render BlogPost Component]
+   I --> J[Static Build Output]
+   J --> K[Client Hydration]
+```
+
+Runs primarily at build-time for static generation, with final hydration behavior on the client.
+
+## Architecture: Content Indexing and Static Files
+
+```mermaid
+flowchart LR
+   A[Post Markdown Files src/posts/*.md] --> B[Load All Posts getAllPosts]
+   B --> C[Validate and Normalize Metadata]
+
+   C --> D[Generate Static Public Files scripts/generate-static-files.ts]
+   D --> E[public/recent-posts.json]
+   D --> F[public/rss.xml]
+   D --> G[public/sitemap.xml]
+   D --> H[public/robots.txt]
+
+   E --> I[Site and Client Consumers]
+   F --> I
+   G --> J[Search Crawlers]
+   H --> J
+```
+
+Runs at build-time via the static file generation script to produce public metadata artifacts.
 
 ## Getting Started
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) installed
-
+- Node.js installed
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository
 
-   ```bash
-   git clone https://github.com/JoeCastle/JoeBloggsV3.git
-   cd JoeBloggsV3
-   ```
+```bash
+git clone https://github.com/JoeCastle/JoeBloggsV3.git
+cd JoeBloggsV3
+```
 
-3. Install dependencies:
-   ```
-   npm install
-   ```
+2. Install dependencies
 
+```bash
+npm install
+```
 
-### Running the Project
+3. Run the development server
 
-1. Start the development server:
-   ```
-   npm run dev
-   ```
+```bash
+npm run dev
+```
 
-2. Open your browser and visit [http://localhost:3000](http://localhost:3000) to view the blog.
+4. Open http://localhost:3000
 
+## Scripts
 
-## Project Structure Overview
+- npm run dev: Start development server
+- npm run build: Build production app (includes static file generation)
+- npm run generate-static-files: Generate robots/sitemap/rss/recent-posts artifacts
+- npm run start: Start production server
+- npm run lint: Run linting
+- npm test: Run Vitest suite
+- npm run test:ui: Run Vitest UI mode
+- npm run test:e2e: Run Playwright e2e suite
+- npm run test:e2e:ui: Run Playwright UI mode
+- npm run test:e2e:update-snapshots: Update visual snapshots
+- npm run test:perf: Run Lighthouse CI checks
 
-- **src:** Contains the source code for the React application.
-  - **app**  Next.js app routes (App Router).
-    - **page.tsx** Homepage.
-    - **blog/[slug]/** Dynamic blog post pages
-  - **components:** React components.
-    - **shared:** Components shared across multiple components or pages.
-  - **posts:** Folders for the blog posts which group the markdown files and images.
-  - **scss:** SASS files for styling the components and pages.
-  - **utils:** Utility functions for blog posts and other general functionallity.
-- ~~**cypress** Tests folder containing Cypress integration and component tests.~~
-- **public** Static folder containing favicon and other assets.
+## Project Structure
 
+- src/app: Next.js routes and layout
+- src/components: Reusable UI components
+- src/posts: Markdown content and per-post assets
+- src/scss: Styling layers and component/page styles
+- src/utils: Content loading, markdown processing, and shared utilities
+- public: Static assets and generated public metadata files
+- e2e: Playwright suites, snapshots, and reliability helpers
 
-## Available Scripts
+## Testing and Quality
 
-- `npm run dev` - Run the dev server
-- `npm run build` - Create a production build
-- `npm test`
-- `npm run test:ui`
-- `npm run pretty`
-- `npm run update-project-date`
-   - Updates the date in `.env.local` to the current date.
+The project uses layered testing and browser quality checks:
 
+- Vitest for unit, component, and integration tests
+- Playwright for end-to-end, accessibility, SEO, and visual regression
+- Lighthouse CI for performance and quality thresholds
 
-## TODO:
+For full testing standards and coverage details, see [TESTING.md](TESTING.md).
 
-- [x] Create project based on existing portfolio project.
-- [x] Convert project from CRA to Next.js.
-- [x] Write README.md.
-- [x] Add blog post functionallity.
-- [x] Add list of posts.
-- [x] Add SEO metadata per page.
-- [x] Update styling and structure of the list and post pages.
-- [x] Write blog posts.
-- [x] Add tests.
+## Deployment
+
+Deployment process and release checklist are documented in [DEPLOYMENT.md](DEPLOYMENT.md).
 
 
 ## License
 
-The code in this project is licensed under the terms of the [LICENSE-website](LICENSE-website), while the content, including text and media, is licensed under the [LICENSE-content](LICENSE-content). See the respective files for detailed licensing information.
+Code is licensed under [LICENSE-website](LICENSE-website).
+Content and media are licensed under [LICENSE-content](LICENSE-content).

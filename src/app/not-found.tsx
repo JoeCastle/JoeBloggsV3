@@ -3,8 +3,8 @@ import Link from 'next/link';
 import '../scss/page/fourzerofour.scss';
 
 /**
- * The 404 not found component.
- * @returns 
+ * Renders the custom 404 page.
+ * @returns Not-found page JSX.
  */
 export default function NotFound(): JSX.Element {
     return (

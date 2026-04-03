@@ -11,24 +11,51 @@ import StructuredData from '@/components/shared/StructuredData';
 import { getSiteUrl } from '@/utils/serverUtils';
 import utils from '@/utils/utils';
 import ShareButtons from '../../../components/shared/ShareButtons';
-import '../../../scss/shared/sharebuttons.scss';
+//import '../../../scss/shared/sharebuttons.scss';
 
 interface Params {
     slug: string;
 }
 
-// Pre-generates all blog pages statically. Called automatically.
+/**
+ * Type guard that validates required post metadata fields.
+ * @param meta Candidate post metadata.
+ * @returns True when metadata contains all required fields.
+ */
+function hasRequiredPostMeta(meta: Partial<PostMeta> | undefined): meta is PostMeta {
+    return Boolean(
+        meta &&
+        typeof meta.title === 'string' &&
+        typeof meta.summary === 'string' &&
+        typeof meta.date === 'string' &&
+        typeof meta.dateModified === 'string' &&
+        typeof meta.readingTime === 'string' &&
+        typeof meta.wordCount === 'number' &&
+        Array.isArray(meta.tags) &&
+        Array.isArray(meta.metaTags)
+    );
+}
+
+/**
+ * Pre-generates static params for each live blog post slug.
+ * @returns Array of route parameter objects.
+ */
 export async function generateStaticParams() {
     const posts: PostMeta[] = await getAllPosts();
     return posts.map((post) => ({ slug: post.slug }));
 }
 
-// Dynamic SEO metadata per blog post
+/**
+ * Generates SEO metadata for a specific blog post route.
+ * @param param0 Route params wrapper from Next.js.
+ * @param param0.params Promise resolving blog route params.
+ * @returns Metadata for the post or fallback 404 metadata.
+ */
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
     const { slug } = await params;
     const post = await getPostBySlug(slug);
 
-    if (!post) {
+    if (!post || !hasRequiredPostMeta(post.meta)) {
         return {
             title: '404 - Page Not Found | JoeBloggs',
             description: 'The requested blog post could not be found.',
@@ -40,6 +67,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     }
 
     const { meta } = post;
+    const seoKeywords: string[] = Array.from(new Set([...(meta.tags ?? []), ...(meta.metaTags ?? [])]));
 
     const baseUrl: string = await getSiteUrl();
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
@@ -55,7 +83,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
         metadataBase: new URL(baseUrl),
         title: `${meta.title} | JoeBloggs`,
         description: meta.summary,
-        keywords: meta.tags?.join(', '),
+        keywords: seoKeywords.join(', '),
         alternates: {
             canonical: fullUrl,
         },
@@ -99,12 +127,17 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     };
 }
 
-// Page renderer
+/**
+ * Renders an individual blog post page.
+ * @param param0 Route params wrapper from Next.js.
+ * @param param0.params Promise resolving blog route params.
+ * @returns Blog post page JSX.
+ */
 export default async function BlogPostPage({ params }: { params: Promise<Params> }) {
     const { slug } = await params;
     const post = await getPostBySlug(slug);
 
-    if (!post) {
+    if (!post || !hasRequiredPostMeta(post.meta) || typeof post.content !== 'string' || typeof post.markdown !== 'string') {
         notFound();
     }
 
@@ -138,11 +171,10 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
             <BlogPost meta={meta} content={content} />
 
-            <div className="content-width-wrapper">
+            <div className="content-width-wrapper post-footer-region">
                 <ShareButtons title={meta.title} url={fullUrl} />
+                <PostNavigation posts={allPosts} currentSlug={slug} />
             </div>
-
-            <PostNavigation posts={allPosts} currentSlug={slug} />
         </>
     );
 }

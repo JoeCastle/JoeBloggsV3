@@ -1,7 +1,8 @@
 /**
- * Convert markdown content to plain text.
- * This strips out code blocks, links, images, formatting, and extra spacing.
- * Mostly used for meta data where I want to include a snippet of the content.
+ * Converts markdown content to plain text for metadata/snippet usage.
+ * This strips code blocks, links, images, formatting markers, and extra spacing.
+ * @param markdown Raw markdown source.
+ * @returns Normalized plain text output.
  */
 export function markdownToPlainText(markdown: string): string {
     return markdown

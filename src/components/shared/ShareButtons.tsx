@@ -23,9 +23,11 @@ interface ShareButtonsProps {
 }
 
 /**
- * Social media share buttons on the blog post page.
- * @param props title and url of the blog post.
- * @returns 
+ * Renders share actions for blog posts with native share fallback on mobile.
+ * @param props Component props.
+ * @param props.title Post title used in share payloads.
+ * @param props.url Canonical post URL used in share payloads.
+ * @returns Share button JSX.
  */
 const ShareButtons: React.FC<ShareButtonsProps> = (props: ShareButtonsProps) => {
     const { title, url } = props;
@@ -49,40 +51,38 @@ const ShareButtons: React.FC<ShareButtonsProps> = (props: ShareButtonsProps) => 
     };
 
     return (
-        <div className="content-width-wrapper">
-            <div className="share-buttons">
-                <span className="share-label">Share this post:</span>
-                <div className="share-btn-row">
-                    {canShare ? (
-                        <button
-                            onClick={handleNativeShare}
-                            className="share-btn"
-                        >
-                            Share
-                        </button>
-                    ) : (
-                        <>
-                            <FacebookShareButton url={url} quote={title}>
-                                <FacebookIcon size={iconSize} round />
-                            </FacebookShareButton>
-                            <TwitterShareButton url={url} title={title}>
-                                <TwitterIcon size={iconSize} round />
-                            </TwitterShareButton>
-                            <LinkedinShareButton url={url} title={title}>
-                                <LinkedinIcon size={iconSize} round />
-                            </LinkedinShareButton>
-                            <RedditShareButton url={url} title={title}>
-                                <RedditIcon size={iconSize} round />
-                            </RedditShareButton>
-                            <EmailShareButton url={url} subject={title}>
-                                <EmailIcon size={iconSize} round />
-                            </EmailShareButton>
-                            <WhatsappShareButton url={url} title={title}>
-                                <WhatsappIcon size={iconSize} round />
-                            </WhatsappShareButton>
-                        </>
-                    )}
-                </div>
+        <div className="share-buttons">
+            <span className="share-label">Share this post:</span>
+            <div className="share-btn-row">
+                {canShare ? (
+                    <button
+                        onClick={handleNativeShare}
+                        className="share-btn"
+                    >
+                        Share
+                    </button>
+                ) : (
+                    <>
+                        <FacebookShareButton url={url} quote={title}>
+                            <FacebookIcon size={iconSize} round />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={url} title={title}>
+                            <TwitterIcon size={iconSize} round />
+                        </TwitterShareButton>
+                        <LinkedinShareButton url={url} title={title}>
+                            <LinkedinIcon size={iconSize} round />
+                        </LinkedinShareButton>
+                        <RedditShareButton url={url} title={title}>
+                            <RedditIcon size={iconSize} round />
+                        </RedditShareButton>
+                        <EmailShareButton url={url} subject={title}>
+                            <EmailIcon size={iconSize} round />
+                        </EmailShareButton>
+                        <WhatsappShareButton url={url} title={title}>
+                            <WhatsappIcon size={iconSize} round />
+                        </WhatsappShareButton>
+                    </>
+                )}
             </div>
         </div>
     );

@@ -17,9 +17,11 @@ interface Props {
 }
 
 /**
- * Handles the next and previous navigation for a blog post.
- * @param props Array of posts and the current slug.
- * @returns 
+ * Renders previous/next navigation links for the current blog post.
+ * @param props Component props.
+ * @param props.posts Ordered post collection used for navigation.
+ * @param props.currentSlug Slug of the current post.
+ * @returns Navigation JSX or null when the slug is not found.
  */
 const PostNavigation: React.FC<Props> = (props: Props) => {
     const { posts, currentSlug } = props;
@@ -34,44 +36,42 @@ const PostNavigation: React.FC<Props> = (props: Props) => {
     const nextPost: PostMeta = posts[nextIndex];
 
     return (
-        <div className="content-width-wrapper">
-            <div className="post-navigation">
-                {prevPost && (
-                    <Link href={`/blog/${prevPost.slug}`} className="nav-link prev-link">
-                        <span className="nav-label">
-                            {prevIndex === 0 ? (
-                                <>
-                                    <FontAwesomeIcon icon={faClockRotateLeft} /> Latest Post
-                                </>
-                            ) : (
-                                <>
-                                    <FontAwesomeIcon icon={faArrowLeft} /> Previous
-                                </>
-                            )}
-                        </span>
-                        <span className="nav-title">{prevPost.title}</span>
-                        <span className="nav-date">{utils.formatDate(prevPost.date)}</span>
-                    </Link>
-                )}
+        <div className="post-navigation">
+            {prevPost && (
+                <Link href={`/blog/${prevPost.slug}`} className="nav-link prev-link">
+                    <span className="nav-label">
+                        {prevIndex === 0 ? (
+                            <>
+                                <FontAwesomeIcon icon={faClockRotateLeft} /> Latest Post
+                            </>
+                        ) : (
+                            <>
+                                <FontAwesomeIcon icon={faArrowLeft} /> Previous
+                            </>
+                        )}
+                    </span>
+                    <span className="nav-title">{prevPost.title}</span>
+                    <span className="nav-date">{utils.formatDate(prevPost.date)}</span>
+                </Link>
+            )}
 
-                {nextPost && (
-                    <Link href={`/blog/${nextPost.slug}`} className="nav-link next-link">
-                        <span className="nav-label">
-                            {nextIndex === posts.length - 1 ? (
-                                <>
-                                    Back to the Beginning <FontAwesomeIcon icon={faArrowRotateRight} />
-                                </>
-                            ) : (
-                                <>
-                                    Next <FontAwesomeIcon icon={faArrowRight} />
-                                </>
-                            )}
-                        </span>
-                        <span className="nav-title">{nextPost.title}</span>
-                        <span className="nav-date">{utils.formatDate(nextPost.date)}</span>
-                    </Link>
-                )}
-            </div>
+            {nextPost && (
+                <Link href={`/blog/${nextPost.slug}`} className="nav-link next-link">
+                    <span className="nav-label">
+                        {nextIndex === posts.length - 1 ? (
+                            <>
+                                Back to the Beginning <FontAwesomeIcon icon={faArrowRotateRight} />
+                            </>
+                        ) : (
+                            <>
+                                Next <FontAwesomeIcon icon={faArrowRight} />
+                            </>
+                        )}
+                    </span>
+                    <span className="nav-title">{nextPost.title}</span>
+                    <span className="nav-date">{utils.formatDate(nextPost.date)}</span>
+                </Link>
+            )}
         </div>
     );
 }

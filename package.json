@@ -1,6 +1,6 @@
 {
     "name": "joebloggsv3",
-    "version": "1.0.5",
+    "version": "1.1.0",
     "private": true,
     "type": "module",
     "scripts": {
@@ -10,7 +10,11 @@
         "start": "next start",
         "lint": "next lint",
         "test": "vitest",
-        "test:ui": "vitest --ui"
+        "test:ui": "vitest --ui",
+        "test:e2e": "playwright test",
+        "test:e2e:ui": "playwright test --ui",
+        "test:e2e:update-snapshots": "playwright test --update-snapshots",
+        "test:perf": "lhci autorun"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -19,6 +23,7 @@
         "@fortawesome/react-fontawesome": "^0.2.2",
         "gray-matter": "^4.0.3",
         "marked": "^15.0.11",
+        "mermaid": "^11.14.0",
         "next": "15.3.1",
         "next-share": "^0.27.0",
         "react": "^19.0.0",
@@ -35,11 +40,14 @@
         "unist-util-visit": "^5.0.0"
     },
     "devDependencies": {
+        "@axe-core/playwright": "^4.11.1",
         "@babel/core": "^7.28.0",
         "@babel/preset-env": "^7.28.0",
         "@babel/preset-react": "^7.27.1",
         "@babel/preset-typescript": "^7.27.1",
         "@eslint/eslintrc": "^3",
+        "@lhci/cli": "^0.15.1",
+        "@playwright/test": "^1.59.1",
         "@tailwindcss/postcss": "^4",
         "@testing-library/dom": "^10.4.0",
         "@testing-library/jest-dom": "^6.6.3",

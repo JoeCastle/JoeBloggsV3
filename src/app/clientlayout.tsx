@@ -10,8 +10,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const isDarkModeDefault: boolean = globals.isDarkModeDefault;
 
+/**
+ * Wraps page content with client-side theme, navigation, and utility controls.
+ * @param param0 Layout props containing rendered child content.
+ * @param param0.children Child nodes rendered in the main content region.
+ * @returns Client layout shell JSX.
+ */
 export default function ClientLayout({ children }: { children: React.ReactNode; }) {
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
     const isScrollToTopButtonDisabled = useRef(false);
 

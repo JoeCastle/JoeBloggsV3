@@ -1,4 +1,4 @@
-import { markdownToPlainText } from './markdownToPlainText';
+import { markdownToPlainText } from '@/utils/markdown/markdownToPlainText';
 
 describe('markdownToPlainText', () => {
     it('converts markdown to plain text', () => {

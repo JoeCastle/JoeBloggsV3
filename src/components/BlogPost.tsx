@@ -1,17 +1,33 @@
 import utils from '@/utils/utils';
+import Link from 'next/link';
 import { PostMeta } from '../utils/posts';
+import MermaidRenderer from './shared/MermaidRenderer';
 
 interface BlogPostProps {
     meta: PostMeta;
     content: string;
 }
 
+/**
+ * Renders a full blog post view including metadata and HTML content.
+ * @param param0 Component props.
+ * @param param0.meta Post metadata.
+ * @param param0.content Rendered post HTML.
+ * @returns Blog post JSX.
+ */
 const BlogPost = ({ meta, content }: BlogPostProps) => {
     return (
         <div className="content-width-wrapper">
             <article className="blog-post">
+                <div className="blog-post-preheader">
+                    <Link href="/" className="blog-post-back-link">
+                        ← Back to blog
+                    </Link>
+                </div>
+
                 <header className="blog-post-header">
                     <h1 className="blog-post-title">{meta.title}</h1>
+                    {meta.summary && <p className="blog-post-summary">{meta.summary}</p>}
                     <div className="blog-post-meta">
                         {meta.date && <span className="blog-post-date">{utils.formatDate(meta.date)}</span>}
                         <span className="blog-post-reading-time">{meta.readingTime}</span>
@@ -21,6 +37,7 @@ const BlogPost = ({ meta, content }: BlogPostProps) => {
                 <div className="blog-post-content">
                     <div dangerouslySetInnerHTML={{ __html: content }} />
                 </div>
+                <MermaidRenderer />
                 {/* <CopyButton /> */}
             </article>
         </div>

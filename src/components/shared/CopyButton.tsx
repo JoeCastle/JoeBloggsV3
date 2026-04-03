@@ -2,6 +2,10 @@
 
 import { useEffect } from 'react';
 
+/**
+ * Injects copy buttons into rendered code blocks on post pages.
+ * @returns Null, because this component only provides side effects.
+ */
 const CopyButton = () => {
     useEffect(() => {
         const codeBlocks = document.querySelectorAll('pre');
