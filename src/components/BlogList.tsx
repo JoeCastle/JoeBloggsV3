@@ -6,6 +6,12 @@ interface BlogListProps {
     posts: PostMeta[];
 }
 
+/**
+ * Renders the homepage list of blog post tiles.
+ * @param param0 Component props.
+ * @param param0.posts Posts to render.
+ * @returns Blog list JSX.
+ */
 const BlogList = ({ posts }: BlogListProps) => {
     return (
         <div className="blog-list-container">

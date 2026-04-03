@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import HomePage from './HomePage';
+import HomePage from '@/app/HomePage';
 
 describe('HomePage', () => {
     it('renders blog heading', () => {
         render(<HomePage posts={[]} />);
-        expect(screen.getByText(/JoeBloggs - A blog by Joseph Castle/i)).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: /JoeBloggs/i, level: 1 })).toBeInTheDocument();
     });
 });

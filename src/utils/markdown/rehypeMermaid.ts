@@ -2,6 +2,11 @@ import { visit } from 'unist-util-visit';
 import type { Plugin } from 'unified';
 import type { Element, Root, Text } from 'hast';
 
+/**
+ * Normalizes HAST className values to a predictable string array.
+ * @param value Unknown HAST className value.
+ * @returns Normalized class name tokens.
+ */
 function getClassNames(value: unknown): string[] {
     if (Array.isArray(value)) {
         return value.filter((item): item is string => typeof item === 'string');
@@ -14,6 +19,11 @@ function getClassNames(value: unknown): string[] {
     return [];
 }
 
+/**
+ * Recursively extracts plain text from an element subtree.
+ * @param node HAST element node.
+ * @returns Flattened text content.
+ */
 function collectText(node: Element): string {
     return node.children
         .map((child) => {
@@ -30,6 +40,10 @@ function collectText(node: Element): string {
         .join('');
 }
 
+/**
+ * Replaces fenced mermaid code blocks with Mermaid-compatible div containers.
+ * @returns Rehype plugin transformer.
+ */
 export const rehypeMermaid: Plugin<[], Root> = () => {
     return (tree) => {
         visit(tree, 'element', (node, index, parent) => {

@@ -10,9 +10,12 @@ import { rehypeMermaid } from './rehypeMermaid';
 import { rehypeTransformVisual } from './rehypeTransformVisual';
 
 /**
- * Renders the markdown content from the blog posts to HTML.
- * @param markdown 
- * @returns 
+ * Converts raw markdown into HTML used by post rendering.
+ *
+ * The pipeline applies GFM parsing, slug generation, custom blocks
+ * (mermaid/transform), syntax highlighting, and table wrapping.
+ * @param markdown Raw markdown source.
+ * @returns Rendered HTML string.
  */
 export async function markdownToHTML(markdown: string): Promise<string> {
     const result = await unified()

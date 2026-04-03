@@ -17,9 +17,11 @@ interface Props {
 }
 
 /**
- * Handles the next and previous navigation for a blog post.
- * @param props Array of posts and the current slug.
- * @returns 
+ * Renders previous/next navigation links for the current blog post.
+ * @param props Component props.
+ * @param props.posts Ordered post collection used for navigation.
+ * @param props.currentSlug Slug of the current post.
+ * @returns Navigation JSX or null when the slug is not found.
  */
 const PostNavigation: React.FC<Props> = (props: Props) => {
     const { posts, currentSlug } = props;

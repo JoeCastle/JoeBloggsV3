@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { markdownToHTML } from './markdownToHTML';
+import { markdownToHTML } from '@/utils/markdown/markdownToHTML';
 
 describe('markdownToHTML', () => {
     it('renders transform fences as editorial transformation visuals', async () => {

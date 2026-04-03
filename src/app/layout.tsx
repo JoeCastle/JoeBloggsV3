@@ -9,7 +9,10 @@ import globals from '@/utils/globals';
 
 const mavenPro = Maven_Pro({ subsets: ['latin'], display: 'swap' });
 
-// Generate dynamic metadata
+/**
+ * Generates global site metadata for the root layout.
+ * @returns Next.js metadata object.
+ */
 export async function generateMetadata(): Promise<Metadata> {
     const siteUrl: string = await getSiteUrl();
 
@@ -48,6 +51,12 @@ export const viewport: Viewport = {
     colorScheme: 'light dark',
 };
 
+/**
+ * Renders the root HTML layout for all routes.
+ * @param param0 Layout props.
+ * @param param0.children Child route content.
+ * @returns Root HTML structure.
+ */
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     const siteUrl: string = await getSiteUrl();
 

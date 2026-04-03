@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
-import PostNavigation from './PostNavigation';
+import PostNavigation from '@/components/shared/PostNavigation';
 import '@testing-library/jest-dom';
 
 describe('PostNavigation', () => {

@@ -23,9 +23,11 @@ interface ShareButtonsProps {
 }
 
 /**
- * Social media share buttons on the blog post page.
- * @param props title and url of the blog post.
- * @returns 
+ * Renders share actions for blog posts with native share fallback on mobile.
+ * @param props Component props.
+ * @param props.title Post title used in share payloads.
+ * @param props.url Canonical post URL used in share payloads.
+ * @returns Share button JSX.
  */
 const ShareButtons: React.FC<ShareButtonsProps> = (props: ShareButtonsProps) => {
     const { title, url } = props;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ScrollProgressBar from './ScrollProgressBar';
+import ScrollProgressBar from '@/components/shared/ScrollProgressBar';
 import '@testing-library/jest-dom';
 
 describe('ScrollProgressBar', () => {

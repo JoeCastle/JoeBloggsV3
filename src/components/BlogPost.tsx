@@ -8,6 +8,13 @@ interface BlogPostProps {
     content: string;
 }
 
+/**
+ * Renders a full blog post view including metadata and HTML content.
+ * @param param0 Component props.
+ * @param param0.meta Post metadata.
+ * @param param0.content Rendered post HTML.
+ * @returns Blog post JSX.
+ */
 const BlogPost = ({ meta, content }: BlogPostProps) => {
     return (
         <div className="content-width-wrapper">

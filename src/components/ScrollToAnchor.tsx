@@ -2,6 +2,10 @@
 
 import { useEffect } from 'react';
 
+/**
+ * Scrolls to a hash anchor after initial client render when present.
+ * @returns Null, because this component only provides side effects.
+ */
 export default function ScrollToAnchor(): null {
     useEffect(() => {
         const hash = window.location.hash?.slice(1);

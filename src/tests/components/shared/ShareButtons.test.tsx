@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ShareButtons from './ShareButtons';
+import ShareButtons from '@/components/shared/ShareButtons';
 import '@testing-library/jest-dom';
 
 const defaultProps = {

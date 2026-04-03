@@ -3,7 +3,8 @@ import type { Plugin } from 'unified';
 import type { Element, Root } from 'hast';
 
 /**
- * Handles adding a wrapper div to all tables in markdown. Use for styling.
+ * Wraps markdown tables in a container div for consistent styling hooks.
+ * @returns Rehype plugin transformer.
  */
 export const rehypeWrapTables: Plugin<[], Root> = () => {
     return (tree) => {

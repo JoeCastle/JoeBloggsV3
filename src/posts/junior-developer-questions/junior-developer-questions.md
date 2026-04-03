@@ -29,7 +29,6 @@ Starting a career in software development can feel overwhelming. If you're just 
 
 This post covers all of that, with practical advice, real-world resources, and answers based on my own journey from beginner to professional.
 
----
 
 ## Table of Contents
 
@@ -46,7 +45,7 @@ This post covers all of that, with practical advice, real-world resources, and a
 11. [Summary: Your First Steps as a Junior Developer](#summary-your-first-steps-as-a-junior-developer)  
 12. [Where to Find Me](#where-to-find-me)
 
----
+
 
 ## 1. Best Programming Languages for Junior Developers
 
@@ -69,7 +68,7 @@ The languages you use will change. Your needs will change.
 - <a href="https://www.codecademy.com/" target="_blank" rel="noopener noreferrer">Codecademy</a>
 - <a href="https://wiki.python.org/moin/BeginnersGuide/NonProgrammers" target="_blank" rel="noopener noreferrer">Python.org Beginner's Guide</a>
 
----
+
 
 ## 2. Do I Need a Computer Science Degree to Get a Job?
 
@@ -101,7 +100,7 @@ Most importantly:
 
 Full disclosure: I have a BSc in Computer Science and I found my first job through my university.
 
----
+
 
 ## 3. Projects to Build as a Junior Developer
 
@@ -128,7 +127,7 @@ Here are some ideas:
 4. Write about what you learned.
 5. Iterate or build new projects.
 
----
+
 
 ## 4. How do you Stand Out to Employers as a Junior Developer?
 
@@ -141,7 +140,7 @@ To get noticed, show real initiative. That means building projects, sharing your
 - Appropriate and well structured CV
 - Enthusiasm and willingness to learn
 
----
+
 
 ## 5. What's the Difference Between Junior, Mid-Level, and Senior Developers?
 
@@ -153,7 +152,7 @@ To get noticed, show real initiative. That means building projects, sharing your
 
 Though it mostly depends on the company as some have more particular requirements.
 
----
+
 
 ## 6. Why Soft Skills Matter for Developers?
 
@@ -178,7 +177,7 @@ The second message provides much more context and helps others exclude approache
 
 And please use punctuation. It makes messages, especially long ones, much easier to read.
 
----
+
 
 ## 7. Ways to Get Real-World Experience Without a Dev Job
 
@@ -196,7 +195,7 @@ You don’t need a job to build experience. Create your own projects, contribute
 3. Fix a typo or small bug
 4. Submit your pull request
 
----
+
 
 ## 8. What Should I Include in My Developer Portfolio?
 
@@ -216,20 +215,22 @@ Here's my Github and Porfolio website:
 - Too many poor quality projects, not enough detail, no screenshots, no links to demos, broken demos.
 - No contact info.
 - Outdated or broken links.
+- Poorly formatted CV.
 
 **The core structure of your visibility to employers will be:**
+- CV
+    - There's plenty of CV guides and templates out there, so don't come up with your own design. The simpler the better.
+    - Don't waste space be leaving gaps every where.
+    - Keep it simple to help it pass any automated filtering.
 - Portfolio website
-    - Display and write about your projects. Link to the demos and GitHub repositories.
+    - Display and write about your projects. Link to the demos and GitHub repositories. Talk about what you learned.
+- LinkedIn
+    - This will be more beneficial as you gain more experience and connections. But you can still display your projects and certifications.
 - GitHub
     - Add comments and tests to your projects.
     - Ensure each project has a README file. As well as screenshots if you don't have them on your portfolio.
-- LinkedIn
-    - This will be more beneficial as you gain more experience and connections. But you can still display your projects and certifications.
-- CV
-    - There's plenty of CV guides out there, so don't come up with your own design. The simpler the better.
-    - Don't waste space be leaving gaps every where.
 
----
+
 
 ## 9. How Do I Prepare for Technical Interviews?
 
@@ -249,7 +250,7 @@ In the interview, it's ok to say "I don't know", if you don't know the answer. T
 
 You can still benefit from failed interviews. Interviewing is a skill that takes practice.
 
----
+
 
 ## 10. What Should I Focus on Learning First?
 
@@ -265,7 +266,7 @@ You can still benefit from failed interviews. Interviewing is a skill that takes
 - Day 11–25: Build a small project
 - Day 26–30: Share it online and get feedback
 
----
+
 
 ## Summary: Your First Steps as a Junior Developer
 
@@ -281,7 +282,7 @@ You don’t need to know everything. You just need to start building and keep le
 
 Every developer starts as a beginner. Keep going, and you’ll get there.
 
----
+
 
 ## Where to Find Me
 

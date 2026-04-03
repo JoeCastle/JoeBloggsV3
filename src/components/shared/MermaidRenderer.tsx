@@ -2,6 +2,10 @@
 
 import { useEffect } from 'react';
 
+/**
+ * Initializes and renders Mermaid diagrams contained in blog post content.
+ * @returns Null, because this component only provides side effects.
+ */
 const MermaidRenderer = () => {
     useEffect(() => {
         const articleRoot = document.querySelector('.blog-post-content');

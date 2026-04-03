@@ -4,6 +4,10 @@ import { getAllPosts } from '@/utils/posts';
 import { getSiteUrl } from '@/utils/serverUtils';
 import HomePage from './HomePage';
 
+/**
+ * Generates metadata for the homepage route.
+ * @returns Next.js metadata object.
+ */
 export async function generateMetadata(): Promise<Metadata> {
     const siteUrl: string = await getSiteUrl();
 
@@ -35,6 +39,10 @@ export async function generateMetadata(): Promise<Metadata> {
     };
 }
 
+/**
+ * Renders the homepage route with all live posts.
+ * @returns Homepage JSX.
+ */
 export default async function Home() {
     const posts = await getAllPosts();
     return <HomePage posts={posts} />;

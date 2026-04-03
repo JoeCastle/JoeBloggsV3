@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
-import BlogPost from './BlogPost';
+import BlogPost from '@/components/BlogPost';
 import '@testing-library/jest-dom';
 
 describe('BlogPost', () => {

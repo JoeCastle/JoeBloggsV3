@@ -2,6 +2,11 @@ import { visit } from 'unist-util-visit';
 import type { Plugin } from 'unified';
 import type { Element, Root, Text } from 'hast';
 
+/**
+ * Normalizes HAST className values to a predictable string array.
+ * @param value Unknown HAST className value.
+ * @returns Normalized class name tokens.
+ */
 function getClassNames(value: unknown): string[] {
     if (Array.isArray(value)) {
         return value.filter((item): item is string => typeof item === 'string');
@@ -14,6 +19,11 @@ function getClassNames(value: unknown): string[] {
     return [];
 }
 
+/**
+ * Recursively extracts plain text from an element subtree.
+ * @param node HAST element node.
+ * @returns Flattened text content.
+ */
 function collectText(node: Element): string {
     return node.children
         .map((child) => {
@@ -34,6 +44,11 @@ type TransformSection =
     | { type: 'content'; label?: string; lines: string[] }
     | { type: 'arrow'; text: string };
 
+/**
+ * Parses transform block text into labeled content and arrow sections.
+ * @param source Raw transform block text.
+ * @returns Parsed ordered transform sections.
+ */
 function parseTransformSections(source: string): TransformSection[] {
     const lines = source.replace(/\n$/, '').split('\n');
     const sections: TransformSection[] = [];
@@ -89,6 +104,11 @@ function parseTransformSections(source: string): TransformSection[] {
     return sections;
 }
 
+/**
+ * Converts a parsed transform section into one or more HAST nodes.
+ * @param section Parsed section descriptor.
+ * @returns HAST elements representing the section.
+ */
 function sectionToNodes(section: TransformSection): Element[] {
     if (section.type === 'arrow') {
         return [{
@@ -122,6 +142,10 @@ function sectionToNodes(section: TransformSection): Element[] {
     return nodes;
 }
 
+/**
+ * Replaces fenced transform code blocks with styled visual transform markup.
+ * @returns Rehype plugin transformer.
+ */
 export const rehypeTransformVisual: Plugin<[], Root> = () => {
     return (tree) => {
         visit(tree, 'element', (node, index, parent) => {

@@ -5,7 +5,7 @@
     <link>https://blog.joecastle.co.uk</link>
     <description>The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.</description>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 15 Jul 2025 21:29:04 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 03 Apr 2026 20:30:32 GMT</lastBuildDate>
     <managingEditor>Joseph Castle</managingEditor>
     
   <item>
@@ -31,7 +31,6 @@ Starting a career in software development can feel overwhelming. If you're just 
 
 This post covers all of that, with practical advice, real-world resources, and answers based on my own journey from beginner to professional.
 
----
 
 ## Table of Contents
 
@@ -48,7 +47,7 @@ This post covers all of that, with practical advice, real-world resources, and a
 11. [Summary: Your First Steps as a Junior Developer](#summary-your-first-steps-as-a-junior-developer)  
 12. [Where to Find Me](#where-to-find-me)
 
----
+
 
 ## 1. Best Programming Languages for Junior Developers
 
@@ -71,7 +70,7 @@ The languages you use will change. Your needs will change.
 - <a href="https://www.codecademy.com/" target="_blank" rel="noopener noreferrer">Codecademy</a>
 - <a href="https://wiki.python.org/moin/BeginnersGuide/NonProgrammers" target="_blank" rel="noopener noreferrer">Python.org Beginner's Guide</a>
 
----
+
 
 ## 2. Do I Need a Computer Science Degree to Get a Job?
 
@@ -86,7 +85,7 @@ According to Stack Overflow's 2024 survey, about 40% of developers don't have a 
 - Coding bootcamps
 
 
-**Long answer:** It depends. It's an option that provide structured learning and shows employers that you can work to deadlines. You're presented with and guided through a wide range of topics.
+**Long answer:** It depends. It's an option that provides structured learning and shows employers that you can work to deadlines. You're presented with and guided through a wide range of topics.
 
 It's an additional certification that you can add to your CV. You will be competing with other developers, so if another developer has similar experience and projects as you do, them having a degree could shift it in their favour.
 
@@ -94,7 +93,7 @@ However, employers will be more impressed by projects and experience. So work on
 
 Also, you'd be surprised by how many candidates finish a degree but are unable to code.
 
-Realisticly you can get the equivalent of a degree for free online. You mainly lose out on the structure, guidance and certificate. The main benefit of skipping a degree is no student loan.
+Realistically you can get the equivalent of a degree for free online. You mainly lose out on the structure, guidance and certificate. The main benefit of skipping a degree is no student loan.
 
 Most importantly:
 - Can you solve problems?
@@ -103,7 +102,7 @@ Most importantly:
 
 Full disclosure: I have a BSc in Computer Science and I found my first job through my university.
 
----
+
 
 ## 3. Projects to Build as a Junior Developer
 
@@ -130,7 +129,7 @@ Here are some ideas:
 4. Write about what you learned.
 5. Iterate or build new projects.
 
----
+
 
 ## 4. How do you Stand Out to Employers as a Junior Developer?
 
@@ -143,7 +142,7 @@ To get noticed, show real initiative. That means building projects, sharing your
 - Appropriate and well structured CV
 - Enthusiasm and willingness to learn
 
----
+
 
 ## 5. What's the Difference Between Junior, Mid-Level, and Senior Developers?
 
@@ -155,7 +154,7 @@ To get noticed, show real initiative. That means building projects, sharing your
 
 Though it mostly depends on the company as some have more particular requirements.
 
----
+
 
 ## 6. Why Soft Skills Matter for Developers?
 
@@ -176,11 +175,11 @@ My goal is to achieve C but I'm only able to output D.
 I've tried X, Y and Z.
 Do you know how to achieve this or where I'm going wrong?"
 
-The second message rovides much more context and helps others exclude approaches you have already tried.
+The second message provides much more context and helps others exclude approaches you have already tried.
 
 And please use punctuation. It makes messages, especially long ones, much easier to read.
 
----
+
 
 ## 7. Ways to Get Real-World Experience Without a Dev Job
 
@@ -198,7 +197,7 @@ You don’t need a job to build experience. Create your own projects, contribute
 3. Fix a typo or small bug
 4. Submit your pull request
 
----
+
 
 ## 8. What Should I Include in My Developer Portfolio?
 
@@ -218,20 +217,22 @@ Here's my Github and Porfolio website:
 - Too many poor quality projects, not enough detail, no screenshots, no links to demos, broken demos.
 - No contact info.
 - Outdated or broken links.
+- Poorly formatted CV.
 
 **The core structure of your visibility to employers will be:**
+- CV
+    - There's plenty of CV guides and templates out there, so don't come up with your own design. The simpler the better.
+    - Don't waste space be leaving gaps every where.
+    - Keep it simple to help it pass any automated filtering.
 - Portfolio website
-    - Display and write about your projects. Link to the demos and GitHub repositories.
+    - Display and write about your projects. Link to the demos and GitHub repositories. Talk about what you learned.
+- LinkedIn
+    - This will be more beneficial as you gain more experience and connections. But you can still display your projects and certifications.
 - GitHub
     - Add comments and tests to your projects.
     - Ensure each project has a README file. As well as screenshots if you don't have them on your portfolio.
-- LinkedIn
-    - This will be more beneficial as you gain more experience and connections. But you can still display your projects and certifications.
-- CV
-    - There's plenty of CV guides out there, so don't come up with your own design. The simpler the better.
-    - Don't waste space be leaving gaps every where.
 
----
+
 
 ## 9. How Do I Prepare for Technical Interviews?
 
@@ -251,7 +252,7 @@ In the interview, it's ok to say "I don't know", if you don't know the answer. T
 
 You can still benefit from failed interviews. Interviewing is a skill that takes practice.
 
----
+
 
 ## 10. What Should I Focus on Learning First?
 
@@ -267,7 +268,7 @@ You can still benefit from failed interviews. Interviewing is a skill that takes
 - Day 11–25: Build a small project
 - Day 26–30: Share it online and get feedback
 
----
+
 
 ## Summary: Your First Steps as a Junior Developer
 
@@ -283,7 +284,7 @@ You don’t need to know everything. You just need to start building and keep le
 
 Every developer starts as a beginner. Keep going, and you’ll get there.
 
----
+
 
 ## Where to Find Me
 
@@ -313,7 +314,7 @@ Starting as a junior software developer can feel overwhelming and full of questi
 
 In this guide you will find practical tips, mindset shifts, and resources based on real-world experience to help you grow your skills and confidence.
 
----
+
 
 ## Table of Contents
 
@@ -337,7 +338,7 @@ In this guide you will find practical tips, mindset shifts, and resources based 
 18. [Final Thoughts](#final-thoughts)  
 19. [Where to Find Me](#where-to-find-me)
 
----
+
 
 ## 1. Ask Questions as a Junior Developer
 
@@ -351,7 +352,7 @@ Remember that the senior you are talking to was a junior once too. They know tha
 
 **Pro Tip:** Write down answers you get, so you don't have to ask twice.
 
----
+
 
 ## 2. When and How to Ask for Help
 
@@ -369,7 +370,7 @@ Asking for help is a sign of good judgment, not failure.
 
 Be mindful not to waste hours on a problem that a senior would only need 5 minutes to help you with. Find a balance between working on a problem and asking questions. Consider the difference between spending time and wasting time.
 
----
+
 
 ## 3. It Is Normal to Feel Overwhelmed
 
@@ -379,7 +380,7 @@ I still get overwhelmed when learning new tech. The trick is to break things dow
 
 Software development is a big field with a steep learning curve. Even experienced developers don't know everything. Take it one step at a time.
 
----
+
 
 ## 4. Comparison Steals Your Joy
 
@@ -390,7 +391,7 @@ Only compare yourself only to who you were yesterday, and who you want to be tom
 
 **Quote:** "Don't compare your chapter 1 to someone else's chapter 20."
 
----
+
 
 ## 5. Mistakes Are Learning Opportunities
 
@@ -402,7 +403,7 @@ Minimise the effects of potential mistakes. Make frequent backups etc.
 
 **Pro Tip:** When you make a mistake or find a bug, write down what happened and how you fixed it.
 
----
+
 
 ## 6. Build Projects to Grow Your Skills
 
@@ -423,7 +424,7 @@ I became a better programmer by working on project after project. I was able to 
 
 Building projects will also allow you to showcase your skills to potential employers.
 
----
+
 
 ## 7. Overcoming Imposter Syndrome
 
@@ -433,7 +434,7 @@ Being a developer is difficult. Writing code is difficult. Creating projects is 
 
 You never fully escape this, but it does get better.
 
----
+
 
 ## 8. Effective Developer Note‑Taking
 
@@ -455,7 +456,7 @@ Even a paper notepad and pen sitting next to you on your desk can be very useful
 
 **Pro tip:** Write about tasks, achievements, challenges and projects when they are still fresh in your mind. This will be useful later when writing your CV and discussing them in interviews.
 
----
+
 
 ## 9. Break Down Complex Tasks
 
@@ -466,7 +467,7 @@ Break complex problems into smaller, manageable steps. Start with what you know.
 
 Start writing notes before writing code. Plan what needs to be done first and what can be left for last.
 
----
+
 
 ## 10. Take Breaks to Sharpen Your Thinking
 
@@ -478,7 +479,7 @@ Sometimes, stepping away is the best debugging tool.
 
 You'll be surprised by how many problems you'll solve as you are going about your everyday chores, or even as you're drifting off to sleep. I find it handy to keep a small note pad next to my desk so I can remember the solution for when I wake up.
 
----
+
 
 ## 11. Use Rubber Duck Debugging
 
@@ -491,7 +492,7 @@ Explain the problem aloud as if you're teaching it to a rubber duck or as if you
 
 I keep a rubber duck on my desk. It works!
 
----
+
 
 ## 12. Get Good at Googling
 
@@ -510,7 +511,7 @@ I Google all of the time. I ask chatbots frequently. I often check stack overflo
 
 As you gain more experience you will be able to sift through irrelevant results more quickly.
 
----
+
 
 ## 13. AI Tools Need Human Oversight
 
@@ -524,7 +525,7 @@ They are tools. But if you only use a hammer, everything looks like a nail.
 
 Check out <a href="https://www.freecodecamp.org/news/how-to-use-ai-generated-code/" target="_blank" rel="noopener noreferrer">How to Use AI-Generated Code in a Safe and Effective Way</a>
 
----
+
 
 ## 14. Write Maintainable Code from Day One
 
@@ -540,7 +541,7 @@ Every change you make affects others. Think ahead.
 
 Be Conscientious.
 
----
+
 
 ## 15. Why Soft Skills Matter
 
@@ -559,7 +560,7 @@ You'll frequently be collaborating with people who don't have technical knowledg
 - Customers
 - Managers
 
----
+
 
 ## 16. Write Code With the Bus Factor in Mind
 
@@ -568,7 +569,7 @@ Use clear naming, documentation, and share knowledge through readmes and hand-of
 
 If you disappeared tomorrow, would anyone else be able to understand your work?
 
----
+
 
 ## 17. Build Your Online Presence
 
@@ -577,7 +578,7 @@ Keep your GitHub up to date, write blog posts, share projects, and build a Linke
 
 **Resource:** <a href="https://www.freecodecamp.org/news/how-to-build-a-developer-portfolio-website/" target="_blank" rel="noopener noreferrer">How to Build Your Own Developer Portfolio Website with HTML, CSS, and JavaScript</a>
 
----
+
 
 ## Final Thoughts
 
@@ -586,7 +587,7 @@ Focus on asking good questions, building in public, learning from mistakes, and 
 
 Each small step compounds into real growth. Keep going.
 
----
+
 
 ## Where to Find Me
 

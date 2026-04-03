@@ -7,9 +7,8 @@ import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { faAt } from '@fortawesome/free-solid-svg-icons';
 
 /**
- * The footer component at the bottom of every page.
- * @param props
- * @returns
+ * Renders the site footer with profile text, social links, and version info.
+ * @returns Footer JSX.
  */
 export const Footer: React.FC = ({ }) => {
     const [year, setYear] = useState<number | null>(null);

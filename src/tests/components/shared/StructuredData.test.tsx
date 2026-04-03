@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import StructuredData from './StructuredData';
+import StructuredData from '@/components/shared/StructuredData';
 import '@testing-library/jest-dom';
 
 describe('StructuredData', () => {

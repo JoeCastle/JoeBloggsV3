@@ -2,8 +2,8 @@
 import { JSX, useEffect, useState } from 'react';
 
 /**
- * Progress bar component at the top of a blog post that shows reading progress as you scroll. 
- * @returns 
+ * Displays reading progress based on scroll position within the page container.
+ * @returns Scroll progress bar JSX.
  */
 const ScrollProgressBar = (): JSX.Element => {
     const [scroll, setScroll] = useState<number>(0);
