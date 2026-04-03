@@ -60,26 +60,7 @@ Built with Next.js App Router, TypeScript, and a custom markdown processing pipe
 
 Posts support standard markdown plus custom fenced blocks.
 
-### Mermaid
 
-```mermaid
-flowchart TD
-   A[Source Data] --> B[Normalise]
-   B --> C[Staging]
-   C --> D[Production]
-```
-
-### Transform Visuals
-
-```transform
-Spreadsheet row:
-Plot 27 | Eaton 309 | Main Roof 470
-
--> expand into category rows
-
-Relational rows:
-(27, Eaton 309, Main Roof, 470)
-```
 
 ## Architecture: Markdown to Render
 
@@ -198,15 +179,6 @@ For full testing standards and coverage details, see [TESTING.md](TESTING.md).
 
 Deployment process and release checklist are documented in [DEPLOYMENT.md](DEPLOYMENT.md).
 
-## Screenshots (Optional)
-
-Screenshots are optional if the project is live, but they can still improve quick scanning and offline review.
-
-Suggested captures:
-- homepage hero
-- blog post page
-- markdown mermaid/transform example
-- test report summary screenshot
 
 ## License
 
