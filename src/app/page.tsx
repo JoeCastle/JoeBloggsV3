@@ -21,14 +21,14 @@ export async function generateMetadata(): Promise<Metadata> {
             title: globals.metaData.title,
             description: globals.metaData.description,
             url: siteUrl,
-            images: [`${siteUrl}/Blog_List.png`],
+            images: [`${siteUrl}/Blog_List_V2.png`],
             type: 'website',
         },
         twitter: {
             card: 'summary_large_image',
             title: globals.metaData.title,
             description: globals.metaData.description,
-            images: [`${siteUrl}/Blog_List.png`],
+            images: [`${siteUrl}/Blog_List_V2.png`],
         },
         icons: {
             icon: '/favicon.ico',

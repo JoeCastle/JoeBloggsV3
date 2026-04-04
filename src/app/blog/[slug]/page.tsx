@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     const baseUrl: string = await getSiteUrl();
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
 
-    let imageUrl: string | undefined = `${baseUrl}/Blog_List.png`;
+    let imageUrl: string | undefined = `${baseUrl}/Blog_List_V2.png`;
     if (meta.coverImage) {
         imageUrl = meta.coverImage
             ? `${baseUrl}/posts/${slug}/${meta.coverImage.replace('./', '')}`
@@ -144,7 +144,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
     const { meta, content, markdown } = post;
     const baseUrl: string = await getSiteUrl();
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
-    const imageUrl: string = `${baseUrl}/Blog_List.png`;
+    const imageUrl: string = `${baseUrl}/Blog_List_V2.png`;
 
     const readingTimeMinutes: number | undefined = parseInt(meta.readingTime.replace(/\D/g, ''), 10) || undefined;
 

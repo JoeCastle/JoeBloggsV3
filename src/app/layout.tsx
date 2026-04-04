@@ -1,6 +1,6 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from 'next';
-import '../../icons.ts';
+import '../../icons';
 import { Maven_Pro } from 'next/font/google';
 import ClientLayout from './clientlayout';
 import '../scss/site.scss';
@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
             description:
                 globals.metaData.description,
             url: siteUrl,
-            images: [`${siteUrl}/Blog_List.png`],
+            images: [`${siteUrl}/Blog_List_V2.png`],
             type: 'website',
         },
         twitter: {
@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
             title: globals.metaData.title,
             description:
                 globals.metaData.description,
-            images: [`${siteUrl}/Blog_List.png`],
+            images: [`${siteUrl}/Blog_List_V2.png`],
         },
         icons: {
             icon: '/favicon.ico',
