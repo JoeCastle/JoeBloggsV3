@@ -59,6 +59,258 @@
     margin-bottom: 2.6rem;
 }
 
+.blog-articles-section {
+    margin-top: 2rem;
+
+    .blog-articles-header-row {
+        margin-bottom: 0.7rem;
+
+        h2 {
+            margin: 0;
+            font-size: 1.14rem;
+            font-weight: 650;
+        }
+    }
+}
+
+.series-discovery {
+    margin: 1.25rem 0 0;
+
+    .series-discovery-shell {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .series-discovery-header {
+        margin-bottom: 0.9rem;
+    }
+
+    .series-discovery-eyebrow {
+        margin: 0;
+        font-size: 0.71rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: rgba($light-primary-font-colour, 0.72);
+    }
+
+    h2 {
+        margin: 0.1rem 0 0;
+        font-size: 1.16rem;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+        color: $light-primary-font-colour;
+    }
+
+    .series-discovery-header p {
+        margin: 0.35rem 0 0;
+        font-size: 0.92rem;
+        line-height: 1.45;
+        color: rgba($light-primary-font-colour, 0.76);
+        max-width: 54ch;
+    }
+
+    .series-discovery-footer {
+        margin-top: 0.75rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+
+        .series-discovery-view-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.22rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: $accessible-blue;
+            text-underline-offset: 3px;
+
+            &:hover,
+            &:focus-visible {
+                text-decoration: underline;
+            }
+        }
+
+        .series-discovery-overflow-note {
+            margin: 0;
+            font-size: 0.78rem;
+            color: rgba($light-primary-font-colour, 0.7);
+            line-height: 1.35;
+            text-align: right;
+        }
+    }
+}
+
+.series-discovery {
+    margin: 1.35rem 0 0;
+
+    .series-discovery-shell {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .series-discovery-header-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 0.95rem;
+    }
+
+    .series-discovery-header {
+        min-width: 0;
+    }
+
+    .series-discovery-eyebrow {
+        margin: 0;
+        font-size: 0.71rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: rgba($light-primary-font-colour, 0.72);
+    }
+
+    h2 {
+        margin: 0.1rem 0 0;
+        font-size: 1.16rem;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+        color: $light-primary-font-colour;
+    }
+
+    .series-discovery-header p {
+        margin: 0.35rem 0 0;
+        font-size: 0.92rem;
+        line-height: 1.45;
+        color: rgba($light-primary-font-colour, 0.76);
+        max-width: 48ch;
+    }
+
+    .series-discovery-view-all {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.22rem;
+        margin-top: 1.05rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: $accessible-blue;
+        text-underline-offset: 3px;
+        white-space: nowrap;
+
+        &:hover,
+        &:focus-visible {
+            text-decoration: underline;
+        }
+    }
+
+    .series-discovery-featured {
+        min-width: 0;
+    }
+}
+
+.series-discovery-card {
+    border: 1px solid $light-divider;
+    border-radius: 10px;
+    padding: 1rem 1.05rem;
+    background: rgba($light-secondary-background-colour, 0.92);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    min-height: 100%;
+    overflow-wrap: anywhere;
+    @include transition-properties((border-color, background-color, color, box-shadow, transform));
+
+    &:hover,
+    &:focus-visible {
+        border-color: rgba($standard-blue-background, 0.4);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($standard-blue-background, 0.5);
+        outline-offset: 2px;
+    }
+}
+
+.series-discovery-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+}
+
+.series-discovery-status-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-bottom: 0.12rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid $light-divider;
+    border-radius: 999px;
+    padding: 0.12rem 0.48rem;
+    color: rgba($light-primary-font-colour, 0.8);
+
+    &.complete {
+        border-color: rgba($accessible-blue, 0.45);
+    }
+
+    &.archived {
+        opacity: 0.84;
+    }
+}
+
+.series-discovery-card-title {
+    display: block;
+    font-weight: 650;
+    font-size: 1rem;
+    line-height: 1.35;
+    color: color.scale($standard-blue-background, $lightness: 10%);
+}
+
+.series-discovery-card-summary {
+    display: block;
+    margin-top: 0;
+    font-size: 0.88rem;
+    color: rgba($light-primary-font-colour, 0.8);
+    line-height: 1.5;
+    max-width: 62ch;
+}
+
+.series-discovery-card-footer {
+    margin-top: 0.18rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba($light-divider, 0.75);
+}
+
+.series-discovery-card-meta {
+    display: block;
+    font-size: 0.76rem;
+    color: rgba($light-primary-font-colour, 0.7);
+}
+
+.series-discovery-card-cta {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $accessible-blue;
+    white-space: nowrap;
+}
+
 .blog-tile-link {
     text-decoration: none;
     color: inherit;
@@ -92,6 +344,14 @@
     @include transition-properties(color);
 }
 
+.blog-tile-series-info {
+    margin: 0;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: rgba($light-primary-font-colour, 0.72);
+}
+
 .blog-tile-summary {
     font-size: 1rem;
     color: rgba($light-primary-font-colour, 0.85);
@@ -104,7 +364,6 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     margin: 0;
-
     list-style: none;
     padding: 0;
 
@@ -160,6 +419,47 @@
 
 // Dark theme
 .theme-container.dark-theme {
+    .series-discovery {
+        h2 {
+            color: $dark-primary-font-colour;
+        }
+
+        .series-discovery-header p {
+            color: rgba($dark-primary-font-colour, 0.78);
+        }
+
+        .series-discovery-view-all {
+            color: $accessible-blue-dark;
+        }
+    }
+
+    .series-discovery-card {
+        background-color: rgba($dark-secondary-background-colour, 0.9);
+        border: $dark-border;
+    }
+
+    .series-discovery-status-badge {
+        border: $dark-border;
+        color: rgba($dark-primary-font-colour, 0.8);
+    }
+
+    .series-discovery-card-title {
+        color: color.scale($standard-blue-background, $lightness: 15%);
+    }
+
+    .series-discovery-card-summary,
+    .series-discovery-card-meta {
+        color: rgba($dark-primary-font-colour, 0.78);
+    }
+
+    .series-discovery-card-footer {
+        border-top: 1px solid rgba($dark-primary-font-colour, 0.14);
+    }
+
+    .series-discovery-card-cta {
+        color: $accessible-blue-dark;
+    }
+
     .blog-header {
         &::before {
             background-color: rgba($standard-blue-background, 0.84);
@@ -185,6 +485,10 @@
 
     .blog-tile-summary {
         color: rgba($dark-primary-font-colour, 0.85);
+    }
+
+    .blog-tile-series-info {
+        color: rgba($dark-primary-font-colour, 0.74);
     }
 
     .blog-tile-tags {
@@ -218,6 +522,34 @@
 
 // Responsive
 @media (max-width: $mobile-max-width-breakpoint) {
+    .series-discovery {
+        .series-discovery-header-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.55rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .series-discovery-view-all {
+            margin-top: 0;
+            white-space: normal;
+        }
+    }
+
+    .series-discovery-card {
+        padding: 0.9rem;
+    }
+
+    .series-discovery-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+    }
+
+    .series-discovery-card-cta {
+        white-space: normal;
+    }
+
     .blog-list-container {
         padding-left: 1rem;
         padding-right: 1rem;

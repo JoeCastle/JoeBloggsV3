@@ -3,6 +3,7 @@ import { createReadStream, promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// Resolve script-relative paths in ESM mode.
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
@@ -31,6 +32,11 @@ const MIME_TYPES = {
     '.woff2': 'font/woff2',
 };
 
+/**
+ * Lightweight existence check used by path resolution.
+ * @param targetPath Absolute file path to check.
+ * @returns True when the path is accessible.
+ */
 async function pathExists(targetPath) {
     try {
         await fs.access(targetPath);
@@ -40,6 +46,11 @@ async function pathExists(targetPath) {
     }
 }
 
+/**
+ * Maps incoming URLs to static export files, including extensionless routes.
+ * @param urlPathname Request pathname from the incoming URL.
+ * @returns Resolved file path when a static asset exists, otherwise null.
+ */
 async function resolveFilePath(urlPathname) {
     const decodedPath = decodeURIComponent(urlPathname);
     const normalizedPath = decodedPath === '/' ? 'index.html' : decodedPath.replace(/^\/+/, '');
@@ -66,6 +77,7 @@ async function resolveFilePath(urlPathname) {
     return null;
 }
 
+// Serves static exported files and falls back to out/404.html when present.
 const server = http.createServer(async (req, res) => {
     try {
         const requestUrl = new URL(req.url ?? '/', `http://${host}:${port}`);

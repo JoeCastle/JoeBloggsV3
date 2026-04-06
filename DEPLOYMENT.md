@@ -4,16 +4,43 @@ This document outlines the steps required to deploy the JoeBloggsV3 application 
 
 ## Prerequisites
 
-- Ensure you have the latest changes committed to the development branch
-- Verify that all tests pass locally
-- Confirm that the build process works without errors
+- Work from the development branch and ensure it is up to date
+- Verify tests pass locally
+- Confirm production build succeeds locally
+- Ensure your working tree is clean before versioning/tagging
 
 ## Deployment Steps
 
-### 1. Commit Changes
-Make sure all your changes are committed to the development branch
+### 1. Build Once (This Already Runs Most Generators)
+Run:
+```bash
+npm run build
+```
 
-### 2. Version Update
+This already runs:
+- `npm run generate-content-index`
+- `npm run generate-static-files`
+- `next build`
+
+Then verify `git status` and stage expected generated artifacts when changed, including:
+- `src/generated/content-index.json`
+- `public/sitemap.xml`
+- `public/rss.xml`
+- `public/recent-posts.json`
+
+Optional (only if you want to refresh the authoring index file):
+```bash
+npm run generate-posts-index
+```
+
+If `src/posts/POSTS-INDEX.md` changed, stage and commit it.
+
+If you have unrelated local changes, either commit them separately or stash them before release.
+
+### 2. Commit Changes
+Commit feature/source changes and generated artifacts to development.
+
+### 3. Version Update
 Update the version of the application:
 ```bash
 npm version patch
@@ -23,15 +50,11 @@ This will automatically:
 - Create a new git commit with the version bump
 - Create a git tag for the new version
 
-### 3. Build the Application
-Create a production build:
+### 4. Optional Test Pass
+Recommended before merge:
 ```bash
-npm run build
+npm run test
 ```
-This generates optimized production files in the `out/` directory. It also runs custom scripts.
-
-### 4. Commit Build Changes
-Commit the build artifacts and version changes
 
 ### 5. Merge to Master
 Merge the development branch into master
@@ -45,7 +68,9 @@ Once merged to master, the build and publish process will happen automatically i
 ## Important Notes
 
 - **Never commit directly to master**: Always work on the development branch and merge through pull requests.
-- **Test before deploying**: Ensure all tests pass and the application works correctly in development. Check for errors.
+- **Keep the tree clean before `npm version`**: Version tags should represent a deterministic release state.
+- **Generated files are part of release state**: For this project, generated content/static files are tracked and should be committed when changed.
+- **Test before deploying**: Ensure all tests pass and the application works correctly in development.
 - **Monitor deployment**: Check the Cloudflare dashboard to confirm successful deployment.
 - **Version management**: The `npm version patch` command automatically handles versioning and git tagging.
 

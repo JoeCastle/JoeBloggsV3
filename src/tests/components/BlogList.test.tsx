@@ -38,7 +38,7 @@ describe('BlogList', () => {
                 isLive: true
             }
         ];
-        render(<BlogList posts={posts} />);
+        render(<BlogList posts={posts} series={[]} />);
         expect(screen.getByText('First Post')).toBeInTheDocument();
         expect(screen.getByText('Second Post')).toBeInTheDocument();
     });

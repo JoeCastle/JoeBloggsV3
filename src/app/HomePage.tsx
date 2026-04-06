@@ -2,6 +2,7 @@
 
 import BlogList from '@/components/BlogList';
 import type { PostMeta } from '@/utils/posts';
+import type { SeriesWithCanonical } from '@/utils/series';
 
 /**
  * Renders the homepage post listing view.
@@ -9,10 +10,10 @@ import type { PostMeta } from '@/utils/posts';
  * @param param0.posts Blog posts to display.
  * @returns Homepage JSX.
  */
-export default function HomePage({ posts }: { posts: PostMeta[] }) {
+export default function HomePage({ posts, series }: { posts: PostMeta[]; series: SeriesWithCanonical[] }) {
     return (
         <div>
-            <BlogList posts={posts} />
+            <BlogList posts={posts} series={series} />
         </div>
     );
 }

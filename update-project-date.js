@@ -6,12 +6,15 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Function to update the "APP_VERSION_DATE" value in .env.local
+/**
+ * Updates NEXT_PUBLIC_APP_VERSION_DATE across local environment files.
+ */
 const updateEnvLocalVersionDate = async () => {
     try {
         const envLocalPath = path.join(__dirname, '.env.local');
         const envLocalContent = await fs.readFile(envLocalPath, 'utf-8');
 
+        // Replace the version timestamp line in-place while preserving other values.
         const pattern = /^APP_VERSION_DATE=(.*)$/m;
         const updatedEnvLocalContent = envLocalContent.replace(pattern, `NEXT_PUBLIC_APP_VERSION_DATE=${Date.now()}`);
 
@@ -25,6 +28,7 @@ const updateEnvLocalVersionDate = async () => {
         console.log('Updated .env NEXT_PUBLIC_APP_VERSION_DATE');
 
         // prod
+        // Mirrors the same generated content into the production env target.
         const prodPath = path.join(__dirname, '.env');
         await fs.writeFile(prodPath, updatedEnvLocalContent, 'utf-8');
         console.log('Updated .env.production NEXT_PUBLIC_APP_VERSION_DATE');

@@ -19,6 +19,9 @@ metaTags:
   - build projects as a junior developer
   - software development best practices
   - early career software engineer advice
+seriesSlug: "junior-developer-playbook"
+seriesOrder: 1
+isSeriesStart: true
 ---
 
 Starting as a junior software developer can feel overwhelming and full of questions. You may be thinking:

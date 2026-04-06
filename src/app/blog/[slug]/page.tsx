@@ -11,6 +11,8 @@ import StructuredData from '@/components/shared/StructuredData';
 import { getSiteUrl } from '@/utils/serverUtils';
 import utils from '@/utils/utils';
 import ShareButtons from '../../../components/shared/ShareButtons';
+import { getSeriesNavigationForPost } from '@/utils/series';
+import SeriesNavigationPanel from '@/components/shared/SeriesNavigationPanel';
 //import '../../../scss/shared/sharebuttons.scss';
 
 interface Params {
@@ -53,7 +55,10 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
     const { slug } = await params;
-    const post = await getPostBySlug(slug);
+    const [post, seriesNavigation] = await Promise.all([
+        getPostBySlug(slug),
+        getSeriesNavigationForPost(slug),
+    ]);
 
     if (!post || !hasRequiredPostMeta(post.meta)) {
         return {
@@ -67,7 +72,11 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     }
 
     const { meta } = post;
-    const seoKeywords: string[] = Array.from(new Set([...(meta.tags ?? []), ...(meta.metaTags ?? [])]));
+    const seoKeywords: string[] = Array.from(new Set([
+        ...(meta.tags ?? []),
+        ...(meta.metaTags ?? []),
+        ...(seriesNavigation ? [seriesNavigation.series.title] : []),
+    ]));
 
     const baseUrl: string = await getSiteUrl();
     const fullUrl: string = `${baseUrl}/blog/${slug}`;
@@ -96,6 +105,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
             modifiedTime: meta.dateModified,
             authors: ['Joseph Castle'],
             tags: meta.metaTags,
+            ...(seriesNavigation ? { section: seriesNavigation.series.title } : {}),
             ...(imageUrl && {
                 images: [
                     {
@@ -148,7 +158,10 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
     const readingTimeMinutes: number | undefined = parseInt(meta.readingTime.replace(/\D/g, ''), 10) || undefined;
 
-    const allPosts: PostMeta[] = await getAllPosts();
+    const [allPosts, seriesNavigation] = await Promise.all([
+        getAllPosts(),
+        getSeriesNavigationForPost(slug),
+    ]);
 
     return (
         <>
@@ -172,6 +185,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
             <BlogPost meta={meta} content={content} />
 
             <div className="content-width-wrapper post-footer-region">
+                {seriesNavigation && <SeriesNavigationPanel navigation={seriesNavigation} />}
                 <ShareButtons title={meta.title} url={fullUrl} />
                 <PostNavigation posts={allPosts} currentSlug={slug} />
             </div>

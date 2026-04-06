@@ -19,6 +19,9 @@ metaTags:
   - first tech job preparation
   - junior developer interview preparation
   - developer career advice
+seriesSlug: "junior-developer-playbook"
+seriesOrder: 2
+isSeriesEnd: true
 ---
 
 Starting a career in software development can feel overwhelming. If you're just getting started, you might be asking questions like:
