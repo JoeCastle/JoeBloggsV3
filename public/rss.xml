@@ -5,7 +5,7 @@
     <link>https://blog.joecastle.co.uk</link>
     <description>The personal blog of Joseph Castle, a Senior Full-Stack Software Developer writing about React, .NET, and SQL Server.</description>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 06 Apr 2026 18:03:09 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2026 21:42:13 GMT</lastBuildDate>
     <managingEditor>Joseph Castle</managingEditor>
     
   <item>
@@ -23,27 +23,32 @@
     <category><![CDATA[software-engineering]]></category>
     <description><![CDATA[A practical SQL Server performance guide covering SARGable queries, index design, execution plans, and optimisation techniques that improve application performance.]]></description>
     <content:encoded><![CDATA[
-
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
-2. [Query Shape and SARGability]()
-3. [Index Design in Practice]()
-4. [Seeks, Scans, and Lookups Explained Properly]()
-5. [Measuring and Validating Performance]()
-6. [Application-Level Performance Pitfalls]()
-7. [Misused “Optimisations” and Anti-Patterns]()
-8. [Index Maintenance and Fragmentation]()
-9. [A Practical Investigation Workflow]()
-10. [Final Summary]()
-
----
-
-## IMAGE_PLACEHOLDER: INTRO_OVERVIEW
+2. [Query Shape and SARGability](#2-query-shape-and-sargability)
+3. [Index Design in Practice](#3-index-design-in-practice)
+4. [Seeks, Scans, and Lookups Explained Properly](#4-seeks-scans-and-lookups-explained-properly)
+5. [Measuring and Validating Performance](#5-measuring-and-validating-performance)
+6. [Application-Level Performance Pitfalls](#6-application-level-performance-pitfalls)
+7. [Misused “Optimisations” and Anti-Patterns](#7-misused-optimisations-and-anti-patterns)
+8. [Index Maintenance and Fragmentation](#8-index-maintenance-and-fragmentation)
+9. [A Practical Investigation Workflow](#9-a-practical-investigation-workflow)
+10. [Final Summary](#10-final-summary)
 
 ## 1. Introduction
 
-Most SQL Server performance issues in real applications are not caused by obscure edge cases. They are caused by a small number of repeated problems:
+Most SQL Server performance issues are not caused by obscure edge cases or a slow database engine. They are caused by a small number of repeated problems.
+
+```mermaid
+flowchart LR
+    A[Application] --> B[SQL Query]
+    B --> C{SARGable}
+    C -- Yes --> D[Index Seek]
+    C -- No --> E[Index Scan]
+    D --> F[Low IO]
+    E --> G[High IO]
+```
 
 - Queries that prevent index usage
 - Poorly designed or excessive indexes
@@ -51,8 +56,6 @@ Most SQL Server performance issues in real applications are not caused by obscur
 - Inefficient data access patterns in application code
 
 This guide focuses on the patterns that consistently matter in production systems.
-
----
 
 ## 2. Query Shape and SARGability
 
@@ -83,7 +86,16 @@ In the second query, SQL Server can:
 
 This is what makes a predicate **SARGable**.
 
----
+```mermaid
+flowchart TB
+    A[Query Predicate]
+    A --> B[Direct Column]
+    A --> C[Function Applied]
+    B --> D[Index Seek]
+    D --> E[Efficient]
+    C --> F[Index Scan]
+    F --> G[Inefficient]
+```
 
 ### Key Insight
 
@@ -97,18 +109,12 @@ It becomes inefficient when it must:
 - Transform values first
 - Evaluate expressions row-by-row
 
----
-
 ### Checklist
 
 - Avoid functions on indexed columns
 - Avoid leading wildcards (`LIKE '%value'`)
 - Filter early to reduce row counts
 - Avoid `SELECT *`
-
----
-
-## IMAGE_PLACEHOLDER: SARGABILITY_DIAGRAM
 
 ## 3. Index Design in Practice
 
@@ -121,10 +127,25 @@ Indexes are not free. They trade write performance and storage for read performa
 
 SQL Server uses a **B-tree structure**:
 
-- Root → Intermediate → Leaf nodes
-- Leaf nodes contain data (clustered) or pointers (nonclustered)
+```mermaid
+flowchart TB
+    Root[Root]
+    BranchA[Intermediate]
+    BranchB[Intermediate]
+    Leaf1[Leaf Page]
+    Leaf2[Leaf Page]
+    Leaf3[Leaf Page]
+    Leaf4[Leaf Page]
 
----
+    Root --> BranchA
+    Root --> BranchB
+    BranchA --> Leaf1
+    BranchA --> Leaf2
+    BranchB --> Leaf3
+    BranchB --> Leaf4
+```
+
+At a practical level, this means SQL Server can navigate an index rather than reading every row. That is the reason seeks are usually fast: the engine walks the tree to the relevant part of the structure instead of scanning the whole thing.
 
 ### Composite Index Example
 
@@ -133,22 +154,20 @@ CREATE INDEX IX_Orders_Customer_Date
 ON Orders (CustomerId, OrderDate);
 ```
 
-#### Works well for:
+Works well for:
 
 ```sql
 WHERE CustomerId = 10
 WHERE CustomerId = 10 AND OrderDate >= '2025-01-01'
 ```
 
-#### Does NOT work efficiently for:
+Does NOT work efficiently for:
 
 ```sql
 WHERE OrderDate >= '2025-01-01'
 ```
 
 Because SQL Server cannot skip the first column in the index key.
-
----
 
 ### Covering Index Example
 
@@ -163,14 +182,10 @@ Now SQL Server can:
 - Find rows using the index
 - Return results without accessing the base table
 
----
-
 ### Selectivity
 
 - High selectivity: few rows per value → effective index
 - Low selectivity: many rows per value → often less useful
-
----
 
 ### Filtered Index
 
@@ -182,8 +197,6 @@ WHERE Status = 'Active';
 
 Useful when queries repeatedly target a subset of rows.
 
----
-
 ### Trade-offs
 
 Every index:
@@ -192,7 +205,7 @@ Every index:
 - Consumes memory and disk
 - Needs maintenance
 
----
+The goal is not to add every potentially useful index. The goal is to add the fewest indexes that meaningfully improve the read patterns that matter most.
 
 ### Checklist
 
@@ -200,10 +213,6 @@ Every index:
 - Order columns based on query patterns
 - Avoid redundant indexes
 - Monitor usage over time
-
----
-
-## IMAGE_PLACEHOLDER: BTREE_STRUCTURE
 
 ## 4. Seeks, Scans, and Lookups Explained Properly
 
@@ -219,8 +228,6 @@ SQL Server:
 
 It uses known key values to jump to the correct location.
 
----
-
 ### Index Scan
 
 A scan is a **sequential read**.
@@ -231,19 +238,29 @@ SQL Server:
 2. Reads rows in order
 3. Applies filtering as it goes
 
-It does NOT know where the data is, so it reads everything (or a large portion).
+It does not have a selective predicate to locate specific rows, so it reads everything (or a large portion).
 
----
+### When Scans Are the Right Choice
+
+Scans are not inherently bad.
+
+They are often the correct choice when:
+
+- A large percentage of the table is needed
+- The cost of seeks plus lookups exceeds scanning
+- The data is already ordered in a useful way
+
+The goal is not to eliminate scans. The goal is to reduce unnecessary ones.
 
 ### Key Lookup
 
 A lookup is a **secondary fetch operation**.
 
-Steps:
+SQL Server:
 
-1. SQL Server uses a nonclustered index to find matching rows
+1. Uses a nonclustered index to find matching rows
 2. The index does not contain all required columns
-3. SQL Server retrieves the remaining columns from the clustered index
+3. Retrieves the remaining columns from the clustered index
 
 This means:
 
@@ -252,7 +269,27 @@ This means:
 
 If this happens thousands of times, it becomes expensive.
 
----
+### Why Key Lookups Become Expensive
+
+A key lookup is cheap when it happens a few times.
+
+It becomes expensive when:
+
+- The outer query returns many rows
+- Each row triggers another read
+- The engine repeatedly hops back to the clustered index or heap
+
+That pattern scales poorly. In practical terms, it behaves like an N+1 problem inside the database engine.
+
+```mermaid
+flowchart LR
+    A[Query] --> B{Access Method}
+    B --> C[Index Seek]
+    B --> D[Index Scan]
+    C --> E[Key Lookup]
+    E --> F[Fetch Missing Columns]
+    D --> G[Read All Rows]
+```
 
 ### Important Distinction
 
@@ -264,23 +301,17 @@ Execution plans show:
 
 DMVs track:
 
-- user_seeks
-- user_scans
-- user_lookups
+- `user_seeks`
+- `user_scans`
+- `user_lookups`
 
 These are aggregated counters, not per-query operations.
-
----
 
 ### Checklist
 
 - Prefer seeks for selective queries
 - Scans are acceptable for large result sets
 - Watch for repeated lookups in large queries
-
----
-
-## IMAGE_PLACEHOLDER: EXECUTION_PLAN_EXAMPLE
 
 ## 5. Measuring and Validating Performance
 
@@ -297,8 +328,6 @@ SET STATISTICS TIME ON;
 - CPU time → processing cost
 - Execution plan → how data is accessed
 
----
-
 ### Execution Plans
 
 Always use **actual execution plans**.
@@ -308,7 +337,29 @@ They show:
 - Actual rows vs estimated rows
 - Real operators used
 
----
+
+
+### Why Row Estimates Matter
+
+SQL Server makes decisions based on estimated row counts.
+
+If estimates are wrong:
+
+- It may choose a scan instead of a seek
+- It may choose a nested loop instead of a hash join
+- It may underestimate the cost of key lookups
+
+This is why:
+
+- Outdated statistics
+- Non-SARGable predicates
+- Complex expressions
+
+can all lead to poor execution plans.
+
+Improving estimates often improves performance without changing the query structure.
+
+
 
 ### Query Store
 
@@ -318,15 +369,30 @@ Tracks:
 - Performance trends
 - Regressions
 
----
+
+
+### Parameter Sensitivity
+
+SQL Server caches execution plans based on initial parameter values.
+
+This can lead to:
+
+- A plan optimised for a small dataset being reused for a large one
+- Or vice versa
+
+This is commonly known as parameter sniffing.
+
+This is not a query problem, but a plan selection problem.
+
+In these cases, the issue is not indexing or query shape, but plan reuse.
+
+
 
 ### Checklist
 
 - Measure before changing anything
 - Compare before vs after
 - Focus on logical reads first
-
----
 
 ## 6. Application-Level Performance Pitfalls
 
@@ -337,33 +403,23 @@ Tracks:
 
 Results in excessive round trips.
 
----
-
 ### Chatty Access
 
 - Multiple small queries instead of one efficient query
-
----
 
 ### Over-fetching
 
 - Retrieving unnecessary columns or rows
 
----
-
 ### Connection Handling
 
 - Open late, close early
-
----
 
 ### Checklist
 
 - Avoid loops hitting the database
 - Batch operations
 - Use set-based queries
-
----
 
 ## 7. Misused “Optimisations” and Anti-Patterns
 
@@ -373,29 +429,21 @@ Results in excessive round trips.
 - Can return inconsistent results
 - Does NOT eliminate all locking
 
----
-
 ### Missing Index Suggestions
 
 - Context-specific
 - May overlap
 - Increase write cost
 
----
-
 ### Scalar Functions
 
 - Can force row-by-row execution
 - May prevent optimisations
 
----
-
 ### Checklist
 
 - Avoid blind optimisations
 - Validate everything with metrics
-
----
 
 ## 8. Index Maintenance and Fragmentation
 
@@ -406,8 +454,6 @@ Indexes fragment over time due to inserts and updates.
 - Reorganize → lightweight
 - Rebuild → full rebuild, more expensive
 
----
-
 ### Important Warning
 
 Rebuilding indexes:
@@ -416,7 +462,14 @@ Rebuilding indexes:
 - Can block or slow queries
 - Should not be done during peak usage
 
----
+```mermaid
+flowchart LR
+    A[Ordered Pages] --> B[Fragmented Pages]
+    B --> C[More IO]
+    B --> D[Slower Reads]
+    C --> E[Reorganize]
+    D --> F[Rebuild]
+```
 
 ### Checklist
 
@@ -424,21 +477,37 @@ Rebuilding indexes:
 - Schedule maintenance carefully
 - Avoid unnecessary rebuilds
 
----
-
-## IMAGE_PLACEHOLDER: FRAGMENTATION_DIAGRAM
-
 ## 9. A Practical Investigation Workflow
 
-1. Reproduce issue  
-2. Capture actual execution plan  
-3. Enable statistics  
-4. Identify expensive operations  
-5. Check indexes  
-6. Validate with real data  
-7. Apply changes incrementally  
+A simple workflow helps avoid guessing and makes it easier to isolate the biggest problems first.
 
----
+```mermaid
+flowchart TB
+    A[Problem] --> B[Capture Plan]
+    B --> C[Check IO and TIME]
+    C --> D[Identify Bottleneck]
+    D --> E[Fix Query or Index]
+    E --> F[Test Again]
+```
+
+1. Reproduce the issue
+2. Capture the actual execution plan
+3. Enable statistics
+4. Identify expensive operations
+5. Check indexes
+6. Validate with real data
+7. Apply changes incrementally
+
+### What Actually Fixes Performance Most Often
+
+In real systems, most improvements come from:
+
+- Fixing non-SARGable predicates
+- Reducing over-fetching
+- Adding or adjusting one useful index
+- Eliminating repeated lookups
+
+Not from rewriting everything at once.
 
 ### What to Check First
 
@@ -446,8 +515,6 @@ Rebuilding indexes:
 - Execution plan operators
 - Row estimate accuracy
 - Index usage
-
----
 
 ## 10. Final Summary
 
@@ -459,10 +526,9 @@ Focus on:
 - Measuring performance correctly
 - Avoiding inefficient application patterns
 
-
 ## Where to Find Me
 
-You can also follow me on <a href="https://github.com/JoeCastle" target="_blank" rel="noopener noreferrer">GitHub</a> or on my <a href="https://joecastle.co.uk" target="_blank" rel="noopener">Portfolio</a> for updates.
+You can also follow me on [GitHub](https://github.com/JoeCastle) or on my [Portfolio](https://joecastle.co.uk) for updates.
 ]]></content:encoded>
   </item>
 
