@@ -30,6 +30,8 @@ Built with Next.js App Router, TypeScript, and a custom markdown processing pipe
 - Mermaid diagram rendering from fenced mermaid blocks
 - Custom transform visual blocks from fenced transform blocks
 - Build-time generation of robots.txt, sitemap.xml, rss.xml, and recent-posts.json
+- First-class blog series with dedicated landing pages and post-level series navigation
+- Build-time content index generation for fast post/series lookup and validation
 - Reading progress indicator for long-form posts
 - Social sharing actions for post pages
 
@@ -145,6 +147,8 @@ npm run dev
 
 - npm run dev: Start development server
 - npm run build: Build production app (includes static file generation)
+- npm run generate-content-index: Generate src/generated/content-index.json with validated posts/series relationships
+- npm run generate-posts-index: Generate src/posts/POSTS-INDEX.md sorted newest first
 - npm run generate-static-files: Generate robots/sitemap/rss/recent-posts artifacts
 - npm run start: Start production server
 - npm run lint: Run linting
@@ -160,6 +164,8 @@ npm run dev
 - src/app: Next.js routes and layout
 - src/components: Reusable UI components
 - src/posts: Markdown content and per-post assets
+- src/series: Series metadata files and authoring notes
+- src/generated: Build-generated content index artifacts
 - src/scss: Styling layers and component/page styles
 - src/utils: Content loading, markdown processing, and shared utilities
 - public: Static assets and generated public metadata files
@@ -178,6 +184,43 @@ For full testing standards and coverage details, see [TESTING.md](TESTING.md).
 ## Deployment
 
 Deployment process and release checklist are documented in [DEPLOYMENT.md](DEPLOYMENT.md).
+
+## Series Authoring
+
+- Define each series in `src/series/*.json`.
+- Link a post to a series using `seriesSlug` and `seriesOrder` in post frontmatter.
+- Run `npm run generate-content-index` to validate ordering and relationships.
+- Full authoring examples and validation rules are in `src/series/README.md`.
+
+## Series Architecture Notes
+
+- Series are modelled as first-class entities (`src/series/*.json`) rather than tags so each series can own its own metadata, SEO, publish state, and landing page.
+- Posts remain simple markdown files and optionally reference a series via frontmatter (`seriesSlug`, `seriesOrder`).
+- `scripts/generate-content-index.ts` creates `src/generated/content-index.json` for deterministic, build-time indexed lookup of posts, series, and per-post series navigation.
+- The runtime reads that index in production via `src/utils/contentIndex.ts`, preserving static-generation performance and minimizing repeated filesystem scans.
+- `scripts/generate-static-files.ts` consumes the same content model to build RSS, sitemap, robots, and recent posts.
+
+## Series SEO and Crawlability
+
+- Public series pages are generated at `/series/[slug]`.
+- Public series listing lives at `/series`.
+- Sitemap includes:
+   - homepage (`/`)
+   - series listing (`/series`)
+   - each published series with at least one live post (`/series/[slug]`)
+   - each live post (`/blog/[slug]`)
+- Draft/unpublished series are excluded from static params and sitemap output.
+- Post canonicals remain post URLs; posts do not canonicalize to series pages.
+- Series pages canonicalize to series URLs; series pages do not canonicalize to part 1.
+
+## Series Navigation and Homepage Preview
+
+- The homepage shows a limited series preview (default: 4) to prevent content bloat as the number of series grows.
+- Preview selection is deterministic: active series first, then complete, then archived; ties are ordered by most recently updated live post.
+- Preview limit and ordering helpers live in `src/utils/seriesPresentation.ts` (`HOMEPAGE_SERIES_PREVIEW_LIMIT`).
+- The preview list always links to `/series` via "View all series" for full browsing.
+- `/series` is the dedicated browse destination for all public series.
+- `/series/[slug]` includes a stable top utility link: "← All series".
 
 
 ## License

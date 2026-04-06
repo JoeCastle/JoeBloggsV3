@@ -4,11 +4,13 @@
 @use './shared/scrollprogressbar.scss';
 @use './shared/postnagivation.scss';
 @use './shared/sharebuttons.scss';
+@use './shared/seriesnavigation.scss';
 
 @use './component/navbar.scss';
 @use './component/footer.scss';
 
 @use './page/fourzerofour.scss';
+@use './page/series.scss';
 
 @use './component/bloglist.scss';
 @use './component/blogpost.scss';

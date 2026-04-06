@@ -2,6 +2,7 @@ import React, { JSX } from 'react';
 import { render, screen } from '@testing-library/react';
 import BlogPostPage, { generateMetadata, generateStaticParams } from '@/app/blog/[slug]/page';
 import { getAllPosts, getPostBySlug } from '@/utils/posts';
+import { getSeriesNavigationForPost } from '@/utils/series';
 import { notFound } from 'next/navigation';
 
 vi.mock('next/navigation', () => ({
@@ -38,6 +39,10 @@ vi.mock('@/utils/serverUtils', () => ({
     getSiteUrl: vi.fn().mockResolvedValue('http://localhost:3000'),
 }));
 
+vi.mock('@/utils/series', () => ({
+    getSeriesNavigationForPost: vi.fn().mockResolvedValue(null),
+}));
+
 vi.mock('@/utils/markdown/markdownToPlainText', () => ({
     markdownToPlainText: (md: string) => md.replace(/^#+\s*/, ''),
 }));
@@ -50,6 +55,10 @@ vi.mock('@/components/shared/PostNavigation', () => ({
     default: () => <div data-testid="PostNavigation" />,
 }));
 
+vi.mock('@/components/shared/SeriesNavigationPanel', () => ({
+    default: () => <div data-testid="SeriesNavigationPanel" />,
+}));
+
 vi.mock('@/components/shared/StructuredData', () => ({
     default: () => <script data-testid="StructuredData" />,
 }));
@@ -60,6 +69,7 @@ vi.mock('@/components/BlogPost', () => ({
 
 const mockedGetPostBySlug = vi.mocked(getPostBySlug);
 const mockedGetAllPosts = vi.mocked(getAllPosts);
+const mockedGetSeriesNavigationForPost = vi.mocked(getSeriesNavigationForPost);
 const mockedNotFound = vi.mocked(notFound);
 
 // Async render helper
@@ -95,6 +105,7 @@ describe('BlogPostPage', () => {
             markdown: '## Test content',
         });
         mockedGetAllPosts.mockResolvedValue([]);
+        mockedGetSeriesNavigationForPost.mockResolvedValue(null);
     });
 
     it('renders blog post page correctly', async () => {
@@ -104,6 +115,47 @@ describe('BlogPostPage', () => {
         expect(screen.getByTestId('ScrollProgressBar')).toBeInTheDocument();
         expect(screen.getByTestId('StructuredData')).toBeInTheDocument();
         expect(screen.getByTestId('PostNavigation')).toBeInTheDocument();
+        expect(screen.queryByTestId('SeriesNavigationPanel')).not.toBeInTheDocument();
+    });
+
+    it('renders series panel when navigation data exists', async () => {
+        mockedGetSeriesNavigationForPost.mockResolvedValueOnce({
+            series: {
+                slug: 'sample-series',
+                title: 'Sample Series',
+                summary: 'Series summary',
+                publishState: 'published',
+                status: 'active',
+                orderingMode: 'manual',
+                tags: [],
+                posts: [],
+                publishedPostCount: 2,
+                canonicalUrl: 'http://localhost:3000/series/sample-series',
+            },
+            current: {
+                slug: 'test-post',
+                title: 'Test Post',
+                summary: 'This is a test post.',
+                date: '2024-01-01',
+                dateModified: '2024-01-01',
+                readingTime: '2 min read',
+                wordCount: 500,
+                canonicalUrl: 'http://localhost:3000/blog/test-post',
+                coverImage: '/cover.jpg',
+                content: '## Test content',
+                tags: ['test'],
+                metaTags: ['Test'],
+                isLive: true,
+            },
+            previous: null,
+            next: null,
+            position: 1,
+            total: 2,
+        });
+
+        await renderAsyncComponent(BlogPostPage, { params: Promise.resolve({ slug: 'test-post' }) });
+
+        expect(screen.getByTestId('SeriesNavigationPanel')).toBeInTheDocument();
     });
 
     it('calls notFound when a post does not exist', async () => {

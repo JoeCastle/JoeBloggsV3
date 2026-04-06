@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 import ScrollToAnchor from '../components/ScrollToAnchor';
 import { NavMenu } from '../components/shared/NavMenu';
 import { Footer } from '../components/shared/Footer';
@@ -20,6 +21,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
     const isScrollToTopButtonDisabled = useRef(false);
+    const pathname = usePathname();
 
     useEffect(() => setHasMounted(true), []);
 
@@ -32,6 +34,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
             setIsDarkMode(mode);
         }
     }, [hasMounted]);
+
+    useEffect(() => {
+        const element: HTMLElement | null = document.getElementById('page-parent');
+        if (element) {
+            element.scrollTop = 0;
+        }
+    }, [pathname]);
 
     /**
      * Handles clicking the scroll to top button.

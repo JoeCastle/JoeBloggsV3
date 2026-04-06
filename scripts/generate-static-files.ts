@@ -4,7 +4,14 @@ import path from 'path';
 import { getAllPosts, validateLivePostSeoFrontmatter } from '../src/utils/posts';
 import { getSiteUrl } from '../src/utils/serverUtils';
 import globals from '../src/utils/globals';
+import { getPublishedSeries } from '../src/utils/series';
 
+/**
+ * Generates RSS XML from live posts using already-rendered post HTML content.
+ * @param posts Live post entries used to build RSS items.
+ * @param siteUrl Canonical site base URL.
+ * @returns RSS XML document string.
+ */
 async function generateRSS(posts: any[], siteUrl: string) {
     const title = globals.metaData.title;
     const description = globals.metaData.description;
@@ -38,7 +45,13 @@ async function generateRSS(posts: any[], siteUrl: string) {
 </rss>`;
 }
 
-async function generateSitemap(posts: any[], siteUrl: string) {
+/**
+ * Generates sitemap XML for the homepage and every live blog post.
+ * @param posts Live post entries used to build URL nodes.
+ * @param siteUrl Canonical site base URL.
+ * @returns Sitemap XML document string.
+ */
+async function generateSitemap(posts: any[], series: any[], siteUrl: string) {
     const urls = posts.map(post => {
         const lastmod = new Date(post.dateModified).toISOString().split('T')[0];
         return `
@@ -47,20 +60,53 @@ async function generateSitemap(posts: any[], siteUrl: string) {
     <lastmod>${lastmod}</lastmod>
   </url>`;
     });
+
+    const seriesUrls = series.map((entry: { slug: string; posts: Array<{ isLive: boolean; dateModified: string }> }) => {
+        const liveDates = (entry.posts ?? [])
+            .filter((post) => post.isLive)
+            .map((post) => new Date(post.dateModified).getTime())
+            .filter((value) => Number.isFinite(value));
+
+        const lastModDate = liveDates.length > 0
+            ? new Date(Math.max(...liveDates)).toISOString().split('T')[0]
+            : new Date().toISOString().split('T')[0];
+
+        return `
+  <url>
+    <loc>${siteUrl}/series/${entry.slug}</loc>
+    <lastmod>${lastModDate}</lastmod>
+  </url>`;
+    });
+
     return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>${siteUrl}/</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
   </url>
+  <url>
+    <loc>${siteUrl}/series</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+  </url>
   ${urls.join('\n')}
+  ${seriesUrls.join('\n')}
 </urlset>`;
 }
 
+/**
+ * Generates robots.txt with a sitemap pointer.
+ * @param siteUrl Canonical site base URL.
+ * @returns robots.txt content.
+ */
 async function generateRobots(siteUrl: string) {
     return `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`;
 }
 
+/**
+ * Produces a compact JSON feed used by homepage and lightweight consumers.
+ * @param posts Live post entries to sort and truncate.
+ * @returns Pretty-printed JSON string for recent posts.
+ */
 async function generateRecentPosts(posts: any[]) {
     return JSON.stringify(
         posts
@@ -72,6 +118,9 @@ async function generateRecentPosts(posts: any[]) {
     );
 }
 
+/**
+ * Orchestrates static artifact generation and fails fast on SEO frontmatter issues.
+ */
 async function main() {
     const publicDir = path.join(process.cwd(), 'public');
     const siteUrl = await getSiteUrl();
@@ -84,7 +133,9 @@ async function main() {
         throw new Error(`SEO frontmatter validation failed for live posts:\n${details}`);
     }
 
+    // Posts are already sorted newest-first in getAllPosts.
     const posts = await getAllPosts();
+    const publishedSeries = await getPublishedSeries();
 
     // rss.xml
     const rss = await generateRSS(posts, siteUrl);
@@ -92,7 +143,7 @@ async function main() {
     console.log('Generated rss.xml');
 
     // sitemap.xml
-    const sitemap = await generateSitemap(posts, siteUrl);
+    const sitemap = await generateSitemap(posts, publishedSeries, siteUrl);
     await fs.writeFile(path.join(publicDir, 'sitemap.xml'), sitemap.trim(), 'utf8');
     console.log('Generated sitemap.xml');
 

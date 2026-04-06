@@ -5,7 +5,9 @@
     "type": "module",
     "scripts": {
         "dev": "next dev",
-        "build": "npm run generate-static-files && next build",
+        "build": "npm run generate-content-index && npm run generate-static-files && next build",
+        "generate-content-index": "tsx scripts/generate-content-index.ts",
+        "generate-posts-index": "tsx scripts/generate-posts-index.ts",
         "generate-static-files": "tsx scripts/generate-static-files.ts",
         "start": "next start",
         "lint": "next lint",

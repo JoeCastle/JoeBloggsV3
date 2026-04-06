@@ -2,9 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://blog.joecastle.co.uk/</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-06</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.joecastle.co.uk/series</loc>
+    <lastmod>2026-04-06</lastmod>
   </url>
   
+  <url>
+    <loc>https://blog.joecastle.co.uk/blog/sql-server-performance-what-matters</loc>
+    <lastmod>2026-04-06</lastmod>
+  </url>
+
   <url>
     <loc>https://blog.joecastle.co.uk/blog/design-spreadsheet-import-pipeline</loc>
     <lastmod>2026-04-03</lastmod>
@@ -22,6 +31,11 @@
 
   <url>
     <loc>https://blog.joecastle.co.uk/blog/welcome-to-my-blog</loc>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.joecastle.co.uk/series/junior-developer-playbook</loc>
     <lastmod>2026-04-03</lastmod>
   </url>
 </urlset>

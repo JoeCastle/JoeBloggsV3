@@ -3,6 +3,7 @@ import globals from '../utils/globals';
 import { getAllPosts } from '@/utils/posts';
 import { getSiteUrl } from '@/utils/serverUtils';
 import HomePage from './HomePage';
+import { getPublishedSeries } from '@/utils/series';
 
 /**
  * Generates metadata for the homepage route.
@@ -15,6 +16,9 @@ export async function generateMetadata(): Promise<Metadata> {
         metadataBase: new URL(siteUrl),
         title: globals.metaData.title,
         description: globals.metaData.description,
+        alternates: {
+            canonical: siteUrl,
+        },
         keywords: globals.metaData.keywords,
         authors: [{ name: 'Joseph Castle' }],
         openGraph: {
@@ -36,6 +40,10 @@ export async function generateMetadata(): Promise<Metadata> {
             apple: '/apple-touch-icon.png',
         },
         manifest: '/site.webmanifest',
+        robots: {
+            index: true,
+            follow: true,
+        },
     };
 }
 
@@ -44,6 +52,6 @@ export async function generateMetadata(): Promise<Metadata> {
  * @returns Homepage JSX.
  */
 export default async function Home() {
-    const posts = await getAllPosts();
-    return <HomePage posts={posts} />;
+    const [posts, series] = await Promise.all([getAllPosts(), getPublishedSeries()]);
+    return <HomePage posts={posts} series={series} />;
 }

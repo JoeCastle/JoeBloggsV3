@@ -1,0 +1,19 @@
+{
+    "slug": "junior-developer-playbook",
+    "title": "Junior Developer Playbook",
+    "summary": "A practical mini-series for early-career developers covering mindset, learning strategy, and career progression.",
+    "longDescription": "This series is designed for new and aspiring software developers who want practical, realistic guidance they can apply immediately in projects and early roles.",
+    "status": "active",
+    "orderingMode": "manual",
+    "tags": [
+        "junior developer",
+        "career",
+        "software engineering"
+    ],
+    "publishState": "published",
+    "seo": {
+        "title": "Junior Developer Playbook Series | JoeBloggs",
+        "description": "A structured series helping junior developers build stronger coding, career, and growth fundamentals.",
+        "canonicalUrl": "/series/junior-developer-playbook"
+    }
+}
