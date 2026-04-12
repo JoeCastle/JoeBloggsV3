@@ -9,6 +9,7 @@ import { rehypeWrapTables } from './rehypeWrapTables';
 import { rehypeMermaid } from './rehypeMermaid';
 import { rehypeTransformVisual } from './rehypeTransformVisual';
 import { rehypePortfolioUtm } from './rehypePortfolioUtm';
+import { rehypeDemoteH1 } from './rehypeDemoteH1';
 
 interface MarkdownToHtmlOptions {
     utmContent?: string;
@@ -28,6 +29,7 @@ export async function markdownToHTML(markdown: string, options?: MarkdownToHtmlO
         .use(remarkParse)
         .use(remarkGfm)
         .use(rehype, { allowDangerousHtml: true })          // Preserve inline HTML like <a>
+        .use(rehypeDemoteH1)                                // Keep a single page-level h1 by demoting body markdown h1 to h2
         .use(rehypeSlug)
         .use(rehypeMermaid)                                 // Convert ```mermaid blocks into Mermaid containers
         .use(rehypeTransformVisual)                         // Convert ```transform blocks into editorial transform visuals

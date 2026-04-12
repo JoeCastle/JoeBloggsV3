@@ -100,6 +100,8 @@ flowchart TD
   C --> D[Delete each association]
 ```
 
+<p class="mermaid-description">The diagram shows the API-driven traversal sequence: fetch catalogs, iterate each catalog, fetch vendors for that catalog, then delete each association individually.</p>
+
 This is the point where the problem stopped being a quick script and became a long-running process design exercise.
 
 ## Estimating the scale before writing too much code
@@ -162,6 +164,8 @@ flowchart TD
   D --> E[Delete each association]
   E --> F[Log progress and continue]
 ```
+
+<p class="mermaid-description">This flow describes the long-running deletion process with token validation, catalog traversal, vendor association deletes, and continuous progress logging.</p>
 
 The logic was straightforward. The engineering work was in making that process survivable over multiple days.
 
@@ -251,6 +255,8 @@ flowchart LR
   E -- Yes --> G[Backoff and retry]
   G --> C
 ```
+
+<p class="mermaid-description">The request lifecycle branches on token validity and rate-limit responses. Invalid tokens are refreshed first, while HTTP 429 responses trigger backoff and retry before resending.</p>
 
 ## The one-hour problem
 

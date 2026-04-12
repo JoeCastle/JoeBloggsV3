@@ -40,6 +40,26 @@ function collectText(node: Element): string {
         .join('');
 }
 
+function detectMermaidDiagramLabel(source: string): string {
+    const firstLine = source
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .find((line) => line.length > 0)
+        ?.toLowerCase() ?? '';
+
+    if (firstLine.startsWith('flowchart')) return 'Flowchart diagram';
+    if (firstLine.startsWith('sequencediagram')) return 'Sequence diagram';
+    if (firstLine.startsWith('classdiagram')) return 'Class diagram';
+    if (firstLine.startsWith('statediagram')) return 'State diagram';
+    if (firstLine.startsWith('erdiagram')) return 'Entity relationship diagram';
+    if (firstLine.startsWith('journey')) return 'Journey diagram';
+    if (firstLine.startsWith('gantt')) return 'Gantt chart';
+    if (firstLine.startsWith('pie')) return 'Pie chart';
+    if (firstLine.startsWith('gitgraph')) return 'Git graph diagram';
+
+    return 'Mermaid diagram';
+}
+
 /**
  * Replaces fenced mermaid code blocks with Mermaid-compatible div containers.
  * @returns Rehype plugin transformer.
@@ -69,11 +89,16 @@ export const rehypeMermaid: Plugin<[], Root> = () => {
             }
 
             const mermaidSource = collectText(codeElement).replace(/\n$/, '');
+            const ariaLabel = detectMermaidDiagramLabel(mermaidSource);
 
             const mermaidBlock: Element = {
                 type: 'element',
                 tagName: 'div',
-                properties: { className: ['mermaid'] },
+                properties: {
+                    className: ['mermaid'],
+                    role: 'img',
+                    ariaLabel,
+                },
                 children: [{ type: 'text', value: mermaidSource }],
             };
 

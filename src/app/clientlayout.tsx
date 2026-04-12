@@ -105,6 +105,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
                 id="scroll-to-top-btn"
                 className="portfolio-btn"
                 onClick={handleScrollToTop}
+                aria-label="Scroll to top"
                 title="Scroll to top"
             >
                 <FontAwesomeIcon className="fa-icon" icon={faArrowUp} />
@@ -113,6 +114,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode; 
             <button
                 id="theme-changer-btn"
                 onClick={handleChangeTheme}
+                aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
                 title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
                 style={{ visibility: hasMounted ? 'visible' : 'hidden' }}
             >

@@ -2,6 +2,19 @@ import { describe, expect, it } from 'vitest';
 import { markdownToHTML } from '@/utils/markdown/markdownToHTML';
 
 describe('markdownToHTML', () => {
+    it('demotes markdown h1 headings to h2 to preserve a single page h1', async () => {
+        const markdown = [
+            '# Welcome heading',
+            '## Existing section',
+        ].join('\n\n');
+
+        const html = await markdownToHTML(markdown);
+
+        expect(html).toContain('<h2 id="welcome-heading">Welcome heading</h2>');
+        expect(html).toContain('<h2 id="existing-section">Existing section</h2>');
+        expect(html).not.toContain('<h1');
+    });
+
     it('renders transform fences as editorial transformation visuals', async () => {
         const markdown = [
             '```transform',
@@ -35,8 +48,20 @@ describe('markdownToHTML', () => {
 
         const html = await markdownToHTML(markdown);
 
-        expect(html).toContain('<div class="mermaid">flowchart TD\n  A[Start] --> B[End]</div>');
+        expect(html).toContain('<div class="mermaid" role="img" aria-label="Flowchart diagram">flowchart TD\n  A[Start] --> B[End]</div>');
         expect(html).not.toContain('<pre><code class="language-mermaid">');
+    });
+
+    it('wraps markdown tables in a focusable region for keyboard horizontal scrolling', async () => {
+        const markdown = [
+            '| A | B |',
+            '|---|---|',
+            '| 1 | 2 |',
+        ].join('\n');
+
+        const html = await markdownToHTML(markdown);
+
+        expect(html).toContain('<div class="markdown-table-wrapper" tabindex="0" aria-label="Scrollable data table"><table>');
     });
 
     it('keeps non-mermaid code fences as normal code blocks', async () => {

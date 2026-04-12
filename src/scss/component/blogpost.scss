@@ -246,6 +246,11 @@
         margin: 1.5rem 0 2rem;
         border: 1px solid;
         border-radius: 10px;
+
+        &:focus-visible {
+            outline: 2px solid rgba($standard-blue-background, 0.6);
+            outline-offset: 2px;
+        }
     }
 
     .mermaid {
@@ -261,6 +266,11 @@
         background: transparent;
         text-align: center;
         @include transition-properties((border-color, background-color));
+
+        &:focus-visible {
+            outline: 2px solid rgba($standard-blue-background, 0.6);
+            outline-offset: 2px;
+        }
     }
 
     .mermaid svg {
@@ -281,6 +291,15 @@
         letter-spacing: 0.01em;
         opacity: 0.82;
         text-align: center;
+    }
+
+    .mermaid-description {
+        max-width: 60ch;
+        margin: 0.4rem auto 1.25rem;
+        font-size: 0.88rem;
+        line-height: 1.5;
+        opacity: 0.9;
+        text-align: left;
     }
 
     .transform-visual {
@@ -435,6 +454,10 @@
             color: rgba($light-primary-font-colour, 0.72);
         }
 
+        .mermaid-description {
+            color: rgba($light-primary-font-colour, 0.88);
+        }
+
         .transform-visual {
             background-color: rgba($light-primary-font-colour, 0.03);
         }
@@ -508,6 +531,10 @@
             color: rgba($dark-primary-font-colour, 0.8);
         }
 
+        .mermaid-description {
+            color: rgba($dark-primary-font-colour, 0.9);
+        }
+
         .transform-visual {
             background-color: rgba($dark-primary-font-colour, 0.06);
         }
@@ -556,6 +583,11 @@
         .mermaid-caption {
             margin-top: 1.05rem;
             font-size: 0.88rem;
+        }
+
+        .mermaid-description {
+            margin: 0.35rem auto 1.05rem;
+            font-size: 0.85rem;
         }
 
         .transform-visual {

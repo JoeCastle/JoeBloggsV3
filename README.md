@@ -17,6 +17,88 @@ Built with Next.js App Router, TypeScript, and a custom markdown processing pipe
 - Layered test suite (Vitest, Playwright, Lighthouse CI)
 - Accessible, responsive UI with light/dark theme support
 
+## Accessibility Overview
+
+- Accessibility implementation status and audit notes: [ACCESSIBILITY.md](ACCESSIBILITY.md)
+- Public-facing accessibility statement: `/accessibility-statement`
+
+Current baseline:
+- Core routes pass automated accessibility scans in light and dark themes.
+- Keyboard access and focus visibility are supported for interactive controls.
+- Mermaid diagrams support labels, captions, and optional long descriptions.
+- Blog post rendering enforces a single page-level H1 structure.
+
+## Writing Accessible Markdown Posts
+
+Use this checklist whenever authoring markdown content.
+
+### 1) Headings
+
+- Start body content at `##` (H2) or deeper.
+- Keep heading order logical and avoid skipping levels.
+- Keep headings descriptive and short.
+
+### 2) Links
+
+- Use descriptive link text (avoid "click here").
+- Indicate destination context when useful.
+
+Example:
+
+- Better: `Read the SQL performance checklist`
+- Worse: `Click here`
+
+### 3) Tables
+
+- Use real markdown table headers.
+- Keep columns concise and meaningful.
+- Add surrounding explanatory text for context.
+
+### 4) Code blocks
+
+- Always use fenced code blocks with a language identifier where possible.
+
+Example:
+
+```md
+```ts
+const result = 42;
+```
+```
+
+### 5) Mermaid diagrams (best practice)
+
+For complex diagrams, include both a caption and a description.
+
+```md
+<p class="mermaid-caption">High-level import pipeline</p>
+
+```mermaid
+flowchart TD
+   A[Input] --> B[Transform]
+   B --> C[Output]
+```
+
+<p class="mermaid-description">This flowchart shows data moving from input through transformation to output.</p>
+```
+
+Behavior in this project:
+- Caption is used as the accessible name (`aria-labelledby`).
+- Description is used as supplemental context (`aria-describedby`).
+- Without caption, a diagram-type fallback label is used.
+
+### 6) Images and raw HTML
+
+- If using images, always provide meaningful `alt` text.
+- Avoid embedding complex raw HTML unless necessary.
+- Keep content understandable without relying only on visual cues.
+
+### 7) Final authoring check
+
+- Read your post once in plain text for structure and clarity.
+- Verify headings, links, and diagram context are understandable on their own.
+- Run project tests and accessibility checks before publishing.
+
 ## Key Features
 
 - Markdown-first publishing with per-post folders and local assets

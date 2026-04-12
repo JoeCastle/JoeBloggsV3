@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import globals from '../../utils/globals';
 import utils from '../../utils/utils';
 import { NEXT_PUBLIC_APP_VERSION } from '../../utils/version';
@@ -43,8 +44,8 @@ export const Footer: React.FC = ({ }) => {
                     {/* https://www.albionresearch.com/tools/obfuscator */}
                     {/* Obfuscate email against bots. */}
                     <a
-                        href="&#109;ailto&#58;&#106;&#37;&#54;Fe&#64;t&#99;a&#115;t%&#54;C%65%&#50;&#69;c%6F%&#50;Euk"
-                        title="Email - joe&#64;&#116;c&#97;s&#116;&#108;e&#46;co&#46;u&#107;"
+                        href={globals.obfuscatedEmailMailto}
+                        title={'Email - ' + globals.obfuscatedEmailAddress}
                         aria-label="Email address."
                     >
                         <div>
@@ -62,6 +63,10 @@ export const Footer: React.FC = ({ }) => {
             <div className="divider" />
 
             <div className="footer-bottom-content">
+                <p className="footer-utility-links">
+                    <Link href="/accessibility-statement">Accessibility statement</Link>
+                </p>
+
                 <p className="copyright-text">
                     Copyright &copy; 2019 - {year ?? '----'} Joseph Castle. All Rights Reserved.
                 </p>

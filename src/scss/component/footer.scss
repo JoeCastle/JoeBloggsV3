@@ -112,6 +112,26 @@ footer {
         }
     }
 
+    .footer-utility-links {
+        margin-bottom: 0.6rem;
+
+        a {
+            font-size: 0.95rem;
+            text-decoration: none;
+
+            &:hover,
+            &:focus-visible {
+                text-decoration: underline;
+                text-underline-offset: 3px;
+            }
+
+            &:focus-visible {
+                outline: 2px solid rgba($standard-blue-background, 0.55);
+                outline-offset: 2px;
+            }
+        }
+    }
+
     .copyright-text {
         font-size: 14px;
     }

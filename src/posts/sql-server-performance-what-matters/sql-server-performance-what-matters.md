@@ -43,6 +43,8 @@ metaTags:
 
 Most SQL Server performance issues are not caused by obscure edge cases or a slow database engine. They are caused by a small number of repeated problems.
 
+<p class="mermaid-caption">SARGability impact on query performance</p>
+
 ```mermaid
 flowchart LR
     A[Application] --> B[SQL Query]
@@ -52,6 +54,8 @@ flowchart LR
     D --> F[Low IO]
     E --> G[High IO]
 ```
+
+  <p class="mermaid-description">The diagram shows that application queries flow into a SARGability decision. SARGable predicates lead to index seeks and lower IO, while non-SARGable predicates lead to scans and higher IO.</p>
 
 - Queries that prevent index usage
 - Poorly designed or excessive indexes
@@ -89,6 +93,8 @@ In the second query, SQL Server can:
 
 This is what makes a predicate **SARGable**.
 
+<p class="mermaid-caption">Predicate shape drives access method</p>
+
 ```mermaid
 flowchart TB
     A[Query Predicate]
@@ -99,6 +105,8 @@ flowchart TB
     C --> F[Index Scan]
     F --> G[Inefficient]
 ```
+
+  <p class="mermaid-description">This diagram contrasts direct column predicates with function-wrapped predicates. Direct predicates map to index seeks and better efficiency, while function-wrapped predicates tend toward scans and poorer efficiency.</p>
 
 ### Key Insight
 
@@ -130,6 +138,8 @@ Indexes are not free. They trade write performance and storage for read performa
 
 SQL Server uses a **B-tree structure**:
 
+<p class="mermaid-caption">Simplified B-tree index navigation</p>
+
 ```mermaid
 flowchart TB
     Root[Root]
@@ -147,6 +157,8 @@ flowchart TB
     BranchB --> Leaf3
     BranchB --> Leaf4
 ```
+
+  <p class="mermaid-description">The chart illustrates root, intermediate, and leaf pages in a B-tree. SQL Server navigates from root to relevant leaf pages instead of scanning all rows.</p>
 
 At a practical level, this means SQL Server can navigate an index rather than reading every row. That is the reason seeks are usually fast: the engine walks the tree to the relevant part of the structure instead of scanning the whole thing.
 
@@ -284,6 +296,8 @@ It becomes expensive when:
 
 That pattern scales poorly. In practical terms, it behaves like an N+1 problem inside the database engine.
 
+<p class="mermaid-caption">Access method and lookup cost path</p>
+
 ```mermaid
 flowchart LR
     A[Query] --> B{Access Method}
@@ -293,6 +307,8 @@ flowchart LR
     E --> F[Fetch Missing Columns]
     D --> G[Read All Rows]
 ```
+
+  <p class="mermaid-description">The diagram shows two execution paths: index scan reads many rows directly, while index seek may branch into key lookups to fetch missing columns, which can become expensive at scale.</p>
 
 ### Important Distinction
 
@@ -465,6 +481,8 @@ Rebuilding indexes:
 - Can block or slow queries
 - Should not be done during peak usage
 
+<p class="mermaid-caption">Fragmentation and maintenance options</p>
+
 ```mermaid
 flowchart LR
     A[Ordered Pages] --> B[Fragmented Pages]
@@ -473,6 +491,8 @@ flowchart LR
     C --> E[Reorganize]
     D --> F[Rebuild]
 ```
+
+  <p class="mermaid-description">This diagram shows that page fragmentation increases IO and can slow reads. Maintenance options branch to reorganize or rebuild depending on severity and operational constraints.</p>
 
 ### Checklist
 
@@ -484,6 +504,8 @@ flowchart LR
 
 A simple workflow helps avoid guessing and makes it easier to isolate the biggest problems first.
 
+<p class="mermaid-caption">Performance investigation workflow</p>
+
 ```mermaid
 flowchart TB
     A[Problem] --> B[Capture Plan]
@@ -492,6 +514,8 @@ flowchart TB
     D --> E[Fix Query or Index]
     E --> F[Test Again]
 ```
+
+  <p class="mermaid-description">The workflow starts with reproducing a problem, then collecting plan and metrics, identifying bottlenecks, applying focused query or index changes, and retesting iteratively.</p>
 
 1. Reproduce the issue
 2. Capture the actual execution plan
