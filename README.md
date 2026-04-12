@@ -28,6 +28,17 @@ Current baseline:
 - Mermaid diagrams support labels, captions, and optional long descriptions.
 - Blog post rendering enforces a single page-level H1 structure.
 
+## Contact Flow (No Infrastructure Changes)
+
+The contact page is designed to work on static hosting without any Cloudflare changes or external form services.
+
+- Local draft generation via `mailto:` (opens the visitor's email app)
+- Honeypot field filtering (`website`)
+- Minimum submit-time check in the client
+- Protected email reveal fallback
+
+This keeps contact professional and reliable while avoiding backend setup.
+
 ## Writing Accessible Markdown Posts
 
 Use this checklist whenever authoring markdown content.

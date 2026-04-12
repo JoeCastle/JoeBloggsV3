@@ -41,17 +41,16 @@ export const Footer: React.FC = ({ }) => {
                             <FontAwesomeIcon className="fa-icon" icon={faLinkedinIn} />
                         </div>
                     </a>
-                    {/* https://www.albionresearch.com/tools/obfuscator */}
-                    {/* Obfuscate email against bots. */}
-                    <a
-                        href={globals.obfuscatedEmailMailto}
-                        title={'Email - ' + globals.obfuscatedEmailAddress}
-                        aria-label="Email address."
+                    {/* Contact page avoids exposing direct email in static footer HTML. */}
+                    <Link
+                        href="/contact"
+                        title="Contact"
+                        aria-label="Contact page"
                     >
                         <div>
                             <FontAwesomeIcon className="fa-icon" icon={faAt} />
                         </div>
-                    </a>
+                    </Link>
                     <a target="_blank" rel="noopener noreferrer" href={globals.gitHubData.url} title={'GitHub - ' + globals.gitHubData.displayName} aria-label="GitHub link.">
                         <div>
                             <FontAwesomeIcon className="fa-icon" icon={faGithub} />

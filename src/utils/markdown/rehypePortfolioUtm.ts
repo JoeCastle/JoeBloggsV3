@@ -1,5 +1,10 @@
-import type { Root } from 'hast';
+import type { Element, Root } from 'hast';
 import { visit } from 'unist-util-visit';
+
+type RawHtmlNode = {
+    type: 'raw';
+    value: string;
+};
 
 export interface PortfolioUtmOptions {
     /**
@@ -93,26 +98,28 @@ function rewriteAnchorTagHrefs(html: string, options?: PortfolioUtmOptions): str
 export function rehypePortfolioUtm(options?: PortfolioUtmOptions) {
     return (tree: Root): void => {
         // Handles normal markdown links that become <a> element nodes.
-        visit(tree, 'element', (node: any) => {
-            if (node.tagName !== 'a') {
+        visit(tree, 'element', (node) => {
+            const elementNode = node as Element;
+            if (elementNode.tagName !== 'a') {
                 return;
             }
 
-            const href = node.properties?.href;
+            const href = elementNode.properties?.href;
             if (typeof href !== 'string' || !isPortfolioUrl(href)) {
                 return;
             }
 
-            node.properties.href = withPortfolioUtm(href, options);
+            elementNode.properties.href = withPortfolioUtm(href, options);
         });
 
         // Handles inline raw HTML links preserved by allowDangerousHtml.
-        visit(tree, 'raw', (node: any) => {
-            if (typeof node.value !== 'string' || node.value.toLowerCase().indexOf('<a') === -1) {
+        visit(tree, 'raw', (node) => {
+            const rawNode = node as RawHtmlNode;
+            if (typeof rawNode.value !== 'string' || rawNode.value.toLowerCase().indexOf('<a') === -1) {
                 return;
             }
 
-            node.value = rewriteAnchorTagHrefs(node.value, options);
+            rawNode.value = rewriteAnchorTagHrefs(rawNode.value, options);
         });
     };
 }

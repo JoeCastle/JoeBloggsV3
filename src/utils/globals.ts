@@ -1,8 +1,3 @@
-const obfuscatedEmailAddress = String.fromCharCode(
-    106, 111, 101, 99, 97, 115, 116, 108, 101, 57, 55, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109
-);
-const obfuscatedEmailMailto = `mailto:${obfuscatedEmailAddress}`;
-
 type SocialDataType = {
     url: string;
     displayName: string;
@@ -40,8 +35,6 @@ const metaData: MetaDataType = {
 };
 
 const globals = {
-    obfuscatedEmailAddress,
-    obfuscatedEmailMailto,
     gitHubData,
     linkedInData,
     numOfSummaryProjectsToDisplay,

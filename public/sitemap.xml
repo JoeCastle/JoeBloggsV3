@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://blog.joecastle.co.uk/</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-12</lastmod>
   </url>
   <url>
     <loc>https://blog.joecastle.co.uk/series</loc>
-    <lastmod>2026-04-06</lastmod>
+    <lastmod>2026-04-12</lastmod>
   </url>
   
+  <url>
+    <loc>https://blog.joecastle.co.uk/blog/building-a-safe-bulk-deletion-process</loc>
+    <lastmod>2026-04-12</lastmod>
+  </url>
+
   <url>
     <loc>https://blog.joecastle.co.uk/blog/sql-server-performance-what-matters</loc>
     <lastmod>2026-04-06</lastmod>

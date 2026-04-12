@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import globals from '@/utils/globals';
 
 export const dynamic = 'force-static';
 
@@ -89,7 +88,7 @@ export default function AccessibilityStatementPage() {
                         device/browser details, and a short description of the issue.
                     </p>
                     <p>
-                        Contact: <a href={globals.obfuscatedEmailMailto}>{globals.obfuscatedEmailAddress}</a>
+                        Contact: <Link href="/contact">Use the contact page</Link>
                     </p>
                 </section>
 
