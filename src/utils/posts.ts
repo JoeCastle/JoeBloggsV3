@@ -168,7 +168,8 @@ export async function getPostBySlug(slug: string): Promise<{ meta: PostMeta; con
     }
 
     const siteUrl: string = await getSiteUrl();
-    const html: string = await markdownToHTML(post.content);
+    // Pass slug so portfolio links can be attributed per post via utm_content.
+    const html: string = await markdownToHTML(post.content, { utmContent: post.slug });
 
     return {
         meta: {

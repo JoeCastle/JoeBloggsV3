@@ -51,4 +51,25 @@ describe('markdownToHTML', () => {
         expect(html).toContain('<pre><code class="hljs language-ts">');
         expect(html).toContain('<span class="hljs-keyword">const</span> value = <span class="hljs-number">42</span>;');
     });
+
+    it('adds UTM tracking to portfolio links and includes per-post utm_content', async () => {
+        const markdown = 'Visit my [Portfolio](https://joecastle.co.uk/projects) for more details.';
+
+        const html = await markdownToHTML(markdown, { utmContent: 'welcome-to-my-blog' });
+
+        expect(html).toContain('href="https://joecastle.co.uk/projects?utm_source=blog.joecastle.co.uk');
+        expect(html).toContain('utm_medium=referral');
+        expect(html).toContain('utm_campaign=portfolio_referrals');
+        expect(html).toContain('utm_content=welcome-to-my-blog');
+    });
+
+    it('does not override existing UTM parameters on portfolio links', async () => {
+        const markdown =
+            'Visit <a href="https://joecastle.co.uk?utm_source=manual&utm_medium=social&utm_campaign=launch" target="_blank" rel="noopener">Portfolio</a>.';
+
+        const html = await markdownToHTML(markdown, { utmContent: 'welcome-to-my-blog' });
+
+        expect(html).toContain('href="https://joecastle.co.uk/?utm_source=manual&utm_medium=social&utm_campaign=launch');
+        expect(html).toContain('utm_content=welcome-to-my-blog');
+    });
 });

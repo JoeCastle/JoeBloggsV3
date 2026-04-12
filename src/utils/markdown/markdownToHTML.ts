@@ -8,6 +8,11 @@ import rehypeStringify from 'rehype-stringify';
 import { rehypeWrapTables } from './rehypeWrapTables';
 import { rehypeMermaid } from './rehypeMermaid';
 import { rehypeTransformVisual } from './rehypeTransformVisual';
+import { rehypePortfolioUtm } from './rehypePortfolioUtm';
+
+interface MarkdownToHtmlOptions {
+    utmContent?: string;
+}
 
 /**
  * Converts raw markdown into HTML used by post rendering.
@@ -15,9 +20,10 @@ import { rehypeTransformVisual } from './rehypeTransformVisual';
  * The pipeline applies GFM parsing, slug generation, custom blocks
  * (mermaid/transform), syntax highlighting, and table wrapping.
  * @param markdown Raw markdown source.
+ * @param options Optional render options for link tracking.
  * @returns Rendered HTML string.
  */
-export async function markdownToHTML(markdown: string): Promise<string> {
+export async function markdownToHTML(markdown: string, options?: MarkdownToHtmlOptions): Promise<string> {
     const result = await unified()
         .use(remarkParse)
         .use(remarkGfm)
@@ -27,6 +33,7 @@ export async function markdownToHTML(markdown: string): Promise<string> {
         .use(rehypeTransformVisual)                         // Convert ```transform blocks into editorial transform visuals
         .use(rehypeHighlight)                               // Syntax highlighting for ``` code blocks
         .use(rehypeWrapTables)                              // Adds wrapper for table components
+        .use(rehypePortfolioUtm, { utmContent: options?.utmContent }) // Track portfolio referrals from blog post links
         .use(rehypeStringify, { allowDangerousHtml: true }) // Output raw HTML like <a>, <img>, etc.
         .process(markdown);
 

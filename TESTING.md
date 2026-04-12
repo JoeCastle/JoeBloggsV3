@@ -20,6 +20,30 @@ This project uses a layered testing strategy:
 - Vitest tests: `src/tests/**`
 - Playwright tests: `e2e/**`
 
+## Current Coverage Snapshot
+
+Current test coverage includes:
+
+- Markdown pipeline behavior:
+  - Mermaid fence conversion
+  - Transform block conversion
+  - Code highlighting output
+  - Portfolio link UTM enrichment for markdown and raw HTML links
+- Content and data contracts:
+  - Frontmatter validation
+  - Content index/sitemap expectations
+  - Live post metadata constraints
+- Rendering and route behavior:
+  - Blog render integration path (markdown -> HTML -> component)
+  - Shared component behavior and key route flows
+  - Not found/missing content paths
+- Browser-level checks:
+  - Accessibility (axe)
+  - SEO tags and structured data assertions
+  - Visual regression snapshots
+- Performance quality gates:
+  - Lighthouse CI thresholds
+
 ## E2E Reliability Pattern
 
 Playwright specs use shared stabilization helpers in `e2e/helpers/reliability.ts`.
@@ -46,6 +70,12 @@ Run Vitest suite:
 
 ```bash
 npm test
+```
+
+Run a single Vitest file (fast feedback):
+
+```bash
+npx vitest run src/tests/utils/markdown/markdownToHTML.test.ts
 ```
 
 Run Vitest UI mode:
@@ -82,6 +112,18 @@ Run Lighthouse CI performance checks:
 
 ```bash
 npm run test:perf
+```
+
+Run lint checks:
+
+```bash
+npm run lint
+```
+
+Run production build checks:
+
+```bash
+npm run build
 ```
 
 ## Recommended CI Order

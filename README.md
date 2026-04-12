@@ -34,6 +34,7 @@ Built with Next.js App Router, TypeScript, and a custom markdown processing pipe
 - Build-time content index generation for fast post/series lookup and validation
 - Reading progress indicator for long-form posts
 - Social sharing actions for post pages
+- Automatic portfolio referral tracking via UTM parameters on portfolio links in post content
 
 ## Engineering Highlights
 
@@ -80,11 +81,13 @@ flowchart LR
    G --> G2[Transform Visual Block Transform rehypeTransformVisual]
    G --> G3[Code Highlighting rehypeHighlight]
    G --> G4[Table Wrapper Injection rehypeWrapTables]
+   G --> G5[Portfolio UTM Link Tracking rehypePortfolioUtm]
 
    G1 --> H[Rendered HTML]
    G2 --> H
    G3 --> H
    G4 --> H
+   G5 --> H
 
    H --> I[Render BlogPost Component]
    I --> J[Static Build Output]
@@ -92,6 +95,21 @@ flowchart LR
 ```
 
 Runs primarily at build-time for static generation, with final hydration behavior on the client.
+
+### Portfolio UTM Tracking
+
+Portfolio links in markdown post content are automatically enriched at render time with UTM parameters.
+
+- Target domain: `https://joecastle.co.uk` (including `www` variant)
+- Defaults added when missing:
+   - `utm_source=blog.joecastle.co.uk`
+   - `utm_medium=referral`
+   - `utm_campaign=portfolio_referrals`
+- Per-post differentiation:
+   - `utm_content=<post-slug>` is added from the current post slug
+- Existing UTM values are preserved and not overwritten
+
+This is handled in the markdown pipeline by `rehypePortfolioUtm` so both markdown links and raw HTML anchor links are covered.
 
 ## Architecture: Content Indexing and Static Files
 
