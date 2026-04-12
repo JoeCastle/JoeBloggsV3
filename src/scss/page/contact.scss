@@ -1,0 +1,310 @@
+@use '../shared/variables.scss' as *;
+
+.contact-page-wrapper {
+    max-width: 80ch;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.contact-page {
+    margin: 1.5rem auto 2.5rem;
+    padding: 1.35rem 1.4rem 1.7rem;
+    border: 1px solid $light-divider;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.62);
+    box-shadow: 0 10px 26px -22px rgba(0, 0, 0, 0.45);
+    transition:
+        background-color $global-animation-time ease-in-out,
+        border-color $global-animation-time ease-in-out,
+        box-shadow $global-animation-time ease-in-out,
+        color $global-animation-time ease-in-out;
+
+    h1 {
+        margin: 0.25rem 0 0.55rem;
+        font-size: 2rem;
+        line-height: 1.15;
+        transition: color $global-animation-time ease-in-out;
+    }
+
+    h2 {
+        margin: 1.35rem 0 0.45rem;
+        font-size: 1.24rem;
+        transition: color $global-animation-time ease-in-out;
+    }
+
+    p {
+        margin: 0.35rem 0;
+        line-height: 1.6;
+        transition: color $global-animation-time ease-in-out;
+    }
+
+    ul {
+        margin: 0.5rem 0 0.8rem;
+        padding-left: 1.1rem;
+    }
+
+    section {
+        margin-top: 1.35rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.07);
+    }
+}
+
+.contact-page-nav {
+    margin-bottom: 0.7rem;
+}
+
+.contact-page-back-link {
+    color: #174a92;
+    text-decoration: none;
+    transition:
+        color $global-animation-time ease-in-out,
+        text-decoration-color $global-animation-time ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($standard-blue-background, 0.55);
+        outline-offset: 2px;
+    }
+}
+
+.contact-page-kicker {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    color: rgba($light-primary-font-colour, 0.78);
+    transition: color $global-animation-time ease-in-out;
+}
+
+.protected-email {
+    margin-top: 0.55rem;
+}
+
+.protected-email-revealed {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+
+    a {
+        font-weight: 600;
+    }
+}
+
+.protected-email-reveal,
+.protected-email-copy {
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 8px;
+    padding: 0.4rem 0.72rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: $light-primary-font-colour;
+    transition:
+        background-color $global-animation-time ease-in-out,
+        border-color $global-animation-time ease-in-out,
+        color $global-animation-time ease-in-out;
+
+    &:hover {
+        border-color: rgba($standard-blue-background, 0.5);
+        background: rgba(255, 255, 255, 1);
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($standard-blue-background, 0.55);
+        outline-offset: 2px;
+    }
+}
+
+.protected-email-note {
+    font-size: 0.88rem;
+    color: rgba($light-primary-font-colour, 0.86);
+    transition: color $global-animation-time ease-in-out;
+}
+
+.contact-form {
+    margin-top: 0.6rem;
+    display: grid;
+    gap: 0.84rem;
+    max-width: 100%;
+}
+
+.contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.84rem;
+
+    >.contact-form-field {
+        min-width: 0;
+    }
+}
+
+.contact-form-field {
+    display: grid;
+    gap: 0.3rem;
+    min-width: 0;
+
+    label {
+        font-weight: 600;
+        color: rgba($light-primary-font-colour, 0.95);
+        transition: color $global-animation-time ease-in-out;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        display: block;
+        border: 1px solid $light-divider;
+        border-radius: 8px;
+        padding: 0.56rem 0.6rem;
+        background: rgba(255, 255, 255, 0.92);
+        color: $light-primary-font-colour;
+        transition:
+            border-color $global-animation-time ease-in-out,
+            background-color $global-animation-time ease-in-out,
+            color $global-animation-time ease-in-out;
+
+        &::placeholder {
+            color: rgba($light-primary-font-colour, 0.6);
+        }
+
+        &:hover {
+            border-color: rgba($standard-blue-background, 0.38);
+        }
+
+        &:focus-visible {
+            outline: 2px solid rgba($standard-blue-background, 0.55);
+            outline-offset: 2px;
+            border-color: rgba($standard-blue-background, 0.6);
+            background: rgba(255, 255, 255, 1);
+        }
+    }
+}
+
+.contact-form-submit {
+    width: fit-content;
+    border: 1px solid $standard-blue-background;
+    border-radius: 8px;
+    padding: 0.48rem 0.9rem;
+    background: $standard-blue-background;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition:
+        background-color $global-animation-time ease-in-out,
+        border-color $global-animation-time ease-in-out,
+        transform 0.12s ease-in-out;
+
+    &:hover {
+        background: $dark-blue-background;
+        border-color: $dark-blue-background;
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($standard-blue-background, 0.55);
+        outline-offset: 2px;
+    }
+}
+
+.contact-form-error {
+    margin: 0;
+    color: #8b0000;
+    font-weight: 600;
+}
+
+.contact-form-privacy-note {
+    font-size: 0.9rem;
+    color: rgba($light-primary-font-colour, 0.86);
+    transition: color $global-animation-time ease-in-out;
+}
+
+.contact-form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.theme-container.dark-theme {
+    .contact-page {
+        border: $dark-border;
+        background-color: $dark-secondary-background-colour;
+        box-shadow: none;
+
+        section {
+            border-top: 1px solid rgba(255, 255, 255, 0.09);
+        }
+    }
+
+    .contact-page-back-link {
+        color: #8fbef2;
+    }
+
+    .contact-page-kicker,
+    .protected-email-note,
+    .contact-form-privacy-note {
+        color: rgba($dark-primary-font-colour, 0.9);
+    }
+
+    .protected-email-reveal,
+    .protected-email-copy,
+    .contact-form-field input,
+    .contact-form-field textarea {
+        border: $dark-border;
+        color: rgba($dark-primary-font-colour, 0.95);
+        background: rgba(0, 0, 0, 0.14);
+
+        &::placeholder {
+            color: rgba($dark-primary-font-colour, 0.65);
+        }
+    }
+
+    .contact-form-submit {
+        border: 1px solid #8fbef2;
+        color: #0b1b2a;
+        background: #8fbef2;
+
+        &:hover {
+            border-color: #7daee6;
+            background: #7daee6;
+        }
+    }
+
+    .contact-form-error {
+        color: #ff9a9a;
+    }
+}
+
+@media (max-width: $mobile-max-width-breakpoint) {
+    .contact-page-wrapper {
+        padding: 0 0.7rem;
+    }
+
+    .contact-form-row {
+        grid-template-columns: 1fr;
+        gap: 0.72rem;
+    }
+
+    .contact-page {
+        padding: 1.02rem 0.92rem 1.3rem;
+
+        h1 {
+            font-size: 1.65rem;
+        }
+
+        h2 {
+            font-size: 1.12rem;
+        }
+    }
+}

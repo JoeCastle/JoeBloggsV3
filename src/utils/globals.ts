@@ -1,5 +1,3 @@
-const obfuscatedEmailAddress = 'joe&#64;&#116;c&#97;s&#116;&#108;e&#46;co&#46;u&#107;';
-
 type SocialDataType = {
     url: string;
     displayName: string;
@@ -37,7 +35,6 @@ const metaData: MetaDataType = {
 };
 
 const globals = {
-    obfuscatedEmailAddress,
     gitHubData,
     linkedInData,
     numOfSummaryProjectsToDisplay,

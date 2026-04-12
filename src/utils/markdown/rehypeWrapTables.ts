@@ -31,7 +31,11 @@ export const rehypeWrapTables: Plugin<[], Root> = () => {
                 const wrapper: Element = {
                     type: 'element',
                     tagName: 'div',
-                    properties: { className: ['markdown-table-wrapper'] },
+                    properties: {
+                        className: ['markdown-table-wrapper'],
+                        tabIndex: 0,
+                        ariaLabel: 'Scrollable data table',
+                    },
                     children: [element],
                 };
 

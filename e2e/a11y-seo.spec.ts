@@ -2,11 +2,33 @@ import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { gotoAndWaitForStablePage } from './helpers/reliability';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+
+interface GeneratedIndex {
+    posts: Array<{ slug: string; isLive: boolean }>;
+    series?: Array<{ slug: string; publishState?: string }>;
+}
+
+function readGeneratedIndex(): GeneratedIndex {
+    const filePath = path.resolve(process.cwd(), 'src/generated/content-index.json');
+    return JSON.parse(readFileSync(filePath, 'utf-8')) as GeneratedIndex;
+}
+
+const generatedIndex = readGeneratedIndex();
+const livePostSlugs = generatedIndex.posts.filter((post) => post.isLive).map((post) => post.slug);
+const publishedSeriesSlugs = (generatedIndex.series ?? [])
+    .filter((entry) => entry.publishState === 'published')
+    .map((entry) => entry.slug);
 
 // Keep accessibility and SEO checks deterministic by waiting for stable page state first.
 
 async function expectNoSeriousAccessibilityViolations(url: string, page: Page) {
     await gotoAndWaitForStablePage(page, url, { heading: { anyH1: true } });
+
+    if (await page.locator('.mermaid').first().isVisible().catch(() => false)) {
+        await page.waitForTimeout(1000);
+    }
 
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
     const seriousOrCriticalViolations = accessibilityScanResults.violations.filter(
@@ -21,9 +43,21 @@ test.describe('accessibility and seo', () => {
         await expectNoSeriousAccessibilityViolations('/', page);
     });
 
-    test('blog page has no serious accessibility violations', async ({ page }) => {
-        await expectNoSeriousAccessibilityViolations('/blog/welcome-to-my-blog', page);
+    test('series index page has no serious accessibility violations', async ({ page }) => {
+        await expectNoSeriousAccessibilityViolations('/series', page);
     });
+
+    for (const slug of publishedSeriesSlugs) {
+        test(`series page "${slug}" has no serious accessibility violations`, async ({ page }) => {
+            await expectNoSeriousAccessibilityViolations(`/series/${slug}`, page);
+        });
+    }
+
+    for (const slug of livePostSlugs) {
+        test(`blog page "${slug}" has no serious accessibility violations`, async ({ page }) => {
+            await expectNoSeriousAccessibilityViolations(`/blog/${slug}`, page);
+        });
+    }
 
     test('home page exposes baseline SEO metadata', async ({ page }) => {
         await gotoAndWaitForStablePage(page, '/', { heading: { level: 1, name: 'JoeBloggs' } });

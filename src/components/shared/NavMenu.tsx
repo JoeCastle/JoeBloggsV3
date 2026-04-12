@@ -9,6 +9,9 @@ interface Props {
     isDarkMode: boolean;
 }
 
+const PORTFOLIO_NAV_LINK =
+    'https://joecastle.co.uk/?utm_source=blog.joecastle.co.uk&utm_medium=referral&utm_campaign=portfolio_referrals&utm_content=nav_menu';
+
 /**
  * Renders the top navigation bar.
  * @param props Component props.
@@ -25,7 +28,7 @@ export const NavMenu: React.FC<Props> = ({ isDarkMode }) => {
                     </Link>
                 </div>
                 <div className="navbar">
-                    <Link href="https://joecastle.co.uk" className="navbar-portfolio-link" rel="noopener" target="_blank">
+                    <Link href={PORTFOLIO_NAV_LINK} className="navbar-portfolio-link" rel="noopener" target="_blank">
                         My Portfolio →
                     </Link>
                 </div>

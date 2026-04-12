@@ -102,6 +102,8 @@ flowchart TD
   E --> F[Validated Production Data]
 ```
 
+<p class="mermaid-description">This diagram shows the import pipeline from raw customer spreadsheets through VBA normalization, CSV staging, ordered SQL inserts, and final validated production records.</p>
+
 
 ## What the data actually looked like
 

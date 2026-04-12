@@ -1,0 +1,126 @@
+@use '../shared/variables.scss' as *;
+
+.accessibility-statement-wrapper {
+    max-width: 84ch;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.accessibility-statement {
+    margin: 1.5rem auto 2.5rem;
+    padding: 1.25rem 1.3rem 1.7rem;
+    border: 1px solid $light-divider;
+    border-radius: 10px;
+    background-color: $light-secondary-background-colour;
+    transition:
+        background-color $global-animation-time ease-in-out,
+        border-color $global-animation-time ease-in-out,
+        color $global-animation-time ease-in-out;
+
+    h1 {
+        margin: 0.25rem 0 0.55rem;
+        font-size: 2rem;
+        transition: color $global-animation-time ease-in-out;
+    }
+
+    h2 {
+        margin: 1.45rem 0 0.5rem;
+        font-size: 1.25rem;
+        transition: color $global-animation-time ease-in-out;
+    }
+
+    p {
+        line-height: 1.6;
+        margin: 0.35rem 0;
+        transition: color $global-animation-time ease-in-out;
+    }
+
+    ul {
+        margin: 0.4rem 0 0.9rem;
+        padding-left: 1.15rem;
+
+        li {
+            margin: 0.2rem 0;
+            line-height: 1.5;
+            transition: color $global-animation-time ease-in-out;
+        }
+
+        a {
+            transition: color $global-animation-time ease-in-out;
+        }
+    }
+}
+
+.accessibility-statement-nav {
+    margin-bottom: 0.7rem;
+}
+
+.accessibility-statement-back-link {
+    color: #174a92;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition:
+        color $global-animation-time ease-in-out,
+        text-decoration-color $global-animation-time ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($standard-blue-background, 0.55);
+        outline-offset: 2px;
+    }
+}
+
+.accessibility-statement-kicker {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    color: rgba($light-primary-font-colour, 0.88);
+    transition: color $global-animation-time ease-in-out;
+}
+
+.accessibility-statement-reviewed {
+    margin-top: 0.6rem;
+    font-size: 0.88rem;
+    color: rgba($light-primary-font-colour, 0.85);
+    transition: color $global-animation-time ease-in-out;
+}
+
+.theme-container.dark-theme {
+    .accessibility-statement-back-link {
+        color: #8fbef2;
+    }
+
+    .accessibility-statement {
+        border: $dark-border;
+        background-color: $dark-secondary-background-colour;
+    }
+
+    .accessibility-statement-kicker,
+    .accessibility-statement-reviewed {
+        color: rgba($dark-primary-font-colour, 0.9);
+    }
+}
+
+@media (max-width: $mobile-max-width-breakpoint) {
+    .accessibility-statement-wrapper {
+        padding: 0 0.7rem;
+    }
+
+    .accessibility-statement {
+        padding: 1.05rem 0.95rem 1.35rem;
+
+        h1 {
+            font-size: 1.65rem;
+        }
+
+        h2 {
+            font-size: 1.12rem;
+        }
+    }
+}

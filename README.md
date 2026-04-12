@@ -17,6 +17,99 @@ Built with Next.js App Router, TypeScript, and a custom markdown processing pipe
 - Layered test suite (Vitest, Playwright, Lighthouse CI)
 - Accessible, responsive UI with light/dark theme support
 
+## Accessibility Overview
+
+- Accessibility implementation status and audit notes: [ACCESSIBILITY.md](ACCESSIBILITY.md)
+- Public-facing accessibility statement: `/accessibility-statement`
+
+Current baseline:
+- Core routes pass automated accessibility scans in light and dark themes.
+- Keyboard access and focus visibility are supported for interactive controls.
+- Mermaid diagrams support labels, captions, and optional long descriptions.
+- Blog post rendering enforces a single page-level H1 structure.
+
+## Contact Flow (No Infrastructure Changes)
+
+The contact page is designed to work on static hosting without any Cloudflare changes or external form services.
+
+- Local draft generation via `mailto:` (opens the visitor's email app)
+- Honeypot field filtering (`website`)
+- Minimum submit-time check in the client
+- Protected email reveal fallback
+
+This keeps contact professional and reliable while avoiding backend setup.
+
+## Writing Accessible Markdown Posts
+
+Use this checklist whenever authoring markdown content.
+
+### 1) Headings
+
+- Start body content at `##` (H2) or deeper.
+- Keep heading order logical and avoid skipping levels.
+- Keep headings descriptive and short.
+
+### 2) Links
+
+- Use descriptive link text (avoid "click here").
+- Indicate destination context when useful.
+
+Example:
+
+- Better: `Read the SQL performance checklist`
+- Worse: `Click here`
+
+### 3) Tables
+
+- Use real markdown table headers.
+- Keep columns concise and meaningful.
+- Add surrounding explanatory text for context.
+
+### 4) Code blocks
+
+- Always use fenced code blocks with a language identifier where possible.
+
+Example:
+
+```md
+```ts
+const result = 42;
+```
+```
+
+### 5) Mermaid diagrams (best practice)
+
+For complex diagrams, include both a caption and a description.
+
+```md
+<p class="mermaid-caption">High-level import pipeline</p>
+
+```mermaid
+flowchart TD
+   A[Input] --> B[Transform]
+   B --> C[Output]
+```
+
+<p class="mermaid-description">This flowchart shows data moving from input through transformation to output.</p>
+```
+
+Behavior in this project:
+- Caption is used as the accessible name (`aria-labelledby`).
+- Description is used as supplemental context (`aria-describedby`).
+- Without caption, a diagram-type fallback label is used.
+
+### 6) Images and raw HTML
+
+- If using images, always provide meaningful `alt` text.
+- Avoid embedding complex raw HTML unless necessary.
+- Keep content understandable without relying only on visual cues.
+
+### 7) Final authoring check
+
+- Read your post once in plain text for structure and clarity.
+- Verify headings, links, and diagram context are understandable on their own.
+- Run project tests and accessibility checks before publishing.
+
 ## Key Features
 
 - Markdown-first publishing with per-post folders and local assets
@@ -34,6 +127,7 @@ Built with Next.js App Router, TypeScript, and a custom markdown processing pipe
 - Build-time content index generation for fast post/series lookup and validation
 - Reading progress indicator for long-form posts
 - Social sharing actions for post pages
+- Automatic portfolio referral tracking via UTM parameters on portfolio links in post content
 
 ## Engineering Highlights
 
@@ -80,11 +174,13 @@ flowchart LR
    G --> G2[Transform Visual Block Transform rehypeTransformVisual]
    G --> G3[Code Highlighting rehypeHighlight]
    G --> G4[Table Wrapper Injection rehypeWrapTables]
+   G --> G5[Portfolio UTM Link Tracking rehypePortfolioUtm]
 
    G1 --> H[Rendered HTML]
    G2 --> H
    G3 --> H
    G4 --> H
+   G5 --> H
 
    H --> I[Render BlogPost Component]
    I --> J[Static Build Output]
@@ -92,6 +188,21 @@ flowchart LR
 ```
 
 Runs primarily at build-time for static generation, with final hydration behavior on the client.
+
+### Portfolio UTM Tracking
+
+Portfolio links in markdown post content are automatically enriched at render time with UTM parameters.
+
+- Target domain: `https://joecastle.co.uk` (including `www` variant)
+- Defaults added when missing:
+   - `utm_source=blog.joecastle.co.uk`
+   - `utm_medium=referral`
+   - `utm_campaign=portfolio_referrals`
+- Per-post differentiation:
+   - `utm_content=<post-slug>` is added from the current post slug
+- Existing UTM values are preserved and not overwritten
+
+This is handled in the markdown pipeline by `rehypePortfolioUtm` so both markdown links and raw HTML anchor links are covered.
 
 ## Architecture: Content Indexing and Static Files
 

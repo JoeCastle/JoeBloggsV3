@@ -1,5 +1,18 @@
 [
   {
+    "slug": "building-a-safe-bulk-deletion-process",
+    "title": "Building a Safe Bulk Deletion Process Without Bulk Delete Endpoints",
+    "summary": "A practical case study on designing a long-running deletion process against a constrained external API, with pagination, rate limiting, expiring auth, retries, and resumability.",
+    "date": "2026-04-12",
+    "tags": [
+      "api-integration",
+      "csharp",
+      "system-design",
+      "long-running-jobs",
+      "rate-limiting"
+    ]
+  },
+  {
     "slug": "sql-server-performance-what-matters",
     "title": "SQL Server Performance for Application Developers: What Actually Matters",
     "summary": "A practical SQL Server performance guide covering SARGable queries, index design, execution plans, and optimisation techniques that improve application performance.",
@@ -24,20 +37,6 @@
       "excel",
       "sql-server",
       "vba macro"
-    ]
-  },
-  {
-    "slug": "junior-developer-questions",
-    "title": "Junior Developer Questions Answered: Language, Portfolio, Career",
-    "summary": "Junior developers ask: which language to learn, how to build a portfolio, get experience, and thrive in their first tech job. Includes real advice, tips, and resources.",
-    "date": "2025-05-26",
-    "tags": [
-      "junior developer",
-      "developer advice",
-      "software development",
-      "programming languages",
-      "coding projects",
-      "tech career"
     ]
   }
 ]

@@ -46,6 +46,59 @@ const MermaidRenderer = () => {
             await mermaid.run({
                 nodes: articleRoot.querySelectorAll('.mermaid'),
             });
+
+            articleRoot.querySelectorAll<HTMLElement>('.mermaid').forEach((container, index) => {
+                const previous = container.previousElementSibling;
+                const caption = previous && previous.classList.contains('mermaid-caption') ? previous as HTMLElement : null;
+                const next = container.nextElementSibling;
+                const descriptionAfter = next && next.classList.contains('mermaid-description') ? next as HTMLElement : null;
+                const descriptionBefore = previous && previous.classList.contains('mermaid-description') ? previous as HTMLElement : null;
+                const description = descriptionAfter ?? descriptionBefore;
+                const sourceLabel = container.getAttribute('aria-label')?.trim();
+                const fallbackLabel = `Mermaid diagram ${index + 1}`;
+                const labelText = caption?.textContent?.trim() || sourceLabel || fallbackLabel;
+
+                container.setAttribute('role', 'img');
+                container.setAttribute('aria-label', labelText);
+                container.removeAttribute('aria-labelledby');
+                container.removeAttribute('aria-describedby');
+
+                if (caption) {
+                    if (!caption.id) {
+                        caption.id = `mermaid-caption-${index + 1}`;
+                    }
+
+                    container.setAttribute('aria-labelledby', caption.id);
+                    container.removeAttribute('aria-label');
+                }
+
+                if (description) {
+                    if (!description.id) {
+                        description.id = `mermaid-description-${index + 1}`;
+                    }
+
+                    container.setAttribute('aria-describedby', description.id);
+                }
+
+                const svg = container.querySelector<SVGElement>('svg');
+                if (!svg) {
+                    return;
+                }
+
+                svg.setAttribute('role', 'img');
+                svg.removeAttribute('aria-labelledby');
+                svg.removeAttribute('aria-describedby');
+                svg.setAttribute('aria-label', labelText);
+
+                if (caption?.id) {
+                    svg.setAttribute('aria-labelledby', caption.id);
+                    svg.removeAttribute('aria-label');
+                }
+
+                if (description?.id) {
+                    svg.setAttribute('aria-describedby', description.id);
+                }
+            });
         };
 
         renderMermaid().catch(() => {
