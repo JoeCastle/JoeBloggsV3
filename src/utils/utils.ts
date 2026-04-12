@@ -5,14 +5,17 @@
  */
 const getYearsOfExperience = (): number => {
     // (Started August 2019, but need to consider the additional year from placement)
-    const startDate: Date = new Date('2018-08-01');
+    const startDate: Date = new Date('2018-08-01T00:00:00.000Z');
 
     const currentDate: Date = new Date();
 
-    let yearsOfExperience: number = currentDate.getFullYear() - startDate.getFullYear();
+    let yearsOfExperience: number = currentDate.getUTCFullYear() - startDate.getUTCFullYear();
 
     // Check if the current month and day is before your start date
-    if (currentDate.getMonth() < startDate.getMonth() || (currentDate.getMonth() === startDate.getMonth() && currentDate.getDate() < startDate.getDate())) {
+    if (
+        currentDate.getUTCMonth() < startDate.getUTCMonth() ||
+        (currentDate.getUTCMonth() === startDate.getUTCMonth() && currentDate.getUTCDate() < startDate.getUTCDate())
+    ) {
         yearsOfExperience--;
     }
 
@@ -40,11 +43,12 @@ const calculateReadingTime = (text: string): string => {
  * @returns Date as formatted string.
  */
 const formatDate = (date: string): string =>
-    new Date(date).toLocaleDateString(undefined, {
+    new Intl.DateTimeFormat('en-GB', {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
-    });
+        timeZone: 'UTC',
+    }).format(new Date(date));
 
 /**
  * Gracefully truncates string to max length. Used for JsonLD structured data articleBody prop.

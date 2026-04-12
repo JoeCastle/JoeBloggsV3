@@ -9,7 +9,13 @@ const MIN_SUBMIT_DELAY_MS = 3500;
  */
 export default function ContactForm() {
     const [error, setError] = useState<string>('');
-    const startedAt = useMemo(() => Date.now(), []);
+    const startedAt = useMemo(() => {
+        if (typeof window === 'undefined') {
+            return 0;
+        }
+
+        return Date.now();
+    }, []);
     const destinationEmail = useMemo(
         () => String.fromCharCode(106, 111, 101, 99, 97, 115, 116, 108, 101, 57, 55, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109),
         []
@@ -57,8 +63,6 @@ export default function ContactForm() {
 
     return (
         <form className="contact-form" onSubmit={onSubmit}>
-            <input type="hidden" name="startedAt" value={String(startedAt)} />
-
             <div className="contact-form-row">
                 <div className="contact-form-field">
                     <label htmlFor="contact-name">Name</label>
