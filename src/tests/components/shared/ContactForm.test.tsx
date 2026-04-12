@@ -29,7 +29,6 @@ describe('ContactForm', () => {
 
     it('opens email app after valid submission', () => {
         const nowSpy = vi.spyOn(Date, 'now')
-            .mockReturnValueOnce(0)
             .mockReturnValueOnce(5000);
         const openSpy = vi.spyOn(window, 'open').mockReturnValue(null);
 

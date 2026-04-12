@@ -13,10 +13,12 @@ import { faAt } from '@fortawesome/free-solid-svg-icons';
  */
 export const Footer: React.FC = ({ }) => {
     const [year, setYear] = useState<number | null>(null);
+    const [yearsOfExperience, setYearsOfExperience] = useState<number | null>(null);
 
     useEffect(() => {
         // Done this way to avoid client/server mismatch hydration errors.
         setYear(new Date().getFullYear());
+        setYearsOfExperience(utils.getYearsOfExperience());
     }, []);
 
     return (
@@ -25,7 +27,7 @@ export const Footer: React.FC = ({ }) => {
                 <div>
                     <h3>Joseph Castle</h3>
                     <p>
-                        A Senior Full-Stack Software Developer with {utils.getYearsOfExperience()}+ years of experience building bespoke web applications with React, .NET and SQL
+                        A Senior Full-Stack Software Developer with {yearsOfExperience ?? 7}+ years of experience building bespoke web applications with React, .NET and SQL
                         Server.
                     </p>
                 </div>
