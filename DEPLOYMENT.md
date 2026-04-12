@@ -70,6 +70,7 @@ Once merged to master, the build and publish process will happen automatically i
 - **Never commit directly to master**: Always work on the development branch and merge through pull requests.
 - **Keep the tree clean before `npm version`**: Version tags should represent a deterministic release state.
 - **Generated files are part of release state**: For this project, generated content/static files are tracked and should be committed when changed.
+- **Cloudflare Pages headers must be in `public/_headers`**: Files in repository root are not automatically copied to the static export output.
 - **Test before deploying**: Ensure all tests pass and the application works correctly in development.
 - **Monitor deployment**: Check the Cloudflare dashboard to confirm successful deployment.
 - **Version management**: The `npm version patch` command automatically handles versioning and git tagging.
